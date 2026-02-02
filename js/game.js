@@ -10,4 +10,3 @@ function init() {
 
 console.log("my Charachter is", world.character);
     };
-

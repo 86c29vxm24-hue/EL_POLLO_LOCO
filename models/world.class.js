@@ -1,24 +1,19 @@
+class World {
+  character = new Character();
+  enemies = [new Chicken(), new Chicken(), new Chicken()];
 
-class World { 
+  draw() {
+    this.ctx.drawImage(
+      this.character.image,
+      this.character.x,
+      this.character.y,
+      this.character.width,
+      this.character.height,
+    );
 
-
-character = new Character();
-enemies = [
-    new Chicken(),
-    new Chicken(),
-    new Chicken()
-];
-
-
-
-    draw() {
-
-    }
-
-
-
+    let self = this;
+    requestAnimationFrame(function() {
+        self.draw();
+    });
+  }
 }
-
-
-
-
