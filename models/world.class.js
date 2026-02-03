@@ -23,12 +23,9 @@ class World {
     this.setWorld();
   }
 
-  
   setWorld() {
     this.character.world = this;
   }
-
-
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -59,7 +56,7 @@ class World {
         -movableObject.x - movableObject.width,
         movableObject.y,
         movableObject.width,
-        movableObject.height
+        movableObject.height,
       );
       this.ctx.restore();
     } else {
@@ -68,8 +65,8 @@ class World {
         movableObject.x,
         movableObject.y,
         movableObject.width,
-      movableObject.height,
-    );
+        movableObject.height,
+      );
+    }
   }
-  }
-};
+}
