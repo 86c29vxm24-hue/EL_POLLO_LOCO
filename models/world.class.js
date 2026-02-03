@@ -1,50 +1,42 @@
 class World {
   character = new Character();
-  enemies = [
-    new Chicken(),
-    new Chicken(),
-    new Chicken(),
-];
-clouds = [
-    new Cloud(),
-    new Cloud(),
-];
+  enemies = [new Chicken(), new Chicken(), new Chicken()];
+  clouds = [new Cloud(), new Cloud()];
 
-backgroundObjects = [
+  backgroundObjects = [
+    new BackgroundObject("img/5_background/layers/air.png", 0, 80),
+    new BackgroundObject("img/5_background/layers/3_third_layer/1.png", 0),
+    new BackgroundObject("img/5_background/layers/2_second_layer/1.png", 0),
+    new BackgroundObject("img/5_background/layers/1_first_layer/1.png", 0),
+  ];
 
-    new BackgroundObject("img/5_background/layers/air.png", 0,80,),
-    new BackgroundObject("img/5_background/layers/3_third_layer/1.png", 0,),
-    new BackgroundObject("img/5_background/layers/2_second_layer/1.png", 0,),
-    new BackgroundObject("img/5_background/layers/1_first_layer/1.png", 0,),
-
-
-
-    ]
-   
-canvas;
+  canvas;
   ctx;
+  keyboard;
+  world;
 
-  constructor(canvas) {
-    this.ctx = canvas.getContext('2d');
+  constructor(canvas, keyboard) {
+    this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
+    this.keyboard = keyboard;
     this.draw();
+    this.setWorld();
   }
+
+  
+  setWorld() {
+    this.character.world = this;
+  }
+
 
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    
- 
-
 
     this.addObjectsToMap(this.backgroundObjects);
     this.addToMap(this.character);
     this.addObjectsToMap(this.enemies);
-    this.addObjectsToMap(this.clouds);  
-
-
-
-
+    this.addObjectsToMap(this.clouds);
 
     let self = this;
     requestAnimationFrame(function () {
@@ -52,22 +44,19 @@ canvas;
     });
   }
 
-
-
-addObjectsToMap(objects) {
-    objects.forEach(o => {
+  addObjectsToMap(objects) {
+    objects.forEach((o) => {
       this.addToMap(o);
     });
+  }
 
-    }
-
-    addToMap(movableObject) {
+  addToMap(movableObject) {
     this.ctx.drawImage(
       movableObject.img,
       movableObject.x,
       movableObject.y,
       movableObject.width,
-      movableObject.height
+      movableObject.height,
     );
   }
-}   
+}
