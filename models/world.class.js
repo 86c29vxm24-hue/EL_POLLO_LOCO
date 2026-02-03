@@ -11,8 +11,7 @@ clouds = [
 ];
 
 backgroundObjects = [
-    new BackgroundObject("img/5_background/layers/3_third_layer/2.png"),
-    new BackgroundObject("img/5_background/layers/3_third_layer/1.png", 0,),
+
     new BackgroundObject("img/5_background/layers/3_third_layer/1.png", 0,),
 
     ]
@@ -33,11 +32,10 @@ canvas;
  
 
 
-
+    this.addObjectsToMap(this.backgroundObjects);
     this.addToMap(this.character);
     this.addObjectsToMap(this.enemies);
     this.addObjectsToMap(this.clouds);  
-    this.addObjectsToMap(this.backgroundObjects);
 
 
 
