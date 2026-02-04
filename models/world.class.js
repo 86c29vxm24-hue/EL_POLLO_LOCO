@@ -7,14 +7,36 @@ class World {
   world;
   camera_x = 0;
   statusBar = new StatusBar();
+  statusBarCoins = new StatusBar();
+  statusBarBottles = new StatusBar();
+  statusBarEndboss = new StatusBar();
+  
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.setupStatusBars();
     this.draw();
     this.setWorld();
     this.checkCollisions();
+  }
+
+  setupStatusBars() {
+    this.statusBar.x = 50;
+    this.statusBar.y = 5;
+
+    this.statusBarCoins.x = 50;
+    this.statusBarCoins.y = 55;
+    this.statusBarCoins.collectCoin(0);
+
+    this.statusBarBottles.x = 50;
+    this.statusBarBottles.y = 105;
+    this.statusBarBottles.collectBottle(0);
+
+    this.statusBarEndboss.x = this.canvas.width - 250;
+    this.statusBarEndboss.y = 5;
+    this.statusBarEndboss.healthEndboss(100);
   }
 
   setWorld() {
@@ -41,6 +63,9 @@ class World {
 
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBar);
+    this.addToMap(this.statusBarCoins);
+    this.addToMap(this.statusBarBottles);
+    this.addToMap(this.statusBarEndboss);
     this.ctx.translate(this.camera_x, 0);
 
 
