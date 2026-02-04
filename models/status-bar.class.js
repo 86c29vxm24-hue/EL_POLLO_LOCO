@@ -1,6 +1,6 @@
 class StatusBar extends DrawableObject {
 
-    IMAGES = [
+    IMAGES_HEALTH = [
         "img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png",
         "img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png",
         "img/7_statusbars/1_statusbar/2_statusbar_health/green/40.png",
@@ -14,8 +14,9 @@ percentage = 100;
 
     constructor() {
         super();
-        this.loadImages(this.IMAGES);
-        this.x = 10;
+        this.loadImages(this.IMAGES_HEALTH);
+        this.setPercentage(100);
+        this.x = 50;
         this.y = 5;
         this.width = 200;
         this.height = 50;
@@ -23,24 +24,23 @@ percentage = 100;
 
     setPercentage(percentage) {
         this.percentage = percentage;
-        let imagePath = this.IMAGES[this.resolveImageIndex()];
-        this.img = this.imageCache[imagePath];
+        this.resolveImageIndex();
     }
 
     
     resolveImageIndex() {
          if (this.percentage == 100) {
-            this.img = this.imageCache[this.IMAGES[5]];
+            this.img = this.imageCache[this.IMAGES_HEALTH[5]];
         } else if (this.percentage >= 80) {
-            this.img = this.imageCache[this.IMAGES[4]];
+            this.img = this.imageCache[this.IMAGES_HEALTH[4]];
         } else if (this.percentage >= 60) {
-            this.img = this.imageCache[this.IMAGES[3]];
+            this.img = this.imageCache[this.IMAGES_HEALTH[3]];
         } else if (this.percentage >= 40) {
-            this.img = this.imageCache[this.IMAGES[2]];
+            this.img = this.imageCache[this.IMAGES_HEALTH[2]];
         } else if (this.percentage >= 20) {
-            this.img = this.imageCache[this.IMAGES[1]];
+            this.img = this.imageCache[this.IMAGES_HEALTH[1]];
         } else {
-            this.img = this.imageCache[this.IMAGES[0]];
+            this.img = this.imageCache[this.IMAGES_HEALTH[0]];
         } }
 
 }
