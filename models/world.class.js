@@ -55,7 +55,7 @@ class World {
 
     let bottleY = 360;
 
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 10; i++) {
       let randomX = 200 + Math.random() * 2400;
       let bottle = new CollectableObjects(randomX, bottleY);
       let bottleImage = bottle.IMAGES_BOTTLES[i % bottle.IMAGES_BOTTLES.length];
