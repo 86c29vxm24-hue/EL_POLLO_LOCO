@@ -11,6 +11,10 @@ IMAGES_BOTTLES = [
 ];
 
 
+  /**
+   * @param {number} x
+   * @param {number} y
+   */
   constructor(x, y) {
     super().loadImage(this.IMAGES_COINS[0]);
     this.loadImages(this.IMAGES_COINS);
@@ -22,6 +26,9 @@ IMAGES_BOTTLES = [
     this.animate();
   }
 
+  /**
+   * @returns {void}
+   */
   animate() {
     setInterval(() => {
       if (this.isCoin) {

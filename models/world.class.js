@@ -25,6 +25,9 @@ class World {
     this.run();
   }
 
+  /**
+   * @returns {void}
+   */
   setupStatusBars() {
     this.statusBar.x = 50;
     this.statusBar.y = 5;
@@ -42,6 +45,9 @@ class World {
     this.statusBarEndboss.healthEndboss(100);
   }
 
+  /**
+   * @returns {void}
+   */
   setupCollectables() {
     let coinYsAir = [150, 180, 210, 240, 170, 200, 230, 160, 190, 220];
     let coinYsLow = [300, 320, 340, 310, 330, 350, 300, 320, 340, 310];
@@ -65,17 +71,26 @@ class World {
     }
   }
 
+  /**
+   * @returns {void}
+   */
   setWorld() {
     this.character.world = this;
   }
 
+  /**
+   * @returns {void}
+   */
   run() {
     setInterval(() => {
       this.checkCollisions();
       this.checkThrowObjects();
-    }, 200);
+    }, 50);
   }
 
+  /**
+   * @returns {void}
+   */
   checkThrowObjects() {
     if (this.keyboard.D) {
       if (!this.statusBarBottles.bottles) return;
@@ -92,26 +107,83 @@ class World {
     }
   }
 
+  /**
+   * @returns {void}
+   */
   checkCollisions() {
+    this.checkJumpOnEnemies();
+    this.checkEnemyCollisions();
+    this.checkCollectableCollisions();
+    this.checkBottleCollisions();
+  }
+
+  /**
+   * @returns {void}
+   */
+  checkEnemyCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
+      if (!enemy.dead && this.character.isColliding(enemy)) {
         this.character.hit();
         this.statusBar.setPercentage(this.character.energy);
       }
     });
+  }
 
+  /**
+   * @returns {void}
+   */
+  checkCollectableCollisions() {
     this.collectableObjects = this.collectableObjects.filter((obj) => {
-      if (obj.isCoin && this.character.isColliding(obj)) {
-        this.statusBarCoins.coins = (this.statusBarCoins.coins || 0) + 1;
-        this.statusBarCoins.collectCoin(this.statusBarCoins.coins * 5);
-        return false;
-      }
-      if (!obj.isCoin && this.character.isColliding(obj)) {
-        this.statusBarBottles.bottles = (this.statusBarBottles.bottles || 0) + 1;
-        this.statusBarBottles.collectBottle(this.statusBarBottles.bottles * 10);
-        return false;
-      }
+      if (obj.isCoin && this.character.isColliding(obj)) return this.collectCoin();
+      if (!obj.isCoin && this.character.isColliding(obj)) return this.collectBottle();
       return true;
+    });
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  collectCoin() {
+    this.statusBarCoins.coins = (this.statusBarCoins.coins || 0) + 1;
+    this.statusBarCoins.collectCoin(this.statusBarCoins.coins * 5);
+    return false;
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  collectBottle() {
+    this.statusBarBottles.bottles = (this.statusBarBottles.bottles || 0) + 1;
+    this.statusBarBottles.collectBottle(this.statusBarBottles.bottles * 10);
+    return false;
+  }
+
+  /**
+   * @returns {void}
+   */
+  checkBottleCollisions() {
+    this.throwableObject.forEach((bottle) => {
+      this.level.enemies.forEach((enemy) => {
+        if (!enemy.dead && !bottle.hasSplashed && bottle.isColliding(enemy)) {
+          enemy.die();
+          bottle.onImpact();
+        }
+      });
+    });
+  }
+
+  /**
+   * @returns {void}
+   */
+  checkJumpOnEnemies() {
+    this.level.enemies.forEach((enemy) => {
+      const isFalling = this.character.speedY < 0;
+      const isAbove = this.character.y + this.character.height - 10 <= enemy.y + enemy.height;
+      const isTop = this.character.y < enemy.y;
+      if (!enemy.dead && isFalling && isAbove && isTop && this.character.isColliding(enemy)) {
+        enemy.die();
+        this.character.speedY = 15;
+      }
     });
   }
 
@@ -144,12 +216,20 @@ class World {
     });
   }
 
+  /**
+   * @param {Array} objects
+   * @returns {void}
+   */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
+  /**
+   * @param {MovableObject} movableObject
+   * @returns {void}
+   */
   addToMap(movableObject) {
     if (movableObject.otherDirection) {
       this.flipImage(movableObject);
@@ -163,12 +243,20 @@ class World {
     }
   }
 
+  /**
+   * @param {MovableObject} mo
+   * @returns {void}
+   */
   flipImage(mo) {
     this.ctx.save();
     this.ctx.scale(-1, 1);
     mo.x = mo.x * -1;
   }
 
+  /**
+   * @param {MovableObject} mo
+   * @returns {void}
+   */
   flipImageBack(mo) {
     this.ctx.restore();
     mo.x = mo.x * -1;
