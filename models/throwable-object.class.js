@@ -13,6 +13,11 @@ class ThrowableObject extends MovableObject {
     "img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png",
   ];
 
+  /**
+   * @param {number} x
+   * @param {number} y
+   * @param {number} groundY
+   */
   constructor(x, y, groundY) {
     super().loadImage("img/6_salsa_bottle/salsa_bottle.png");
     this.loadImages(this.IMAGE_BOTTLETHROW);
@@ -26,41 +31,62 @@ class ThrowableObject extends MovableObject {
     this.throw();
   }
 
+  /**
+   * @returns {void}
+   */
   throw() {
     this.speedY = 15;
     this.applyGravity();
-    let animationInterval = setInterval(() => {
-      if (!this.hasSplashed) {
-        this.playAnimation(this.IMAGE_BOTTLETHROW);
-      }
-    }, 100);
-    let throwInterval = setInterval(() => {
-      if (!this.hasSplashed) {
-        this.x += 8;
-      }
-      if (!this.isAboveGround()) {
-        this.y = this.groundY;
-        this.speedY = 0;
-        clearInterval(animationInterval);
-        this.splash();
-        clearInterval(throwInterval);
-      }
-    }, 1000 / 60);
+    this.startThrowAnimation();
+    this.startThrowMovement();
   }
 
+  /**
+   * @returns {boolean}
+   */
   isAboveGround() {
     return this.y < this.groundY;
   }
 
+  /**
+   * @returns {void}
+   */
+  startThrowAnimation() {
+    this.animationInterval = setInterval(() => {
+      if (!this.hasSplashed) this.playAnimation(this.IMAGE_BOTTLETHROW);
+    }, 100);
+  }
+
+  /**
+   * @returns {void}
+   */
+  startThrowMovement() {
+    this.throwInterval = setInterval(() => {
+      if (!this.hasSplashed) this.x += 8;
+      if (!this.isAboveGround()) this.onImpact();
+    }, 1000 / 60);
+  }
+
+  /**
+   * @returns {void}
+   */
+  onImpact() {
+    this.y = this.groundY;
+    this.speedY = 0;
+    clearInterval(this.animationInterval);
+    clearInterval(this.throwInterval);
+    this.splash();
+  }
+
+  /**
+   * @returns {void}
+   */
   splash() {
     this.hasSplashed = true;
     let i = 0;
     let splashInterval = setInterval(() => {
-      this.img = this.imageCache[this.IMAGE_BOTTLESPLASH[i]];
-      i++;
-      if (i >= this.IMAGE_BOTTLESPLASH.length) {
-        clearInterval(splashInterval);
-      }
+      this.img = this.imageCache[this.IMAGE_BOTTLESPLASH[i++]];
+      if (i >= this.IMAGE_BOTTLESPLASH.length) clearInterval(splashInterval);
     }, 100);
   }
 }
