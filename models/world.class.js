@@ -82,7 +82,7 @@ class World {
       this.statusBarBottles.bottles -= 1;
       this.statusBarBottles.collectBottle(this.statusBarBottles.bottles * 10);
       let spawnX = this.character.x + this.character.width;
-      let groundY = this.character.y + this.character.height;
+      let groundY = 400;
       let bottle = new ThrowableObject(
         spawnX,
         this.character.y,

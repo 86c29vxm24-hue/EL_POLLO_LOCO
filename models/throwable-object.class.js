@@ -11,6 +11,8 @@ class ThrowableObject extends MovableObject {
     "img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
     "img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png",
     "img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png",
+    "img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
   ];
 
   /**
@@ -86,7 +88,11 @@ class ThrowableObject extends MovableObject {
     let i = 0;
     let splashInterval = setInterval(() => {
       this.img = this.imageCache[this.IMAGE_BOTTLESPLASH[i++]];
-      if (i >= this.IMAGE_BOTTLESPLASH.length) clearInterval(splashInterval);
+      if (i >= this.IMAGE_BOTTLESPLASH.length) {
+        clearInterval(splashInterval);
+        this.width = 0;
+        this.height = 0;
+      }
     }, 100);
   }
 }
