@@ -103,6 +103,11 @@ class World {
         this.statusBarCoins.collectCoin(this.statusBarCoins.coins * 5);
         return false;
       }
+      if (!obj.isCoin && this.character.isColliding(obj)) {
+        this.statusBarBottles.bottles = (this.statusBarBottles.bottles || 0) + 1;
+        this.statusBarBottles.collectBottle(this.statusBarBottles.bottles * 10);
+        return false;
+      }
       return true;
     });
   }
