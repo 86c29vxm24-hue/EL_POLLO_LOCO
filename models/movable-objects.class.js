@@ -51,7 +51,7 @@ class MovableObject extends DrawableObject {
     let offsetBottom = 0;
 
     if (this instanceof Character) {
-      offsetLeft = 5;
+      offsetLeft = 0;
       offsetRight = 17;
       offsetTop = 5;
       offsetBottom = 5;
