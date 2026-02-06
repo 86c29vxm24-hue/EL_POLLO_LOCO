@@ -59,6 +59,7 @@ class World {
       let randomX = 200 + Math.random() * 2400;
       let bottle = new CollectableObjects(randomX, bottleY);
       let bottleImage = bottle.IMAGES_BOTTLES[i % bottle.IMAGES_BOTTLES.length];
+      bottle.isCoin = false;
       bottle.loadImage(bottleImage);
       this.collectableObjects.push(bottle);
     }

@@ -13,12 +13,22 @@ IMAGES_BOTTLES = [
 
   constructor(x, y) {
     super().loadImage(this.IMAGES_COINS[0]);
+    this.loadImages(this.IMAGES_COINS);
     this.x = x;
     this.y = y;
-    this.width = 80;
-    this.height = 80;
+    this.width = 90;
+    this.height = 90;
+    this.isCoin = true;
+    this.animate();
   }
 
+  animate() {
+    setInterval(() => {
+      if (this.isCoin) {
+        this.playAnimation(this.IMAGES_COINS);
+      }
+    }, 300);
+  }
 
 
 }
