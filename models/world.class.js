@@ -61,7 +61,7 @@ class World {
 
     let bottleY = 360;
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 20; i++) {
       let randomX = 200 + Math.random() * 2400;
       let bottle = new CollectableObjects(randomX, bottleY);
       let bottleImage = bottle.IMAGES_BOTTLES[i % bottle.IMAGES_BOTTLES.length];
@@ -98,7 +98,7 @@ class World {
     if (this.keyboard.D) {
       if (!this.statusBarBottles.bottles) return;
       this.statusBarBottles.bottles -= 1;
-      this.statusBarBottles.collectBottle(this.statusBarBottles.bottles * 10);
+      this.statusBarBottles.collectBottle(this.statusBarBottles.bottles * 5);
       let spawnX = this.character.x + this.character.width;
       let groundY = 400;
       let bottle = new ThrowableObject(
@@ -157,7 +157,7 @@ class World {
    */
   collectBottle() {
     this.statusBarBottles.bottles = (this.statusBarBottles.bottles || 0) + 1;
-    this.statusBarBottles.collectBottle(this.statusBarBottles.bottles * 10);
+    this.statusBarBottles.collectBottle(this.statusBarBottles.bottles * 5);
     return false;
   }
 
