@@ -58,10 +58,10 @@ class MovableObject extends DrawableObject {
     }
 
     if (mo instanceof Chicken || this instanceof Chicken) {
-      offsetLeft += 10;
-      offsetRight += 10;
-      offsetTop += 10;
-      offsetBottom += 10;
+      offsetLeft += 5;
+      offsetRight += 5;
+      offsetTop += 5;
+      offsetBottom += 5;
     }
 
     if (mo instanceof CollectableObjects && mo.isCoin) {
@@ -69,6 +69,13 @@ class MovableObject extends DrawableObject {
       offsetRight += 8;
       offsetTop += 8;
       offsetBottom += 8;
+    }
+
+    if (mo instanceof CollectableObjects && !mo.isCoin) {
+      offsetLeft += 6;
+      offsetRight += 6;
+      offsetTop += 6;
+      offsetBottom += 6;
     }
 
     return (
