@@ -20,10 +20,6 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/1_walk/G2.png",
     "img/4_enemie_boss_chicken/1_walk/G3.png",
     "img/4_enemie_boss_chicken/1_walk/G4.png",
-    "img/4_enemie_boss_chicken/1_walk/G5.png",
-    "img/4_enemie_boss_chicken/1_walk/G6.png",
-    "img/4_enemie_boss_chicken/1_walk/G7.png",
-    "img/4_enemie_boss_chicken/1_walk/G8.png",
   ];
 
   IMAGES_ATTACK = [
@@ -38,10 +34,9 @@ class Endboss extends MovableObject {
   ];
 
   IMAGES_HURT = [
-    "img/4_enemie_boss_chicken/3_hurt/G21.png",
-    "img/4_enemie_boss_chicken/3_hurt/G22.png",
-    "img/4_enemie_boss_chicken/3_hurt/G23.png",
-    "img/4_enemie_boss_chicken/3_hurt/G24.png",
+    "img/4_enemie_boss_chicken/4_hurt/G21.png",
+    "img/4_enemie_boss_chicken/4_hurt/G22.png",
+    "img/4_enemie_boss_chicken/4_hurt/G23.png",
   ];
 
   IMAGES_DEAD = [
@@ -51,6 +46,7 @@ class Endboss extends MovableObject {
   ];
   phase = "idle";
   hasTriggered = false;
+  startX = 0;
 
   /**
    * @returns {void}
@@ -62,6 +58,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_ATTACK); this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
     this.x = 1400;
+    this.startX = this.x;
     this.speed = 0.15 + Math.random() * 0.5;
     this.animate();
   }
@@ -76,6 +73,9 @@ class Endboss extends MovableObject {
     setInterval(() => {
       this.playCurrentAnimation();
     }, 200);
+    setInterval(() => {
+      this.walkToCharacter();
+    }, 1000 / 60);
   }
 
   /**
@@ -90,6 +90,7 @@ class Endboss extends MovableObject {
    */
   triggerSequence() {
     this.hasTriggered = true;
+    this.startX = this.x;
     this.setPhase("alert");
     setTimeout(() => this.setPhase("walk"), 1200);
     setTimeout(() => this.setPhase("attack"), 2400);
@@ -113,10 +114,19 @@ class Endboss extends MovableObject {
   }
 
   /**
+   * @returns {void}
+   */
+  walkToCharacter() {
+    if (this.phase !== "walk") return;
+    if (this.x <= this.startX - 300) return;
+    this.x -= 1;
+  }
+
+  /**
    * @returns {boolean}
    */
   isTriggered() {
     if (!this.world) return false;
-    return this.world.character.x > this.x - 300;
+    return this.world.character.x > this.x - 500;
   }
 }
