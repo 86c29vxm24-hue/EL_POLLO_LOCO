@@ -78,6 +78,9 @@ class World {
 
   checkThrowObjects() {
     if (this.keyboard.D) {
+      if (!this.statusBarBottles.bottles) return;
+      this.statusBarBottles.bottles -= 1;
+      this.statusBarBottles.collectBottle(this.statusBarBottles.bottles * 10);
       let spawnX = this.character.x + this.character.width;
       let groundY = this.character.y + this.character.height;
       let bottle = new ThrowableObject(
