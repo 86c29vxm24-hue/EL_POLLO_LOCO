@@ -49,33 +49,30 @@ class MovableObject extends DrawableObject {
     let offsetRight = 0;
     let offsetTop = 0;
     let offsetBottom = 0;
+    let moLeft = 0;
+    let moRight = 0;
+    let moTop = 0;
+    let moBottom = 0;
 
     if (this instanceof Character) {
-      offsetLeft = 0;
-      offsetRight = 17;
-      offsetTop = 5;
-      offsetBottom = 5;
+      offsetLeft = 20;
+      offsetRight = 20;
+      offsetTop = 70;
+      offsetBottom = 20;
     }
 
-    if (mo instanceof CollectableObjects && mo.isCoin) {
-      offsetLeft += 8;
-      offsetRight += 8;
-      offsetTop += 8;
-      offsetBottom += 8;
+    if (mo instanceof CollectableObjects) {
+      offsetTop += 80;
+      offsetLeft += 40;
+      offsetRight += 40;
     }
 
-    if (mo instanceof CollectableObjects && !mo.isCoin) {
-      offsetLeft += 6;
-      offsetRight += 6;
-      offsetTop += 6;
-      offsetBottom += 6;
-    }
 
     return (
-      this.x + this.width - offsetRight > mo.x + offsetLeft &&
-      this.x + offsetLeft < mo.x + mo.width - offsetRight &&
-      this.y + this.height - offsetBottom > mo.y + offsetTop &&
-      this.y + offsetTop < mo.y + mo.height - offsetBottom
+      this.x + this.width - offsetRight > mo.x + moLeft &&
+      this.x + offsetLeft < mo.x + mo.width - moRight &&
+      this.y + this.height - offsetBottom > mo.y + moTop &&
+      this.y + offsetTop < mo.y + mo.height - moBottom
     );
   }
 
