@@ -11,6 +11,7 @@ class World {
   statusBarBottles = new StatusBar();
   statusBarEndboss = new StatusBar();
   throwableObject = [];
+  collectableObjects = [];  
   
 
   constructor(canvas, keyboard) {
@@ -18,6 +19,7 @@ class World {
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.setupStatusBars();
+    this.setupCollectables();
     this.draw();
     this.setWorld();
     this.run();
@@ -38,6 +40,31 @@ class World {
     this.statusBarEndboss.x = this.canvas.width - 250;
     this.statusBarEndboss.y = 5;
     this.statusBarEndboss.healthEndboss(100);
+  }
+
+  setupCollectables() {
+    let coinYsAir = [150, 180, 210, 240, 170, 200, 230, 160, 190, 220];
+    let coinYsLow = [300, 320, 340, 310, 330, 350, 300, 320, 340, 310];
+    let startX = 200;
+    let spacing = 90;
+
+    for (let i = 0; i < 20; i++) {
+      let y = i < 10 ? coinYsAir[i] : coinYsLow[i - 10];
+      let coin = new CollectableObjects(startX + i * spacing, y);
+      this.collectableObjects.push(coin);
+    }
+
+    let bottleY = 360;
+    let bottleMinX = 300;
+    let bottleMaxX = 2000;
+
+    for (let i = 0; i < 6; i++) {
+      let randomX = bottleMinX + Math.random() * (bottleMaxX - bottleMinX);
+      let bottle = new CollectableObjects(randomX, bottleY);
+      let bottleImage = bottle.IMAGES_BOTTLES[i % bottle.IMAGES_BOTTLES.length];
+      bottle.loadImage(bottleImage);
+      this.collectableObjects.push(bottle);
+    }
   }
 
   setWorld() {
@@ -92,6 +119,7 @@ class World {
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.throwableObject);
+    this.addObjectsToMap(this.collectableObjects);
 
     this.ctx.translate(-this.camera_x, 0);
 
