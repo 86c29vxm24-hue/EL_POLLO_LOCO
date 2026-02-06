@@ -47,6 +47,7 @@ class Endboss extends MovableObject {
   phase = "idle";
   hasTriggered = false;
   startX = 0;
+  isSequenceRunning = false;
 
   /**
    * @returns {void}
@@ -82,18 +83,15 @@ class Endboss extends MovableObject {
    * @returns {void}
    */
   updateState() {
-    if (!this.hasTriggered && this.isTriggered()) this.triggerSequence();
+    if (this.isTriggered() && !this.isSequenceRunning) this.triggerSequence();
   }
 
   /**
    * @returns {void}
    */
   triggerSequence() {
-    this.hasTriggered = true;
-    this.startX = this.x;
-    this.setPhase("alert");
-    setTimeout(() => this.setPhase("walk"), 1200);
-    setTimeout(() => this.setPhase("attack"), 2400);
+    if (!this.hasTriggered) this.runAlertCycle();
+    else this.runWalkAttackCycle();
   }
 
   /**
@@ -111,6 +109,44 @@ class Endboss extends MovableObject {
     if (this.phase === "alert") this.playAnimation(this.IMAGES_ALERT);
     if (this.phase === "walk") this.playAnimation(this.IMAGES_WALKING);
     if (this.phase === "attack") this.playAnimation(this.IMAGES_ATTACK);
+  }
+
+  /**
+   * @returns {void}
+   */
+  runAlertCycle() {
+    this.hasTriggered = true;
+    this.beginWalkCycle();
+    this.setPhase("alert");
+    setTimeout(() => this.setPhase("walk"), 1200);
+    setTimeout(() => this.setPhase("attack"), 2400);
+    setTimeout(() => this.finishSequence(), 3600);
+  }
+
+  /**
+   * @returns {void}
+   */
+  runWalkAttackCycle() {
+    this.beginWalkCycle();
+    this.setPhase("walk");
+    setTimeout(() => this.setPhase("attack"), 1200);
+    setTimeout(() => this.finishSequence(), 2400);
+  }
+
+  /**
+   * @returns {void}
+   */
+  beginWalkCycle() {
+    this.isSequenceRunning = true;
+    this.startX = this.x;
+  }
+
+  /**
+   * @returns {void}
+   */
+  finishSequence() {
+    this.isSequenceRunning = false;
+    this.setPhase("walk");
   }
 
   /**
