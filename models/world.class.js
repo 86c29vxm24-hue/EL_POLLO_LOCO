@@ -10,6 +10,7 @@ class World {
   statusBarCoins = new StatusBar();
   statusBarBottles = new StatusBar();
   statusBarEndboss = new StatusBar();
+  throwableObject = [];
   
 
   constructor(canvas, keyboard) {
@@ -19,7 +20,7 @@ class World {
     this.setupStatusBars();
     this.draw();
     this.setWorld();
-    this.checkCollisions();
+    this.run();
   }
 
   setupStatusBars() {
@@ -43,15 +44,33 @@ class World {
     this.character.world = this;
   }
 
-  checkCollisions() {
+  run() {
     setInterval(() => {
-      this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy)) {
-          this.character.hit();
-          this.statusBar.setPercentage(this.character.energy);
-        }
-      });
-    }, 100);
+      this.checkCollisions();
+      this.checkThrowObjects();
+    }, 200);
+  }
+
+  checkThrowObjects() {
+    if (this.keyboard.D) {
+      let spawnX = this.character.x + this.character.width;
+      let groundY = this.character.y + this.character.height;
+      let bottle = new ThrowableObject(
+        spawnX,
+        this.character.y,
+        groundY
+      );
+      this.throwableObject.push(bottle);
+    }
+  }
+
+  checkCollisions() {
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy)) {
+        this.character.hit();
+        this.statusBar.setPercentage(this.character.energy);
+      }
+    });
   }
 
   draw() {
@@ -72,6 +91,7 @@ class World {
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.clouds);
+    this.addObjectsToMap(this.throwableObject);
 
     this.ctx.translate(-this.camera_x, 0);
 
@@ -109,5 +129,4 @@ class World {
   flipImageBack(mo) {
     this.ctx.restore();
     mo.x = mo.x * -1;
-  }
-}
+  }}
