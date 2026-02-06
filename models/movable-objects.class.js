@@ -51,17 +51,10 @@ class MovableObject extends DrawableObject {
     let offsetBottom = 0;
 
     if (this instanceof Character) {
-      offsetLeft = 20;
-      offsetRight = 20;
-      offsetTop = 10;
-      offsetBottom = 10;
-    }
-
-    if (mo instanceof Chicken || this instanceof Chicken) {
-      offsetLeft += 5;
-      offsetRight += 5;
-      offsetTop += 5;
-      offsetBottom += 5;
+      offsetLeft = 17;
+      offsetRight = 17;
+      offsetTop = 5;
+      offsetBottom = 5;
     }
 
     if (mo instanceof CollectableObjects && mo.isCoin) {
