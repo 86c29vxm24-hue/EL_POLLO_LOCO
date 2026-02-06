@@ -96,6 +96,15 @@ class World {
         this.statusBar.setPercentage(this.character.energy);
       }
     });
+
+    this.collectableObjects = this.collectableObjects.filter((obj) => {
+      if (obj.isCoin && this.character.isColliding(obj)) {
+        this.statusBarCoins.coins = (this.statusBarCoins.coins || 0) + 1;
+        this.statusBarCoins.collectCoin(this.statusBarCoins.coins * 5);
+        return false;
+      }
+      return true;
+    });
   }
 
   draw() {
