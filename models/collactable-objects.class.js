@@ -15,8 +15,8 @@ IMAGES_BOTTLES = [
     super().loadImage(this.IMAGES_COINS[0]);
     this.x = x;
     this.y = y;
-    this.width = 50;
-    this.height = 50;
+    this.width = 80;
+    this.height = 80;
   }
 
 
