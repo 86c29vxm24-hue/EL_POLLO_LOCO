@@ -45,11 +45,30 @@ class MovableObject extends DrawableObject {
   }
 
   isColliding(mo) {
+    let offsetLeft = 0;
+    let offsetRight = 0;
+    let offsetTop = 0;
+    let offsetBottom = 0;
+
+    if (this instanceof Character) {
+      offsetLeft = 20;
+      offsetRight = 20;
+      offsetTop = 10;
+      offsetBottom = 10;
+    }
+
+    if (mo instanceof CollectableObjects && mo.isCoin) {
+      offsetLeft += 8;
+      offsetRight += 8;
+      offsetTop += 8;
+      offsetBottom += 8;
+    }
+
     return (
-      this.x + this.width > mo.x &&
-      this.x < mo.x + mo.width &&
-      this.y + this.height > mo.y &&
-      this.y < mo.y + mo.height
+      this.x + this.width - offsetRight > mo.x + offsetLeft &&
+      this.x + offsetLeft < mo.x + mo.width - offsetRight &&
+      this.y + this.height - offsetBottom > mo.y + offsetTop &&
+      this.y + offsetTop < mo.y + mo.height - offsetBottom
     );
   }
 
