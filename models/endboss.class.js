@@ -26,6 +26,17 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/1_walk/G8.png",
   ];
 
+  IMAGES_ATTACK = [
+    "img/4_enemie_boss_chicken/3_attack/G13.png",
+    "img/4_enemie_boss_chicken/3_attack/G14.png",
+    "img/4_enemie_boss_chicken/3_attack/G15.png",
+    "img/4_enemie_boss_chicken/3_attack/G16.png",
+    "img/4_enemie_boss_chicken/3_attack/G17.png",
+    "img/4_enemie_boss_chicken/3_attack/G18.png",
+    "img/4_enemie_boss_chicken/3_attack/G19.png",
+    "img/4_enemie_boss_chicken/3_attack/G20.png",
+  ];
+
   IMAGES_HURT = [
     "img/4_enemie_boss_chicken/3_hurt/G21.png",
     "img/4_enemie_boss_chicken/3_hurt/G22.png",
@@ -38,20 +49,74 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/5_dead/G25.png",
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
+  phase = "idle";
+  hasTriggered = false;
 
+  /**
+   * @returns {void}
+   */
   constructor() {
     super();
     this.loadImage(this.IMAGES_ALERT[0]);
-    this.loadImages(this.IMAGES_ALERT);
-
+    this.loadImages(this.IMAGES_ALERT); this.loadImages(this.IMAGES_WALKING);
+    this.loadImages(this.IMAGES_ATTACK); this.loadImages(this.IMAGES_HURT);
+    this.loadImages(this.IMAGES_DEAD);
     this.x = 1400;
     this.speed = 0.15 + Math.random() * 0.5;
     this.animate();
   }
 
+  /**
+   * @returns {void}
+   */
   animate() {
     setInterval(() => {
-      this.playAnimation(this.IMAGES_WALKING);
+      this.updateState();
     }, 200);
+    setInterval(() => {
+      this.playCurrentAnimation();
+    }, 200);
+  }
+
+  /**
+   * @returns {void}
+   */
+  updateState() {
+    if (!this.hasTriggered && this.isTriggered()) this.triggerSequence();
+  }
+
+  /**
+   * @returns {void}
+   */
+  triggerSequence() {
+    this.hasTriggered = true;
+    this.setPhase("alert");
+    setTimeout(() => this.setPhase("walk"), 1200);
+    setTimeout(() => this.setPhase("attack"), 2400);
+  }
+
+  /**
+   * @param {string} phase
+   * @returns {void}
+   */
+  setPhase(phase) {
+    this.phase = phase;
+  }
+
+  /**
+   * @returns {void}
+   */
+  playCurrentAnimation() {
+    if (this.phase === "alert") this.playAnimation(this.IMAGES_ALERT);
+    if (this.phase === "walk") this.playAnimation(this.IMAGES_WALKING);
+    if (this.phase === "attack") this.playAnimation(this.IMAGES_ATTACK);
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  isTriggered() {
+    if (!this.world) return false;
+    return this.world.character.x > this.x - 300;
   }
 }
