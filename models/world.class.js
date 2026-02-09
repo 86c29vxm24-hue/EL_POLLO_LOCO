@@ -104,12 +104,13 @@ class World {
       this.statusBarBottles.collectBottle(this.statusBarBottles.bottles * 5);
       let direction = this.character.otherDirection ? -1 : 1;
       let spawnX = this.character.otherDirection
-        ? this.character.x - 50
-        : this.character.x + this.character.width;
+        ? this.character.x + 40
+        : this.character.x + this.character.width - 45;
+      let spawnY = this.character.y + 100;
       let groundY = 400;
       let bottle = new ThrowableObject(
         spawnX,
-        this.character.y,
+        spawnY,
         groundY,
         direction
       );
