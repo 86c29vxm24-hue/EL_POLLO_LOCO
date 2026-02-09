@@ -12,6 +12,7 @@ class World {
   statusBarEndboss = new StatusBar();
   throwableObject = [];
   collectableObjects = [];  
+  lastThrowTime = 0;
   
 
   constructor(canvas, keyboard) {
@@ -96,7 +97,9 @@ class World {
    */
   checkThrowObjects() {
     if (this.keyboard.D) {
+      if (this.isThrowOnCooldown()) return;
       if (!this.statusBarBottles.bottles) return;
+      this.lastThrowTime = new Date().getTime();
       this.statusBarBottles.bottles -= 1;
       this.statusBarBottles.collectBottle(this.statusBarBottles.bottles * 5);
       let spawnX = this.character.x + this.character.width;
@@ -108,6 +111,13 @@ class World {
       );
       this.throwableObject.push(bottle);
     }
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  isThrowOnCooldown() {
+    return new Date().getTime() - this.lastThrowTime < 500;
   }
 
   /**
