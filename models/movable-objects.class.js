@@ -68,10 +68,14 @@ class MovableObject extends DrawableObject {
     }
 
     if (mo instanceof Endboss || this instanceof Endboss) {
-      moLeft += 40;
-      moRight += 40;
+      moLeft += 60;
+      moRight += 60;
       moTop += 40;
       moBottom += 40;
+    }
+
+    if (mo instanceof Chicken || this instanceof Chicken) {
+      moTop += 20;
     }
 
 
