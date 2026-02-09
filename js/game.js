@@ -8,6 +8,7 @@ function init() {
     canvas = document.getElementById("canvas");
     world = new World(canvas, keyboard);
     bindStartButton();
+    bindEndButton();
 };
 
 /**
@@ -18,6 +19,16 @@ function bindStartButton() {
     btn.addEventListener("click", () => {
         world.startGame();
         btn.style.display = "none";
+    });
+}
+
+/**
+ * @returns {void}
+ */
+function bindEndButton() {
+    let btn = document.getElementById("end-button");
+    btn.addEventListener("click", () => {
+        location.reload();
     });
 }
 

@@ -15,6 +15,9 @@ class World {
   lastThrowTime = 0;
   startScreen = new StartScreen();
   gameStarted = false;
+  endScreen = new EndScreen();
+  gameEnded = false;
+  endScheduled = false;
   
 
   constructor(canvas, keyboard) {
@@ -140,10 +143,42 @@ class World {
    */
   checkCollisions() {
     if (!this.gameStarted) return;
+    this.checkGameEnd();
     this.checkJumpOnEnemies();
     this.checkEnemyCollisions();
     this.checkCollectableCollisions();
     this.checkBottleCollisions();
+  }
+
+  /**
+   * @returns {void}
+   */
+  checkGameEnd() {
+    if (this.endScheduled) return;
+    if (this.character.isDead()) return this.scheduleEnd("lose");
+    const boss = this.getEndboss();
+    if (boss && boss.isDead()) return this.scheduleEnd("win");
+  }
+
+  /**
+   * @param {string} type
+   * @returns {void}
+   */
+  scheduleEnd(type) {
+    this.endScheduled = true;
+    setTimeout(() => this.showEndScreen(type), 1200);
+  }
+
+  /**
+   * @param {string} type
+   * @returns {void}
+   */
+  showEndScreen(type) {
+    this.gameEnded = true;
+    if (type === "win") this.endScreen.showWin();
+    if (type === "lose") this.endScreen.showLose();
+    let btn = document.getElementById("end-button");
+    if (btn) btn.style.display = "block";
   }
 
   /**
@@ -240,6 +275,10 @@ class World {
 
     if (!this.gameStarted) {
       this.startScreen.draw(this.ctx);
+      return this.loopDraw();
+    }
+    if (this.gameEnded) {
+      this.endScreen.draw(this.ctx);
       return this.loopDraw();
     }
 
