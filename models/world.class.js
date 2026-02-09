@@ -165,14 +165,22 @@ class World {
    * @returns {void}
    */
   checkBottleCollisions() {
+    const boss = this.getEndboss();
+    if (!boss) return;
     this.throwableObject.forEach((bottle) => {
-      this.level.enemies.forEach((enemy) => {
-        if (!enemy.dead && !bottle.hasSplashed && bottle.isColliding(enemy)) {
-          enemy.die();
-          bottle.onImpact();
-        }
-      });
+      if (!bottle.hasSplashed && bottle.isColliding(boss)) {
+        boss.takeHit();
+        this.statusBarEndboss.healthEndboss(boss.energy);
+        bottle.onImpact();
+      }
     });
+  }
+
+  /**
+   * @returns {Endboss|undefined}
+   */
+  getEndboss() {
+    return this.level.enemies.find((e) => e instanceof Endboss);
   }
 
   /**
@@ -183,7 +191,8 @@ class World {
       const isFalling = this.character.speedY < 0;
       const isAbove = this.character.y + this.character.height - 10 <= enemy.y + enemy.height;
       const isTop = this.character.y < enemy.y;
-      if (!enemy.dead && isFalling && isAbove && isTop && this.character.isColliding(enemy)) {
+      if (enemy instanceof Chicken && !enemy.dead && isFalling &&
+        isAbove && isTop && this.character.isColliding(enemy)) {
         enemy.die();
         this.character.speedY = 15;
       }
