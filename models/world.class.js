@@ -179,9 +179,14 @@ class World {
    */
   showEndScreen(type) {
     this.gameEnded = true;
-    gameSounds.playEndScreenLoop();
-    if (type === "win") this.endScreen.showWin();
-    if (type === "lose") this.endScreen.showLose();
+    if (type === "win") {
+      gameSounds.playWinEndScreenSound();
+      this.endScreen.showWin();
+    }
+    if (type === "lose") {
+      gameSounds.playLoseEndScreenSound();
+      this.endScreen.showLose();
+    }
     let btn = document.getElementById("end-button");
     if (btn) btn.style.display = "block";
   }

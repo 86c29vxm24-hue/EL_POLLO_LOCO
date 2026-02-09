@@ -4,7 +4,8 @@ class GamingSounds {
   bottleCollectSound = new Audio("audio/delon_boomkin-video-game-collect-item-468889.mp3");
   bottleSplashSound = new Audio("audio/freesound_community-water-splash-80537.mp3");
   startScreenMusic = new Audio("audio/xtremefreddy-game-music-loop-7-145285.mp3");
-  endScreenMusic = new Audio("audio/universfield-cartoon-fail-trumpet-278822.mp3");
+  endScreenLoseSound = new Audio("audio/universfield-cartoon-fail-trumpet-278822.mp3");
+  endScreenWinSound = new Audio("audio/scratchonix-victory-chime-366449.mp3");
 
   /**
    * @returns {void}
@@ -76,10 +77,19 @@ class GamingSounds {
   /**
    * @returns {void}
    */
-  playEndScreenLoop() {
-    this.endScreenMusic.loop = false;
-    this.endScreenMusic.currentTime = 0;
-    this.endScreenMusic.play().catch(() => {});
+  playLoseEndScreenSound() {
+    this.endScreenLoseSound.loop = false;
+    this.endScreenLoseSound.currentTime = 0;
+    this.endScreenLoseSound.play().catch(() => {});
+  }
+
+  /**
+   * @returns {void}
+   */
+  playWinEndScreenSound() {
+    this.endScreenWinSound.loop = false;
+    this.endScreenWinSound.currentTime = 0;
+    this.endScreenWinSound.play().catch(() => {});
   }
 }
 
