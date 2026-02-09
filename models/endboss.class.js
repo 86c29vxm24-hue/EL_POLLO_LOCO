@@ -49,6 +49,7 @@ class Endboss extends MovableObject {
   startX = 0;
   isSequenceRunning = false;
   energy = 100;
+  isHurt = false;
 
   /**
    * @returns {void}
@@ -108,6 +109,7 @@ class Endboss extends MovableObject {
    * @returns {void}
    */
   playCurrentAnimation() {
+    if (this.isHurt) return this.playAnimation(this.IMAGES_HURT);
     if (this.isDead()) return this.playAnimation(this.IMAGES_DEAD);
     if (this.phase === "alert") this.playAnimation(this.IMAGES_ALERT);
     if (this.phase === "walk") this.playAnimation(this.IMAGES_WALKING);
@@ -169,7 +171,18 @@ class Endboss extends MovableObject {
     if (this.isDead()) return;
     this.energy -= 20;
     if (this.energy < 0) this.energy = 0;
+    this.triggerHurt();
     if (this.isDead()) this.setPhase("dead");
+  }
+
+  /**
+   * @returns {void}
+   */
+  triggerHurt() {
+    this.isHurt = true;
+    setTimeout(() => {
+      this.isHurt = false;
+    }, 400);
   }
 
   /**
