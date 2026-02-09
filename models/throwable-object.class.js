@@ -30,6 +30,8 @@ class ThrowableObject extends MovableObject {
     this.height = 60;
     this.groundY = groundY;
     this.hasSplashed = false;
+    this.impactX = this.x;
+    this.impactY = this.y;
     this.throw();
   }
 
@@ -65,7 +67,11 @@ class ThrowableObject extends MovableObject {
   startThrowMovement() {
     this.throwInterval = setInterval(() => {
       if (!this.hasSplashed) this.x += 8;
-      if (!this.isAboveGround()) this.onImpact();
+      if (!this.isAboveGround()) {
+        this.impactX = this.x;
+        this.impactY = this.groundY;
+        this.onImpact();
+      }
     }, 1000 / 60);
   }
 
@@ -73,7 +79,8 @@ class ThrowableObject extends MovableObject {
    * @returns {void}
    */
   onImpact() {
-    this.y = this.groundY;
+    this.x = this.impactX;
+    this.y = this.impactY;
     this.speedY = 0;
     clearInterval(this.animationInterval);
     clearInterval(this.throwInterval);

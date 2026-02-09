@@ -171,6 +171,8 @@ class World {
       if (!bottle.hasSplashed && bottle.isColliding(boss)) {
         boss.takeHit();
         this.statusBarEndboss.healthEndboss(boss.energy);
+        bottle.impactX = bottle.x;
+        bottle.impactY = bottle.y;
         bottle.onImpact();
       }
     });
