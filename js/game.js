@@ -10,6 +10,7 @@ function init() {
     bindStartButton();
     bindEndButton();
     bindFullscreenButton();
+    bindMobileControls();
 };
 
 /**
@@ -51,6 +52,39 @@ function bindFullscreenButton() {
     document.addEventListener("fullscreenchange", () => {
         btn.textContent = document.fullscreenElement ? "Exit Fullscreen" : "Fullscreen";
     });
+}
+
+/**
+ * @returns {void}
+ */
+function bindMobileControls() {
+    let left = document.getElementById("btn-left");
+    let right = document.getElementById("btn-right");
+    let jump = document.getElementById("btn-jump");
+    let throwBtn = document.getElementById("btn-throw");
+    bindHold(left, "LEFT");
+    bindHold(right, "RIGHT");
+    bindHold(jump, "UP");
+    bindHold(throwBtn, "D");
+}
+
+/**
+ * @param {HTMLElement} btn
+ * @param {string} key
+ * @returns {void}
+ */
+function bindHold(btn, key) {
+    btn.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        keyboard[key] = true;
+    });
+    btn.addEventListener("touchend", (e) => {
+        e.preventDefault();
+        keyboard[key] = false;
+    });
+    btn.addEventListener("mousedown", () => { keyboard[key] = true; });
+    btn.addEventListener("mouseup", () => { keyboard[key] = false; });
+    btn.addEventListener("mouseleave", () => { keyboard[key] = false; });
 }
 
 window.addEventListener('keydown', (event) => {
