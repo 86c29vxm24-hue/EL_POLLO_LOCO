@@ -20,7 +20,7 @@ class ThrowableObject extends MovableObject {
    * @param {number} y
    * @param {number} groundY
    */
-  constructor(x, y, groundY) {
+  constructor(x, y, groundY, direction) {
     super().loadImage("img/6_salsa_bottle/salsa_bottle.png");
     this.loadImages(this.IMAGE_BOTTLETHROW);
     this.loadImages(this.IMAGE_BOTTLESPLASH);
@@ -32,6 +32,7 @@ class ThrowableObject extends MovableObject {
     this.hasSplashed = false;
     this.impactX = this.x;
     this.impactY = this.y;
+    this.direction = direction;
     this.throw();
   }
 
@@ -66,7 +67,7 @@ class ThrowableObject extends MovableObject {
    */
   startThrowMovement() {
     this.throwInterval = setInterval(() => {
-      if (!this.hasSplashed) this.x += 8;
+      if (!this.hasSplashed) this.x += 8 * this.direction;
       if (!this.isAboveGround()) {
         this.impactX = this.x;
         this.impactY = this.groundY;

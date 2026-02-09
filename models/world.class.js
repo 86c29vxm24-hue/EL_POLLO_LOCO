@@ -102,12 +102,16 @@ class World {
       this.lastThrowTime = new Date().getTime();
       this.statusBarBottles.bottles -= 1;
       this.statusBarBottles.collectBottle(this.statusBarBottles.bottles * 5);
-      let spawnX = this.character.x + this.character.width;
+      let direction = this.character.otherDirection ? -1 : 1;
+      let spawnX = this.character.otherDirection
+        ? this.character.x - 50
+        : this.character.x + this.character.width;
       let groundY = 400;
       let bottle = new ThrowableObject(
         spawnX,
         this.character.y,
-        groundY
+        groundY,
+        direction
       );
       this.throwableObject.push(bottle);
     }
