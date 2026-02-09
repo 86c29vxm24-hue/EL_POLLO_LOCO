@@ -67,6 +67,13 @@ class MovableObject extends DrawableObject {
       offsetRight += 40;
     }
 
+    if (mo instanceof Endboss || this instanceof Endboss) {
+      moLeft += 40;
+      moRight += 40;
+      moTop += 40;
+      moBottom += 40;
+    }
+
 
     return (
       this.x + this.width - offsetRight > mo.x + moLeft &&
