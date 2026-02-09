@@ -53,7 +53,6 @@ class Character extends MovableObject {
   ]
 
   currentImage = 0;
-  jumpSound = new Audio("audio/edr-8-bit-jump-001-171817.mp3");
 
   constructor() {
     super();
@@ -104,8 +103,7 @@ class Character extends MovableObject {
   }
 
   jump() {
-    this.jumpSound.currentTime = 0;
-    this.jumpSound.play();
+    gameSounds.playJump();
     this.speedY = 28;
   }
 }

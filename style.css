@@ -64,6 +64,21 @@ canvas {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 
+#music-toggle-button {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    padding: 8px 12px;
+    border: 2px solid #2a1b0f;
+    background: #f3c36b;
+    color: #2a1b0f;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    display: none;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
 #fullscreen-button {
     position: absolute;
     right: 12px;
@@ -80,6 +95,7 @@ canvas {
 
 #start-button:hover,
 #end-button:hover,
+#music-toggle-button:hover,
 #fullscreen-button:hover {
     border-color: #ffffff;
     color: #ffffff;

@@ -8,6 +8,7 @@ function init() {
     canvas = document.getElementById("canvas");
     world = new World(canvas, keyboard);
     bindStartButton();
+    bindMusicToggleButton();
     bindEndButton();
     bindFullscreenButton();
     bindMobileControls();
@@ -18,9 +19,25 @@ function init() {
  */
 function bindStartButton() {
     let btn = document.getElementById("start-button");
+    let musicBtn = document.getElementById("music-toggle-button");
     btn.addEventListener("click", () => {
         world.startGame();
         btn.style.display = "none";
+        if (musicBtn) musicBtn.style.display = "none";
+    });
+}
+
+/**
+ * @returns {void}
+ */
+function bindMusicToggleButton() {
+    let btn = document.getElementById("music-toggle-button");
+    if (!btn) return;
+    btn.style.display = "block";
+    btn.textContent = gameSounds.isStartScreenLoopPlaying() ? "Music: On" : "Music: Off";
+    btn.addEventListener("click", () => {
+        let isPlaying = gameSounds.toggleStartScreenLoop();
+        btn.textContent = isPlaying ? "Music: On" : "Music: Off";
     });
 }
 

@@ -24,6 +24,7 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    gameSounds.playStartScreenLoop();
     this.setupStatusBars();
     this.setupCollectables();
     this.draw();
@@ -35,6 +36,7 @@ class World {
    * @returns {void}
    */
   startGame() {
+    gameSounds.stopStartScreenLoop();
     this.gameStarted = true;
   }
 
@@ -211,6 +213,7 @@ class World {
    */
   collectCoin() {
     this.statusBarCoins.coins = (this.statusBarCoins.coins || 0) + 1;
+    gameSounds.playCoinCollect();
     this.statusBarCoins.collectCoin(this.statusBarCoins.coins * 5);
     return false;
   }
