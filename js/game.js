@@ -9,6 +9,7 @@ function init() {
     world = new World(canvas, keyboard);
     bindStartButton();
     bindEndButton();
+    bindFullscreenButton();
 };
 
 /**
@@ -29,6 +30,26 @@ function bindEndButton() {
     let btn = document.getElementById("end-button");
     btn.addEventListener("click", () => {
         location.reload();
+    });
+}
+
+/**
+ * @returns {void}
+ */
+function bindFullscreenButton() {
+    let btn = document.getElementById("fullscreen-button");
+    let area = document.getElementById("game-area");
+    btn.addEventListener("click", () => {
+        if (!document.fullscreenElement) {
+            area.requestFullscreen();
+            btn.textContent = "Exit Fullscreen";
+        } else {
+            document.exitFullscreen();
+            btn.textContent = "Fullscreen";
+        }
+    });
+    document.addEventListener("fullscreenchange", () => {
+        btn.textContent = document.fullscreenElement ? "Exit Fullscreen" : "Fullscreen";
     });
 }
 
