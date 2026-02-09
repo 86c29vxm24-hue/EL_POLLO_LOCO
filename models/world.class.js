@@ -224,6 +224,7 @@ class World {
    */
   collectBottle() {
     this.statusBarBottles.bottles = (this.statusBarBottles.bottles || 0) + 1;
+    gameSounds.playBottleCollect();
     this.statusBarBottles.collectBottle(this.statusBarBottles.bottles * 5);
     return false;
   }

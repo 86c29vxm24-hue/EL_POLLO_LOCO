@@ -1,6 +1,7 @@
 class GamingSounds {
   jumpSound = new Audio("audio/edr-8-bit-jump-001-171817.mp3");
   coinCollectSound = new Audio("audio/wolfy_sanic-collect-ring-15982.mp3");
+  bottleCollectSound = new Audio("audio/delon_boomkin-video-game-collect-item-468889.mp3");
   bottleSplashSound = new Audio("audio/freesound_community-water-splash-80537.mp3");
   startScreenMusic = new Audio("audio/xtremefreddy-game-music-loop-7-145285.mp3");
   endScreenMusic = new Audio("audio/universfield-cartoon-fail-trumpet-278822.mp3");
@@ -27,6 +28,14 @@ class GamingSounds {
   playBottleSplash() {
     this.bottleSplashSound.currentTime = 0;
     this.bottleSplashSound.play();
+  }
+
+  /**
+   * @returns {void}
+   */
+  playBottleCollect() {
+    this.bottleCollectSound.currentTime = 0;
+    this.bottleCollectSound.play();
   }
 
   /**
