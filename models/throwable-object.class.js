@@ -93,6 +93,7 @@ class ThrowableObject extends MovableObject {
    */
   splash() {
     this.hasSplashed = true;
+    gameSounds.playBottleSplash();
     let i = 0;
     let splashInterval = setInterval(() => {
       this.img = this.imageCache[this.IMAGE_BOTTLESPLASH[i++]];
