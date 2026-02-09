@@ -166,7 +166,7 @@ class World {
    */
   scheduleEnd(type) {
     this.endScheduled = true;
-    setTimeout(() => this.showEndScreen(type), 1200);
+    setTimeout(() => this.showEndScreen(type), 2500);
   }
 
   /**
