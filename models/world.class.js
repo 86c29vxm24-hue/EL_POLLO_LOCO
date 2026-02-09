@@ -179,6 +179,7 @@ class World {
    */
   showEndScreen(type) {
     this.gameEnded = true;
+    gameSounds.playEndScreenLoop();
     if (type === "win") this.endScreen.showWin();
     if (type === "lose") this.endScreen.showLose();
     let btn = document.getElementById("end-button");
