@@ -23,7 +23,8 @@ dead = false;
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_CHICKEN_DEAD);
 
-        this.x = 200 + Math.random() * 2400; 
+        this.x = 200 + Math.random() * 2400;
+        if (this.x < 300) this.x = 300 + Math.random() * 200;
         this.speed = 0.15 + Math.random() * 0.5;
         this.animate();
     }
