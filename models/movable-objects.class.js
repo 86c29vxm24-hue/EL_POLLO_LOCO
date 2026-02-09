@@ -24,10 +24,12 @@ class MovableObject extends DrawableObject {
   }
 
   moveRight() {
+    if (this.world && (!this.world.gameStarted || this.world.gameEnded)) return;
     this.x += this.speed;
   }
 
   moveLeft() {
+    if (this.world && (!this.world.gameStarted || this.world.gameEnded)) return;
     {
       this.x -= this.speed;
     }
