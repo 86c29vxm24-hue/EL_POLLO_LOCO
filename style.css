@@ -27,6 +27,7 @@ canvas {
     font-weight: 700;
     font-size: 18px;
     cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 
 #end-button {
@@ -42,4 +43,12 @@ canvas {
     font-size: 18px;
     cursor: pointer;
     display: none;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+#start-button:hover,
+#end-button:hover {
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
 }
