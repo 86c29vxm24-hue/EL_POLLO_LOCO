@@ -181,9 +181,17 @@ class World {
    */
   checkBottleCollisions() {
     const boss = this.getEndboss();
-    if (!boss) return;
     this.throwableObject.forEach((bottle) => {
-      if (!bottle.hasSplashed && bottle.isColliding(boss)) {
+      if (bottle.hasSplashed) return;
+      this.level.enemies.forEach((enemy) => {
+        if (enemy instanceof Chicken && !enemy.dead && bottle.isColliding(enemy)) {
+          enemy.die();
+          bottle.impactX = bottle.x;
+          bottle.impactY = bottle.y;
+          bottle.onImpact();
+        }
+      });
+      if (boss && bottle.isColliding(boss)) {
         boss.takeHit();
         this.statusBarEndboss.healthEndboss(boss.energy);
         bottle.impactX = bottle.x;
