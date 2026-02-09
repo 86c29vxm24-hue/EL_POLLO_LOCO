@@ -13,6 +13,8 @@ class World {
   throwableObject = [];
   collectableObjects = [];  
   lastThrowTime = 0;
+  startScreen = new StartScreen();
+  gameStarted = false;
   
 
   constructor(canvas, keyboard) {
@@ -24,6 +26,13 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
+  }
+
+  /**
+   * @returns {void}
+   */
+  startGame() {
+    this.gameStarted = true;
   }
 
   /**
@@ -96,6 +105,7 @@ class World {
    * @returns {void}
    */
   checkThrowObjects() {
+    if (!this.gameStarted) return;
     if (this.keyboard.D) {
       if (this.isThrowOnCooldown()) return;
       if (!this.statusBarBottles.bottles) return;
@@ -129,6 +139,7 @@ class World {
    * @returns {void}
    */
   checkCollisions() {
+    if (!this.gameStarted) return;
     this.checkJumpOnEnemies();
     this.checkEnemyCollisions();
     this.checkCollectableCollisions();
@@ -227,6 +238,11 @@ class World {
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+    if (!this.gameStarted) {
+      this.startScreen.draw(this.ctx);
+      return this.loopDraw();
+    }
+
     this.ctx.translate(this.camera_x, 0);
 
     this.addObjectsToMap(this.level.backgroundObjects);
@@ -247,6 +263,13 @@ class World {
 
     this.ctx.translate(-this.camera_x, 0);
 
+    this.loopDraw();
+  }
+
+  /**
+   * @returns {void}
+   */
+  loopDraw() {
     let self = this;
     requestAnimationFrame(function () {
       self.draw();

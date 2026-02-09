@@ -7,9 +7,19 @@ let keyboard = new Keyboard();
 function init() {
     canvas = document.getElementById("canvas");
     world = new World(canvas, keyboard);
-
-
+    bindStartButton();
 };
+
+/**
+ * @returns {void}
+ */
+function bindStartButton() {
+    let btn = document.getElementById("start-button");
+    btn.addEventListener("click", () => {
+        world.startGame();
+        btn.style.display = "none";
+    });
+}
 
 window.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowLeft') {
