@@ -3,6 +3,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: #d97a3f;
+    background: linear-gradient(180deg, #e08a3b 0%, #c45a2a 100%);
 }
 
 #game-area {
