@@ -110,6 +110,7 @@ class World {
   checkThrowObjects() {
     if (!this.gameStarted) return;
     if (this.character.isDead()) return;
+    if (this.character.otherDirection) return;
     if (this.keyboard.D) {
       if (this.isThrowOnCooldown()) return;
       if (!this.statusBarBottles.bottles) return;
