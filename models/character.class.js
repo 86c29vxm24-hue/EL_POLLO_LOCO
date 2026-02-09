@@ -68,6 +68,7 @@ class Character extends MovableObject {
   animate() {
     setInterval(() => {
       if (this.isDead()) return;
+      if (!this.world.gameStarted || this.world.gameEnded) return;
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
         this.otherDirection = false;
@@ -89,6 +90,7 @@ class Character extends MovableObject {
     }, 1000 / 60);
 
     setInterval(() => {
+      if (!this.world.gameStarted || this.world.gameEnded) return;
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
       } else if (this.isHurt()) {
@@ -96,13 +98,13 @@ class Character extends MovableObject {
       } else if (this.isAboveGround()) {
         this.playAnimation(this.IMAGES_JUMPING);
       } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-        this.x += this.speed;
         this.playAnimation(this.IMAGES_WALKING);
       }
     }, 100);
   }
 
   jump() {
+    if (!this.world.gameStarted || this.world.gameEnded) return;
     gameSounds.playJump();
     this.speedY = 28;
   }
