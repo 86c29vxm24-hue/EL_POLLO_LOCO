@@ -237,13 +237,21 @@ body.info-page {
 @media (max-width: 450px) {
     body {
         margin: 0;
+        padding-top: 0;
+        min-height: 100dvh;
+        height: 100dvh;
+        overflow: hidden;
+    }
+    html {
+        height: 100dvh;
+        overflow: hidden;
     }
     h1 {
         display: none;
     }
     #game-area {
         width: 100vw;
-        height: 100vh;
+        height: 100dvh;
     }
     canvas {
         width: 100%;

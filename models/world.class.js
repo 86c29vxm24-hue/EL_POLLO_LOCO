@@ -49,11 +49,12 @@ class World {
   }
 
   placeStatusBars() {
+    const isMobile = window.matchMedia("(max-width: 450px)").matches;
     this.statusBar.x = 50; this.statusBar.y = 5;
     this.statusBarCoins.x = 50; this.statusBarCoins.y = 55;
     this.statusBarBottles.x = 50; this.statusBarBottles.y = 105;
     this.statusBarEndboss.x = this.canvas.width - 250;
-    this.statusBarEndboss.y = 5;
+    this.statusBarEndboss.y = isMobile ? 40 : 5;
   }
 
   /**
