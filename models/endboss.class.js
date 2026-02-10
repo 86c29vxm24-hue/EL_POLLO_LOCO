@@ -62,7 +62,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.x = 1400;
     this.startX = this.x;
-    this.speed = 1.4 + Math.random() * 0.8;
+    this.speed = 1.8 + Math.random() * 0.9;
     this.animate();
   }
 
@@ -124,8 +124,8 @@ class Endboss extends MovableObject {
     this.beginWalkCycle();
     this.setPhase("alert");
     this.trackTimeout(() => this.setPhase("walk"), 700);
-    this.trackTimeout(() => this.setPhase("attack"), 1600);
-    this.trackTimeout(() => this.finishSequence(), 2200);
+    this.trackTimeout(() => this.setPhase("attack"), 2100);
+    this.trackTimeout(() => this.finishSequence(), 2800);
   }
 
   /**
@@ -134,8 +134,8 @@ class Endboss extends MovableObject {
   runWalkAttackCycle() {
     this.beginWalkCycle();
     this.setPhase("walk");
-    this.trackTimeout(() => this.setPhase("attack"), 900);
-    this.trackTimeout(() => this.finishSequence(), 1700);
+    this.trackTimeout(() => this.setPhase("attack"), 1400);
+    this.trackTimeout(() => this.finishSequence(), 2200);
   }
 
   /**
