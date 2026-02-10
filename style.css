@@ -1,3 +1,9 @@
+@font-face {
+    font-family: "Kablammo";
+    src: url("assets/fonts/Kablammo-Regular-VariableFont_MORF.ttf") format("truetype");
+    font-display: swap;
+}
+
 body {
     display: flex;
     flex-direction: column;
