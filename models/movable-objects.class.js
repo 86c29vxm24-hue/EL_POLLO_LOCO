@@ -106,7 +106,7 @@ class MovableObject extends DrawableObject {
    */
   getSelfCollisionOffsets(mo) {
     const offsets = { left: 0, right: 0, top: 0, bottom: 0 };
-    if (this instanceof Character) Object.assign(offsets, { left: 20, right: 20, top: 70, bottom: 20 });
+    if (this instanceof Character) Object.assign(offsets, { left: 20, right: 30, top: 70, bottom: 20 });
     if (mo instanceof CollectableObjects) Object.assign(offsets, { left: offsets.left + 40, right: offsets.right + 40, top: offsets.top + 80 });
     return offsets;
   }
