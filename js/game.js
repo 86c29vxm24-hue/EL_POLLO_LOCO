@@ -111,11 +111,18 @@ function bindMobileControls() {
  * @returns {void}
  */
 function bindHold(btn, key) {
+    btn.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+    });
     btn.addEventListener("touchstart", (e) => {
         e.preventDefault();
         keyboard[key] = true;
     });
     btn.addEventListener("touchend", (e) => {
+        e.preventDefault();
+        keyboard[key] = false;
+    });
+    btn.addEventListener("touchcancel", (e) => {
         e.preventDefault();
         keyboard[key] = false;
     });

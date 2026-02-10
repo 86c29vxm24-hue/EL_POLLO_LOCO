@@ -141,6 +141,9 @@ canvas {
     color: #2a1b0f;
     font-weight: 700;
     font-size: 18px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 #mobile-controls button:active {
