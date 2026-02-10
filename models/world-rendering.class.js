@@ -37,8 +37,14 @@ Object.assign(World.prototype, {
   drawGameScene() {
     this.ctx.translate(this.camera_x, 0);
     this.drawWorldObjects();
+    if (!this.character.isAboveGround()) this.addToMap(this.character);
     this.ctx.translate(-this.camera_x, 0);
     this.drawStatusBars();
+    if (this.character.isAboveGround()) {
+      this.ctx.translate(this.camera_x, 0);
+      this.addToMap(this.character);
+      this.ctx.translate(-this.camera_x, 0);
+    }
   },
 
   /**
@@ -46,7 +52,6 @@ Object.assign(World.prototype, {
    */
   drawWorldObjects() {
     this.addObjectsToMap(this.level.backgroundObjects);
-    this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.throwableObject);
