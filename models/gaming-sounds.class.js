@@ -10,21 +10,88 @@ class GamingSounds {
   startScreenMusic = new Audio("audio/xtremefreddy-game-music-loop-7-145285.mp3");
   endScreenLoseSound = new Audio("audio/universfield-cartoon-fail-trumpet-278822.mp3");
   endScreenWinSound = new Audio("audio/scratchonix-victory-chime-366449.mp3");
+  muted = false;
+
+  constructor() {
+    this.muted = this.loadMuteState();
+    this.applyMuteState();
+  }
+
+  /**
+   * @returns {Audio[]}
+   */
+  getAllSounds() {
+    return [
+      this.jumpSound, this.characterHurtSound, this.characterDeathSound, this.enemyHitSound,
+      this.endbossDeathSound, this.coinCollectSound, this.bottleCollectSound, this.bottleSplashSound,
+      this.startScreenMusic, this.endScreenLoseSound, this.endScreenWinSound,
+    ];
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  loadMuteState() {
+    const savedValue = localStorage.getItem("globalMute");
+    return savedValue === "true";
+  }
+
+  /**
+   * @returns {void}
+   */
+  saveMuteState() {
+    localStorage.setItem("globalMute", String(this.muted));
+  }
+
+  /**
+   * @returns {void}
+   */
+  applyMuteState() {
+    this.getAllSounds().forEach((sound) => {
+      sound.muted = this.muted;
+    });
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  isMuted() {
+    return this.muted;
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  toggleMute() {
+    this.muted = !this.muted;
+    this.applyMuteState();
+    this.saveMuteState();
+    return this.muted;
+  }
+
+  /**
+   * @param {Audio} sound
+   * @param {boolean} restart
+   * @returns {void}
+   */
+  playSound(sound, restart = true) {
+    if (this.muted) return;
+    if (restart) sound.currentTime = 0;
+    sound.play().catch(() => {});
+  }
 
   /**
    * @returns {void}
    */
   playJump() {
-    this.jumpSound.currentTime = 0;
-    this.jumpSound.play();
+    this.playSound(this.jumpSound);
   }
 
   /**
    * @returns {void}
    */
   playCharacterHurt() {
-    this.characterHurtSound.currentTime = 0;
-    this.characterHurtSound.play();
+    this.playSound(this.characterHurtSound);
   }
 
   /**
@@ -32,16 +99,14 @@ class GamingSounds {
    */
   playCharacterDeath() {
     this.characterDeathSound.loop = false;
-    this.characterDeathSound.currentTime = 0;
-    this.characterDeathSound.play();
+    this.playSound(this.characterDeathSound);
   }
 
   /**
    * @returns {void}
    */
   playEnemyHit() {
-    this.enemyHitSound.currentTime = 0;
-    this.enemyHitSound.play();
+    this.playSound(this.enemyHitSound);
   }
 
   /**
@@ -49,32 +114,28 @@ class GamingSounds {
    */
   playEndbossDeath() {
     this.endbossDeathSound.loop = false;
-    this.endbossDeathSound.currentTime = 0;
-    this.endbossDeathSound.play();
+    this.playSound(this.endbossDeathSound);
   }
 
   /**
    * @returns {void}
    */
   playCoinCollect() {
-    this.coinCollectSound.currentTime = 0;
-    this.coinCollectSound.play();
+    this.playSound(this.coinCollectSound);
   }
 
   /**
    * @returns {void}
    */
   playBottleSplash() {
-    this.bottleSplashSound.currentTime = 0;
-    this.bottleSplashSound.play();
+    this.playSound(this.bottleSplashSound);
   }
 
   /**
    * @returns {void}
    */
   playBottleCollect() {
-    this.bottleCollectSound.currentTime = 0;
-    this.bottleCollectSound.play();
+    this.playSound(this.bottleCollectSound);
   }
 
   /**
@@ -82,7 +143,7 @@ class GamingSounds {
    */
   playStartScreenLoop() {
     this.startScreenMusic.loop = true;
-    this.startScreenMusic.play().catch(() => {});
+    this.playSound(this.startScreenMusic, false);
   }
 
   /**
@@ -117,8 +178,7 @@ class GamingSounds {
    */
   playLoseEndScreenSound() {
     this.endScreenLoseSound.loop = false;
-    this.endScreenLoseSound.currentTime = 0;
-    this.endScreenLoseSound.play().catch(() => {});
+    this.playSound(this.endScreenLoseSound);
   }
 
   /**
@@ -126,8 +186,7 @@ class GamingSounds {
    */
   playWinEndScreenSound() {
     this.endScreenWinSound.loop = false;
-    this.endScreenWinSound.currentTime = 0;
-    this.endScreenWinSound.play().catch(() => {});
+    this.playSound(this.endScreenWinSound);
   }
 }
 

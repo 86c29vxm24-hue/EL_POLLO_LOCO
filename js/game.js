@@ -19,11 +19,9 @@ function init() {
  */
 function bindStartButton() {
     let btn = document.getElementById("start-button");
-    let musicBtn = document.getElementById("music-toggle-button");
     btn.addEventListener("click", () => {
         world.startGame();
         btn.style.display = "none";
-        if (musicBtn) musicBtn.style.display = "none";
     });
 }
 
@@ -34,11 +32,20 @@ function bindMusicToggleButton() {
     let btn = document.getElementById("music-toggle-button");
     if (!btn) return;
     btn.style.display = "block";
-    btn.textContent = gameSounds.isStartScreenLoopPlaying() ? "Music: On" : "Music: Off";
+    updateMuteButtonText(btn);
     btn.addEventListener("click", () => {
-        let isPlaying = gameSounds.toggleStartScreenLoop();
-        btn.textContent = isPlaying ? "Music: On" : "Music: Off";
+        const isMuted = gameSounds.toggleMute();
+        if (!isMuted && !world.gameStarted) gameSounds.playStartScreenLoop();
+        updateMuteButtonText(btn);
     });
+}
+
+/**
+ * @param {HTMLElement} btn
+ * @returns {void}
+ */
+function updateMuteButtonText(btn) {
+    btn.textContent = gameSounds.isMuted() ? "Sound: Off" : "Sound: On";
 }
 
 /**
