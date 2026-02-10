@@ -62,7 +62,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.x = 1400;
     this.startX = this.x;
-    this.speed = 0.15 + Math.random() * 0.5;
+    this.speed = 1.4 + Math.random() * 0.8;
     this.animate();
   }
 
@@ -123,9 +123,9 @@ class Endboss extends MovableObject {
     this.hasTriggered = true;
     this.beginWalkCycle();
     this.setPhase("alert");
-    this.trackTimeout(() => this.setPhase("walk"), 1200);
-    this.trackTimeout(() => this.setPhase("attack"), 2400);
-    this.trackTimeout(() => this.finishSequence(), 3600);
+    this.trackTimeout(() => this.setPhase("walk"), 700);
+    this.trackTimeout(() => this.setPhase("attack"), 1600);
+    this.trackTimeout(() => this.finishSequence(), 2200);
   }
 
   /**
@@ -134,8 +134,8 @@ class Endboss extends MovableObject {
   runWalkAttackCycle() {
     this.beginWalkCycle();
     this.setPhase("walk");
-    this.trackTimeout(() => this.setPhase("attack"), 1200);
-    this.trackTimeout(() => this.finishSequence(), 2400);
+    this.trackTimeout(() => this.setPhase("attack"), 900);
+    this.trackTimeout(() => this.finishSequence(), 1700);
   }
 
   /**
@@ -160,8 +160,10 @@ class Endboss extends MovableObject {
   walkToCharacter() {
     if (this.isDead()) return;
     if (this.phase !== "walk") return;
-    if (this.x <= this.startX - 300) return;
-    this.x -= 1;
+    if (!this.world) return;
+    const targetX = this.world.character.x + 120;
+    if (this.x > targetX) this.x -= this.speed;
+    else if (this.x < targetX - 80) this.x += this.speed * 0.4;
   }
 
   /**
@@ -190,6 +192,6 @@ class Endboss extends MovableObject {
    */
   isTriggered() {
     if (!this.world) return false;
-    return this.world.character.x > this.x - 500;
+    return this.world.character.x > this.x - 700;
   }
 }
