@@ -1,4 +1,6 @@
 class GamingSounds {
+  startScreenVolume = 1;
+  gameplayBackgroundVolume = 0.5;
   jumpSound = new Audio("audio/edr-8-bit-jump-001-171817.mp3");
   characterHurtSound = new Audio("audio/homemade_sfx-slap-hurt-pain-sound-effect-262618.mp3");
   characterDeathSound = new Audio("audio/freesound_community-young-man-being-hurt-95628.mp3");
@@ -143,6 +145,16 @@ class GamingSounds {
    */
   playStartScreenLoop() {
     this.startScreenMusic.loop = true;
+    this.startScreenMusic.volume = this.startScreenVolume;
+    this.playSound(this.startScreenMusic, false);
+  }
+
+  /**
+   * @returns {void}
+   */
+  playGameplayBackgroundLoop() {
+    this.startScreenMusic.loop = true;
+    this.startScreenMusic.volume = this.gameplayBackgroundVolume;
     this.playSound(this.startScreenMusic, false);
   }
 

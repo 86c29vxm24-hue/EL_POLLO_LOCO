@@ -36,7 +36,7 @@ class World {
    * @returns {void}
    */
   startGame() {
-    gameSounds.stopStartScreenLoop();
+    gameSounds.playGameplayBackgroundLoop();
     this.gameStarted = true;
   }
 

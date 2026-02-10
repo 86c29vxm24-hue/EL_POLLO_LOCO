@@ -37,6 +37,7 @@ function bindMusicToggleButton() {
     btn.addEventListener("click", () => {
         const isMuted = gameSounds.toggleMute();
         if (!isMuted && !world.gameStarted) gameSounds.playStartScreenLoop();
+        if (!isMuted && world.gameStarted) gameSounds.playGameplayBackgroundLoop();
         updateMuteButtonText(btn);
     });
 }
