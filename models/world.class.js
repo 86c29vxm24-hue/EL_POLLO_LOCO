@@ -244,6 +244,7 @@ class World {
       if (bottle.hasSplashed) return;
       this.level.enemies.forEach((enemy) => {
         if (enemy instanceof Chicken && !enemy.dead && bottle.isColliding(enemy)) {
+          gameSounds.playEnemyHit();
           enemy.die();
           bottle.impactX = bottle.x;
           bottle.impactY = bottle.y;
@@ -251,6 +252,7 @@ class World {
         }
       });
       if (boss && bottle.isColliding(boss)) {
+        gameSounds.playEnemyHit();
         boss.takeHit();
         this.statusBarEndboss.healthEndboss(boss.energy);
         bottle.impactX = bottle.x;
@@ -277,6 +279,7 @@ class World {
       const isTop = this.character.y < enemy.y;
       if (enemy instanceof Chicken && !enemy.dead && isFalling &&
         isAbove && isTop && this.character.isColliding(enemy)) {
+        gameSounds.playEnemyHit();
         enemy.die();
         this.character.speedY = 15;
       }
