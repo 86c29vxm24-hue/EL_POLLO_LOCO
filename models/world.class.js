@@ -171,6 +171,7 @@ class World {
   scheduleEnd(type) {
     this.endScheduled = true;
     if (type === "lose") gameSounds.playCharacterDeath();
+    if (type === "win") gameSounds.playEndbossDeath();
     setTimeout(() => this.showEndScreen(type), 2500);
   }
 

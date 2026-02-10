@@ -3,6 +3,7 @@ class GamingSounds {
   characterHurtSound = new Audio("audio/homemade_sfx-slap-hurt-pain-sound-effect-262618.mp3");
   characterDeathSound = new Audio("audio/freesound_community-young-man-being-hurt-95628.mp3");
   enemyHitSound = new Audio("audio/stepir44-hurt-sound-435314.mp3");
+  endbossDeathSound = new Audio("audio/freesound_community-086398_game-die-81356.mp3");
   coinCollectSound = new Audio("audio/wolfy_sanic-collect-ring-15982.mp3");
   bottleCollectSound = new Audio("audio/delon_boomkin-video-game-collect-item-468889.mp3");
   bottleSplashSound = new Audio("audio/freesound_community-water-splash-80537.mp3");
@@ -41,6 +42,15 @@ class GamingSounds {
   playEnemyHit() {
     this.enemyHitSound.currentTime = 0;
     this.enemyHitSound.play();
+  }
+
+  /**
+   * @returns {void}
+   */
+  playEndbossDeath() {
+    this.endbossDeathSound.loop = false;
+    this.endbossDeathSound.currentTime = 0;
+    this.endbossDeathSound.play();
   }
 
   /**
