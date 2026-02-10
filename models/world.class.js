@@ -205,7 +205,7 @@ class World {
   showEndScreen(type) {
     this.gameEnded = true;
     this.renderEndScreenByType(type);
-    this.showEndButton();
+    this.showEndButtons();
   }
 
   /**
@@ -226,9 +226,11 @@ class World {
   /**
    * @returns {void}
    */
-  showEndButton() {
-    let btn = document.getElementById("end-button");
-    if (btn) btn.style.display = "block";
+  showEndButtons() {
+    let menuBtn = document.getElementById("end-button");
+    let playAgainBtn = document.getElementById("play-again-button");
+    if (menuBtn) menuBtn.style.display = "block";
+    if (playAgainBtn) playAgainBtn.style.display = "block";
   }
 
   /**

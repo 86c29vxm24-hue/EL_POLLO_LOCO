@@ -8,6 +8,7 @@ function init() {
     canvas = document.getElementById("canvas");
     world = new World(canvas, keyboard);
     bindStartButton();
+    bindPlayAgainButton();
     bindMusicToggleButton();
     bindEndButton();
     bindFullscreenButton();
@@ -61,6 +62,16 @@ function bindEndButton() {
     let btn = document.getElementById("end-button");
     btn.addEventListener("click", () => {
         world.restartGame();
+    });
+}
+
+/**
+ * @returns {void}
+ */
+function bindPlayAgainButton() {
+    let btn = document.getElementById("play-again-button");
+    btn.addEventListener("click", () => {
+        world.restartGame(true);
     });
 }
 

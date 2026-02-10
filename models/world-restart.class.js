@@ -1,13 +1,15 @@
 Object.assign(World.prototype, {
   /**
+   * @param {boolean} startImmediately
    * @returns {void}
    */
-  restartGame() {
+  restartGame(startImmediately = false) {
     gameSounds.stopAllSounds();
     this.disposeActiveObjects();
     this.resetRuntimeState();
-    this.resetUiState();
-    gameSounds.playStartScreenLoop();
+    this.resetUiState(startImmediately);
+    if (startImmediately) this.startGame();
+    else gameSounds.playStartScreenLoop();
   },
 
   /**
@@ -65,10 +67,12 @@ Object.assign(World.prototype, {
     });
   },
 
-  resetUiState() {
+  resetUiState(startImmediately = false) {
     const startBtn = document.getElementById("start-button");
     const endBtn = document.getElementById("end-button");
-    if (startBtn) startBtn.style.display = "block";
+    const playAgainBtn = document.getElementById("play-again-button");
+    if (startBtn) startBtn.style.display = startImmediately ? "none" : "block";
     if (endBtn) endBtn.style.display = "none";
+    if (playAgainBtn) playAgainBtn.style.display = "none";
   },
 });
