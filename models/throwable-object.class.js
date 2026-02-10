@@ -24,16 +24,24 @@ class ThrowableObject extends MovableObject {
     super().loadImage("img/6_salsa_bottle/salsa_bottle.png");
     this.loadImages(this.IMAGE_BOTTLETHROW);
     this.loadImages(this.IMAGE_BOTTLESPLASH);
-    this.x = x;
-    this.y = y;
-    this.width = 50;
-    this.height = 60;
+    this.initializeThrowProps(x, y, groundY, direction);
+    this.throw();
+  }
+
+  /**
+   * @param {number} x
+   * @param {number} y
+   * @param {number} groundY
+   * @param {number} direction
+   * @returns {void}
+   */
+  initializeThrowProps(x, y, groundY, direction) {
+    this.x = x; this.y = y;
+    this.width = 50; this.height = 60;
     this.groundY = groundY;
     this.hasSplashed = false;
-    this.impactX = this.x;
-    this.impactY = this.y;
+    this.impactX = x; this.impactY = y;
     this.direction = direction;
-    this.throw();
   }
 
   /**

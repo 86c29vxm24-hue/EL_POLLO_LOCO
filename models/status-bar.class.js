@@ -56,19 +56,7 @@ class StatusBar extends DrawableObject {
   }
 
   resolveImageIndex() {
-    if (this.percentage == 100) {
-      this.img = this.imageCache[this.IMAGES_HEALTH[5]];
-    } else if (this.percentage >= 80) {
-      this.img = this.imageCache[this.IMAGES_HEALTH[4]];
-    } else if (this.percentage >= 60) {
-      this.img = this.imageCache[this.IMAGES_HEALTH[3]];
-    } else if (this.percentage >= 40) {
-      this.img = this.imageCache[this.IMAGES_HEALTH[2]];
-    } else if (this.percentage >= 20) {
-      this.img = this.imageCache[this.IMAGES_HEALTH[1]];
-    } else {
-      this.img = this.imageCache[this.IMAGES_HEALTH[0]];
-    }
+    this.img = this.imageCache[this.IMAGES_HEALTH[this.resolvePercentImageIndex()]];
   }
 
   collectCoin(percentage) {
@@ -77,19 +65,7 @@ class StatusBar extends DrawableObject {
   }
 
   resolveCoinImageIndex() {
-    if (this.percentage == 100) {
-      this.img = this.imageCache[this.IMAGES_COINS[5]];
-    } else if (this.percentage >= 80) {
-      this.img = this.imageCache[this.IMAGES_COINS[4]];
-    } else if (this.percentage >= 60) {
-      this.img = this.imageCache[this.IMAGES_COINS[3]];
-    } else if (this.percentage >= 40) {
-      this.img = this.imageCache[this.IMAGES_COINS[2]];
-    } else if (this.percentage >= 20) {
-      this.img = this.imageCache[this.IMAGES_COINS[1]];
-    } else {
-      this.img = this.imageCache[this.IMAGES_COINS[0]];
-    }
+    this.img = this.imageCache[this.IMAGES_COINS[this.resolvePercentImageIndex()]];
   }
 
 
@@ -99,20 +75,8 @@ class StatusBar extends DrawableObject {
     this.resolveBottleImageIndex();
   } 
 
-    resolveBottleImageIndex() {     
-      if (this.percentage == 100) {
-        this.img = this.imageCache[this.IMAGES_BOTTLES[5]];
-      } else if (this.percentage >= 80) {
-        this.img = this.imageCache[this.IMAGES_BOTTLES[4]];
-      } else if (this.percentage >= 60) {
-        this.img = this.imageCache[this.IMAGES_BOTTLES[3]];
-      } else if (this.percentage >= 40) {
-        this.img = this.imageCache[this.IMAGES_BOTTLES[2]];
-      } else if (this.percentage >= 20) {
-        this.img = this.imageCache[this.IMAGES_BOTTLES[1]];
-      } else {
-        this.img = this.imageCache[this.IMAGES_BOTTLES[0]];
-      }
+    resolveBottleImageIndex() {
+      this.img = this.imageCache[this.IMAGES_BOTTLES[this.resolvePercentImageIndex()]];
     }
 
 
@@ -122,21 +86,21 @@ class StatusBar extends DrawableObject {
       this.resolveEndbossImageIndex();
     } 
 
-      resolveEndbossImageIndex() {   
-        if (this.percentage == 100) {
-          this.img = this.imageCache[this.IMAGE_ENDBOSS[5]];
-        } else if (this.percentage >= 80) {
-          this.img = this.imageCache[this.IMAGE_ENDBOSS[4]];
-        } else if (this.percentage >= 60) {
-          this.img = this.imageCache[this.IMAGE_ENDBOSS[3]];
-        } else if (this.percentage >= 40) {
-          this.img = this.imageCache[this.IMAGE_ENDBOSS[2]];
-        } else if (this.percentage >= 20) {
-          this.img = this.imageCache[this.IMAGE_ENDBOSS[1]];
-        } else {
-          this.img = this.imageCache[this.IMAGE_ENDBOSS[0]];
-        }
+      resolveEndbossImageIndex() {
+        this.img = this.imageCache[this.IMAGE_ENDBOSS[this.resolvePercentImageIndex()]];
       }
+
+  /**
+   * @returns {number}
+   */
+  resolvePercentImageIndex() {
+    if (this.percentage >= 100) return 5;
+    if (this.percentage >= 80) return 4;
+    if (this.percentage >= 60) return 3;
+    if (this.percentage >= 40) return 2;
+    if (this.percentage >= 20) return 1;
+    return 0;
+  }
 
 
 

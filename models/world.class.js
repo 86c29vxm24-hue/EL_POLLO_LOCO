@@ -44,19 +44,27 @@ class World {
    * @returns {void}
    */
   setupStatusBars() {
-    this.statusBar.x = 50;
-    this.statusBar.y = 5;
+    this.placeStatusBars();
+    this.initializeStatusBarValues();
+  }
 
-    this.statusBarCoins.x = 50;
-    this.statusBarCoins.y = 55;
-    this.statusBarCoins.collectCoin(0);
-
-    this.statusBarBottles.x = 50;
-    this.statusBarBottles.y = 105;
-    this.statusBarBottles.collectBottle(0);
-
+  /**
+   * @returns {void}
+   */
+  placeStatusBars() {
+    this.statusBar.x = 50; this.statusBar.y = 5;
+    this.statusBarCoins.x = 50; this.statusBarCoins.y = 55;
+    this.statusBarBottles.x = 50; this.statusBarBottles.y = 105;
     this.statusBarEndboss.x = this.canvas.width - 250;
     this.statusBarEndboss.y = 5;
+  }
+
+  /**
+   * @returns {void}
+   */
+  initializeStatusBarValues() {
+    this.statusBarCoins.collectCoin(0);
+    this.statusBarBottles.collectBottle(0);
     this.statusBarEndboss.healthEndboss(100);
   }
 
@@ -64,21 +72,28 @@ class World {
    * @returns {void}
    */
   setupCollectables() {
+    this.createCoins();
+    this.createBottles();
+  }
+
+  /**
+   * @returns {void}
+   */
+  createCoins() {
     let coinYsAir = [150, 180, 210, 240, 170, 200, 230, 160, 190, 220];
     let coinYsLow = [300, 320, 340, 310, 330, 350, 300, 320, 340, 310];
-
     for (let i = 0; i < 20; i++) {
       let y = i < 10 ? coinYsAir[i] : coinYsLow[i - 10];
-      let randomX = 200 + Math.random() * 2400;
-      let coin = new CollectableObjects(randomX, y);
-      this.collectableObjects.push(coin);
+      this.collectableObjects.push(new CollectableObjects(200 + Math.random() * 2400, y));
     }
+  }
 
-    let bottleY = 360;
-
+  /**
+   * @returns {void}
+   */
+  createBottles() {
     for (let i = 0; i < 10; i++) {
-      let randomX = 200 + Math.random() * 2400;
-      let bottle = new CollectableObjects(randomX, bottleY);
+      let bottle = new CollectableObjects(200 + Math.random() * 2400, 360);
       let bottleImage = bottle.IMAGES_BOTTLES[i % bottle.IMAGES_BOTTLES.length];
       bottle.isCoin = false;
       bottle.loadImage(bottleImage);
@@ -110,29 +125,37 @@ class World {
    * @returns {void}
    */
   checkThrowObjects() {
-    if (!this.gameStarted) return;
-    if (this.character.isDead()) return;
-    if (this.character.otherDirection) return;
-    if (this.keyboard.D) {
-      if (this.isThrowOnCooldown()) return;
-      if (!this.statusBarBottles.bottles) return;
-      this.lastThrowTime = new Date().getTime();
-      this.statusBarBottles.bottles -= 1;
-      this.statusBarBottles.collectBottle(this.getBottlePercentage());
-      let direction = this.character.otherDirection ? -1 : 1;
-      let spawnX = this.character.otherDirection
-        ? this.character.x + 40
-        : this.character.x + this.character.width - 45;
-      let spawnY = this.character.y + 100;
-      let groundY = 400;
-      let bottle = new ThrowableObject(
-        spawnX,
-        spawnY,
-        groundY,
-        direction
-      );
-      this.throwableObject.push(bottle);
-    }
+    if (!this.canThrowBottle()) return;
+    this.consumeBottle();
+    this.throwableObject.push(this.createThrowableBottle());
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  canThrowBottle() {
+    if (!this.gameStarted || this.character.isDead()) return false;
+    if (this.character.otherDirection || !this.keyboard.D) return false;
+    if (this.isThrowOnCooldown()) return false;
+    return !!this.statusBarBottles.bottles;
+  }
+
+  /**
+   * @returns {void}
+   */
+  consumeBottle() {
+    this.lastThrowTime = new Date().getTime();
+    this.statusBarBottles.bottles -= 1;
+    this.statusBarBottles.collectBottle(this.getBottlePercentage());
+  }
+
+  /**
+   * @returns {ThrowableObject}
+   */
+  createThrowableBottle() {
+    let direction = this.character.otherDirection ? -1 : 1;
+    let spawnX = this.character.otherDirection ? this.character.x + 40 : this.character.x + this.character.width - 45;
+    return new ThrowableObject(spawnX, this.character.y + 100, 400, direction);
   }
 
   /**
@@ -181,6 +204,15 @@ class World {
    */
   showEndScreen(type) {
     this.gameEnded = true;
+    this.renderEndScreenByType(type);
+    this.showEndButton();
+  }
+
+  /**
+   * @param {string} type
+   * @returns {void}
+   */
+  renderEndScreenByType(type) {
     if (type === "win") {
       gameSounds.playWinEndScreenSound();
       this.endScreen.showWin();
@@ -189,6 +221,12 @@ class World {
       gameSounds.playLoseEndScreenSound();
       this.endScreen.showLose();
     }
+  }
+
+  /**
+   * @returns {void}
+   */
+  showEndButton() {
     let btn = document.getElementById("end-button");
     if (btn) btn.style.display = "block";
   }
@@ -252,24 +290,45 @@ class World {
     const boss = this.getEndboss();
     this.throwableObject.forEach((bottle) => {
       if (bottle.hasSplashed) return;
-      this.level.enemies.forEach((enemy) => {
-        if (enemy instanceof Chicken && !enemy.dead && bottle.isColliding(enemy)) {
-          gameSounds.playEnemyHit();
-          enemy.die();
-          bottle.impactX = bottle.x;
-          bottle.impactY = bottle.y;
-          bottle.onImpact();
-        }
-      });
-      if (boss && bottle.isColliding(boss)) {
-        gameSounds.playEnemyHit();
-        boss.takeHit();
-        this.statusBarEndboss.healthEndboss(boss.energy);
-        bottle.impactX = bottle.x;
-        bottle.impactY = bottle.y;
-        bottle.onImpact();
-      }
+      this.checkBottleChickenHits(bottle);
+      this.checkBottleBossHit(bottle, boss);
     });
+  }
+
+  /**
+   * @param {ThrowableObject} bottle
+   * @returns {void}
+   */
+  checkBottleChickenHits(bottle) {
+    this.level.enemies.forEach((enemy) => {
+      if (!(enemy instanceof Chicken) || enemy.dead || !bottle.isColliding(enemy)) return;
+      gameSounds.playEnemyHit();
+      enemy.die();
+      this.splashBottleAtImpact(bottle);
+    });
+  }
+
+  /**
+   * @param {ThrowableObject} bottle
+   * @param {Endboss|undefined} boss
+   * @returns {void}
+   */
+  checkBottleBossHit(bottle, boss) {
+    if (!boss || !bottle.isColliding(boss)) return;
+    gameSounds.playEnemyHit();
+    boss.takeHit();
+    this.statusBarEndboss.healthEndboss(boss.energy);
+    this.splashBottleAtImpact(bottle);
+  }
+
+  /**
+   * @param {ThrowableObject} bottle
+   * @returns {void}
+   */
+  splashBottleAtImpact(bottle) {
+    bottle.impactX = bottle.x;
+    bottle.impactY = bottle.y;
+    bottle.onImpact();
   }
 
   /**
@@ -298,33 +357,66 @@ class World {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    if (this.drawStartOrEndScreen()) return this.loopDraw();
+    this.drawGameScene();
+    this.loopDraw();
+  }
 
-    if (!this.gameStarted) {
-      this.startScreen.draw(this.ctx);
-      return this.loopDraw();
-    }
-    if (this.gameEnded) {
-      this.endScreen.draw(this.ctx);
-      return this.loopDraw();
-    }
+  /**
+   * @returns {boolean}
+   */
+  drawStartOrEndScreen() {
+    if (!this.gameStarted) return this.drawOnlyStartScreen();
+    if (this.gameEnded) return this.drawOnlyEndScreen();
+    return false;
+  }
 
+  /**
+   * @returns {boolean}
+   */
+  drawOnlyStartScreen() {
+    this.startScreen.draw(this.ctx);
+    return true;
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  drawOnlyEndScreen() {
+    this.endScreen.draw(this.ctx);
+    return true;
+  }
+
+  /**
+   * @returns {void}
+   */
+  drawGameScene() {
     this.ctx.translate(this.camera_x, 0);
+    this.drawWorldObjects();
+    this.ctx.translate(-this.camera_x, 0);
+    this.drawStatusBars();
+  }
 
+  /**
+   * @returns {void}
+   */
+  drawWorldObjects() {
     this.addObjectsToMap(this.level.backgroundObjects);
-
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.throwableObject);
     this.addObjectsToMap(this.collectableObjects);
+  }
 
-    this.ctx.translate(-this.camera_x, 0);
+  /**
+   * @returns {void}
+   */
+  drawStatusBars() {
     this.addToMap(this.statusBar);
     this.addToMap(this.statusBarCoins);
     this.addToMap(this.statusBarBottles);
     this.addToMap(this.statusBarEndboss);
-
-    this.loopDraw();
   }
 
   /**

@@ -57,18 +57,25 @@ function bindEndButton() {
 function bindFullscreenButton() {
     let btn = document.getElementById("fullscreen-button");
     let area = document.getElementById("game-area");
-    btn.addEventListener("click", () => {
-        if (!document.fullscreenElement) {
-            area.requestFullscreen();
-            btn.textContent = "Exit Fullscreen";
-        } else {
-            document.exitFullscreen();
-            btn.textContent = "Fullscreen";
-        }
-    });
-    document.addEventListener("fullscreenchange", () => {
-        btn.textContent = document.fullscreenElement ? "Exit Fullscreen" : "Fullscreen";
-    });
+    btn.addEventListener("click", () => toggleFullscreen(area));
+    document.addEventListener("fullscreenchange", () => updateFullscreenButtonText(btn));
+}
+
+/**
+ * @param {HTMLElement} area
+ * @returns {void}
+ */
+function toggleFullscreen(area) {
+    if (!document.fullscreenElement) return area.requestFullscreen();
+    document.exitFullscreen();
+}
+
+/**
+ * @param {HTMLElement} btn
+ * @returns {void}
+ */
+function updateFullscreenButtonText(btn) {
+    btn.textContent = document.fullscreenElement ? "Exit Fullscreen" : "Fullscreen";
 }
 
 /**
@@ -105,45 +112,20 @@ function bindHold(btn, key) {
 }
 
 window.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowLeft') {
-        keyboard.LEFT = true;
-    }
-    if (event.key === 'ArrowRight') {
-        keyboard.RIGHT = true;
-    }
-    if (event.key === 'ArrowUp') {
-        keyboard.UP = true;
-    }
-    if (event.key === 'ArrowDown') {
-        keyboard.DOWN = true;
-    }
-    if (event.key === ' ') {
-        keyboard.SPACE = true;
-    }
-
-    if (event.key === 'd') {    
-        keyboard.D = true;
-    }
+    setKeyboardState(event.key, true);
 });
 
 window.addEventListener('keyup', (event) => {
-    if (event.key === 'ArrowLeft') {
-        keyboard.LEFT = false;
-    }
-    if (event.key === 'ArrowRight') {
-        keyboard.RIGHT = false;
-    }
-    if (event.key === 'ArrowUp') {
-        keyboard.UP = false;
-    }
-    if (event.key === 'ArrowDown') {
-        keyboard.DOWN = false;
-    }
-    if (event.key === ' ') {
-        keyboard.SPACE = false;
-    }
-
-    if (event.key === 'd') {    
-        keyboard.D = false;
-    }
+    setKeyboardState(event.key, false);
 });
+
+/**
+ * @param {string} key
+ * @param {boolean} isPressed
+ * @returns {void}
+ */
+function setKeyboardState(key, isPressed) {
+    const keyMap = { ArrowLeft: "LEFT", ArrowRight: "RIGHT", ArrowUp: "UP", ArrowDown: "DOWN", " ": "SPACE", d: "D" };
+    const mappedKey = keyMap[key];
+    if (mappedKey) keyboard[mappedKey] = isPressed;
+}
