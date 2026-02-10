@@ -54,7 +54,7 @@ function updateMuteButtonText(btn) {
 function bindEndButton() {
     let btn = document.getElementById("end-button");
     btn.addEventListener("click", () => {
-        location.reload();
+        world.restartGame();
     });
 }
 

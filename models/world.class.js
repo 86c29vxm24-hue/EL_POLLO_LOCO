@@ -1,6 +1,6 @@
 class World {
   character = new Character();
-  level = level1;
+  level = createLevel1();
   canvas;
   ctx;
   keyboard;
@@ -38,6 +38,55 @@ class World {
   startGame() {
     gameSounds.stopStartScreenLoop();
     this.gameStarted = true;
+  }
+
+  /**
+   * @returns {void}
+   */
+  restartGame() {
+    gameSounds.stopAllSounds();
+    this.resetRuntimeState();
+    this.resetUiState();
+    gameSounds.playStartScreenLoop();
+  }
+
+  /**
+   * @returns {void}
+   */
+  resetRuntimeState() {
+    this.gameStarted = false;
+    this.gameEnded = false;
+    this.endScheduled = false;
+    this.camera_x = 0;
+    this.lastThrowTime = 0;
+    this.throwableObject = [];
+    this.collectableObjects = [];
+    this.character = new Character();
+    this.level = createLevel1();
+    this.endScreen = new EndScreen();
+    this.resetKeyboardState();
+    this.setupStatusBars();
+    this.setupCollectables();
+    this.setWorld();
+  }
+
+  /**
+   * @returns {void}
+   */
+  resetKeyboardState() {
+    Object.keys(this.keyboard).forEach((key) => {
+      this.keyboard[key] = false;
+    });
+  }
+
+  /**
+   * @returns {void}
+   */
+  resetUiState() {
+    const startBtn = document.getElementById("start-button");
+    const endBtn = document.getElementById("end-button");
+    if (startBtn) startBtn.style.display = "block";
+    if (endBtn) endBtn.style.display = "none";
   }
 
   /**

@@ -155,6 +155,16 @@ class GamingSounds {
   }
 
   /**
+   * @returns {void}
+   */
+  stopAllSounds() {
+    this.getAllSounds().forEach((sound) => {
+      sound.pause();
+      sound.currentTime = 0;
+    });
+  }
+
+  /**
    * @returns {boolean}
    */
   toggleStartScreenLoop() {
