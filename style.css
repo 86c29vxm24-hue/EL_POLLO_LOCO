@@ -366,7 +366,7 @@ body.info-page {
     }
 }
 
-@media (max-width: 900px) and (orientation: portrait) {
+@media (max-width: 450px) and (orientation: portrait) {
     body:not(.info-page) #rotate-device-overlay {
         display: flex;
     }
