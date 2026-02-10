@@ -192,7 +192,9 @@ class World {
     this.endScheduled = true;
     if (type === "lose") gameSounds.playCharacterDeath();
     if (type === "win") gameSounds.playEndbossDeath();
-    setTimeout(() => this.showEndScreen(type), 2500);
+    const loseDelay = this.character.IMAGES_DEAD.length * 100 + 150;
+    const delay = type === "lose" ? loseDelay : 2500;
+    setTimeout(() => this.showEndScreen(type), delay);
   }
 
   /**

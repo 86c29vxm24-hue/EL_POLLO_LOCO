@@ -143,7 +143,7 @@ class Character extends MovableObject {
    * @returns {void}
    */
   playCurrentAnimation() {
-    if (this.isDead()) return this.playState("dead", this.IMAGES_DEAD);
+    if (this.isDead()) return this.playDeadAnimationOnce();
     if (this.isHurt()) return this.playState("hurt", this.IMAGES_HURT);
     if (this.isAboveGround()) {
       this.idleStartTime = Date.now();
@@ -157,6 +157,23 @@ class Character extends MovableObject {
       return this.playState("longIdle", this.IMAGES_LONG_IDLE);
     }
     this.playState("idle", this.IMAGES_IDLE);
+  }
+
+  /**
+   * @returns {void}
+   */
+  playDeadAnimationOnce() {
+    if (this.animationState !== "dead") {
+      this.animationState = "dead";
+      this.currentImage = 0;
+    }
+    const lastIndex = this.IMAGES_DEAD.length - 1;
+    if (this.currentImage > lastIndex) {
+      this.img = this.imageCache[this.IMAGES_DEAD[lastIndex]];
+      return;
+    }
+    this.img = this.imageCache[this.IMAGES_DEAD[this.currentImage]];
+    this.currentImage++;
   }
 
   /**
