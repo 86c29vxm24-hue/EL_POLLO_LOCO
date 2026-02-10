@@ -7,6 +7,13 @@ body {
     background: linear-gradient(180deg, #e08a3b 0%, #c45a2a 100%);
 }
 
+h1 {
+    font-family: "Kablammo", system-ui, sans-serif;
+    font-size: 56px;
+    letter-spacing: 1px;
+    margin: 20px 0;
+}
+
 #game-area {
     position: relative;
 }
