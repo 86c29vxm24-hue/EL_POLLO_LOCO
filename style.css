@@ -363,7 +363,6 @@ body.info-page {
         justify-content: flex-start;
     }
     body:not(.info-page) h1,
-    body:not(.info-page) #page-links,
     body:not(.info-page) #rotate-device-overlay {
         display: none;
     }
@@ -380,5 +379,22 @@ body.info-page {
     }
     body:not(.info-page) #fullscreen-button {
         display: none;
+    }
+    body:not(.info-page) #page-links {
+        position: fixed;
+        right: 8px;
+        bottom: 8px;
+        top: auto;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+        z-index: 50;
+    }
+    body:not(.info-page) #page-links a {
+        padding: 6px 8px;
+        font-size: 12px;
     }
 }
