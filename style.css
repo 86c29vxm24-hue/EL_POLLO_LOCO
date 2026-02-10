@@ -81,15 +81,21 @@ canvas {
     position: absolute;
     left: 12px;
     bottom: 12px;
-    padding: 8px 12px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
     border: 2px solid #2a1b0f;
     background: #f3c36b;
     color: #2a1b0f;
     font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
     display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    z-index: 10;
 }
 
 #fullscreen-button {
@@ -169,6 +175,13 @@ canvas {
     }
     #fullscreen-button {
         display: none;
+    }
+    #music-toggle-button {
+        left: auto;
+        right: 12px;
+        top: 12px;
+        bottom: auto;
+        z-index: 30;
     }
     #mobile-controls {
         display: flex;
