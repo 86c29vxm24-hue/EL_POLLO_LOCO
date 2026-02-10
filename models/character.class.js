@@ -111,12 +111,18 @@ class Character extends MovableObject {
    */
   handleHorizontalMovement() {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+      if (this.otherDirection) {
+        this.otherDirection = false;
+        return;
+      }
       this.moveRight();
-      this.otherDirection = false;
     }
     if (this.world.keyboard.LEFT && this.x > 0) {
+      if (!this.otherDirection) {
+        this.otherDirection = true;
+        return;
+      }
       this.moveLeft();
-      this.otherDirection = true;
     }
   }
 

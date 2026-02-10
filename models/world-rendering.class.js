@@ -112,7 +112,7 @@ Object.assign(World.prototype, {
   flipImage(mo) {
     this.ctx.save();
     this.ctx.scale(-1, 1);
-    mo.x = mo.x * -1;
+    mo.x = mo.x * -1 - mo.width;
   },
 
   /**
@@ -121,6 +121,6 @@ Object.assign(World.prototype, {
    */
   flipImageBack(mo) {
     this.ctx.restore();
-    mo.x = mo.x * -1;
+    mo.x = (mo.x + mo.width) * -1;
   },
 });
