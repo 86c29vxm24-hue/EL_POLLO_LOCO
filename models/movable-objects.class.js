@@ -17,6 +17,11 @@ class MovableObject extends DrawableObject {
       if (this.isAboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
+        const groundY = this.getGroundY();
+        if (this.y > groundY) {
+          this.y = groundY;
+          this.speedY = 0;
+        }
       }
     }, 1000 / 25);
   }
@@ -68,7 +73,14 @@ class MovableObject extends DrawableObject {
   }
 
   isAboveGround() {
-    return this.y < 160;
+    return this.y < this.getGroundY();
+  }
+
+  /**
+   * @returns {number}
+   */
+  getGroundY() {
+    return typeof this.groundY === "number" ? this.groundY : 160;
   }
 
   moveRight() {

@@ -1,5 +1,6 @@
 class Character extends MovableObject {
   height = 280;
+  groundY = 155;
   y = 155;
   speed = 6;
   idleStartTime = Date.now();
