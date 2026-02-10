@@ -244,7 +244,6 @@ body.info-page {
     }
     html {
         height: 100dvh;
-        overflow: hidden;
     }
     h1 {
         display: none;
@@ -299,5 +298,21 @@ body.info-page {
     #page-links a {
         padding: 6px 8px;
         font-size: 12px;
+    }
+    body.info-page {
+        height: auto;
+        min-height: 100dvh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        justify-content: flex-start;
+        padding: 16px 12px 24px 12px;
+    }
+    body.info-page .info-card {
+        width: 100%;
+        margin: 0;
+        padding: 16px;
+    }
+    body.info-page #page-links {
+        position: static;
     }
 }
