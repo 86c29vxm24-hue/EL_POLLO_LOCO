@@ -120,10 +120,10 @@ class MovableObject extends DrawableObject {
     if (mo instanceof Endboss || this instanceof Endboss) Object.assign(offsets, { left: 60, right: 60, top: 40, bottom: 40 });
     if (mo instanceof Chicken || this instanceof Chicken) offsets.top += 20;
     if (mo instanceof ChickenSmall || this instanceof ChickenSmall) {
-      offsets.left += 30;
-      offsets.right += 30;
-      offsets.top += 30;
-      offsets.bottom += 30;
+      offsets.left += 20;
+      offsets.right += 20;
+      offsets.top += 20;
+      offsets.bottom += 20;
     }
     return offsets;
   }
