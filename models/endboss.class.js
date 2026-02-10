@@ -160,10 +160,7 @@ class Endboss extends MovableObject {
   walkToCharacter() {
     if (this.isDead()) return;
     if (this.phase !== "walk") return;
-    if (!this.world) return;
-    const targetX = this.world.character.x + 120;
-    if (this.x > targetX) this.x -= this.speed;
-    else if (this.x < targetX - 80) this.x += this.speed * 0.4;
+    this.x -= this.speed;
   }
 
   /**
