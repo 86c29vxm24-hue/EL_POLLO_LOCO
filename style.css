@@ -9,6 +9,10 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    padding-top: 24px;
+    box-sizing: border-box;
+    margin: 0;
     background: #d97a3f;
     background: linear-gradient(180deg, #e08a3b 0%, #c45a2a 100%);
 }
@@ -22,10 +26,12 @@ h1 {
 
 #game-area {
     position: relative;
+    margin: 0 auto;
 }
 
 canvas {
     display: block;
+    margin: 0 auto;
     background-color: black;
 }
 
