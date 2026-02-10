@@ -229,8 +229,8 @@ class World {
   showEndButtons() {
     let menuBtn = document.getElementById("end-button");
     let playAgainBtn = document.getElementById("play-again-button");
-    if (menuBtn) menuBtn.style.display = "block";
-    if (playAgainBtn) playAgainBtn.style.display = "block";
+    if (menuBtn) menuBtn.style.display = "flex";
+    if (playAgainBtn) playAgainBtn.style.display = "flex";
   }
 
   /**

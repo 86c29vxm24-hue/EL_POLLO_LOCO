@@ -70,32 +70,40 @@ canvas {
 #end-button {
     position: absolute;
     left: 50%;
-    top: 76%;
+    top: calc(58% + 84px);
     transform: translate(-50%, -50%);
-    padding: 12px 28px;
+    width: 220px;
+    height: 52px;
+    padding: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
     border: 3px solid #2a1b0f;
     background: #f3c36b;
     color: #2a1b0f;
     font-weight: 700;
     font-size: 18px;
     cursor: pointer;
-    display: none;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 
 #play-again-button {
     position: absolute;
     left: 50%;
-    top: 64%;
+    top: 58%;
     transform: translate(-50%, -50%);
-    padding: 12px 28px;
+    width: 220px;
+    height: 52px;
+    padding: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
     border: 3px solid #2a1b0f;
     background: #f3c36b;
     color: #2a1b0f;
     font-weight: 700;
     font-size: 18px;
     cursor: pointer;
-    display: none;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 
