@@ -70,13 +70,13 @@ class Endboss extends MovableObject {
    * @returns {void}
    */
   animate() {
-    setInterval(() => {
+    this.trackInterval(() => {
       this.updateState();
     }, 200);
-    setInterval(() => {
+    this.trackInterval(() => {
       this.playCurrentAnimation();
     }, 200);
-    setInterval(() => {
+    this.trackInterval(() => {
       this.walkToCharacter();
     }, 1000 / 60);
   }
@@ -123,9 +123,9 @@ class Endboss extends MovableObject {
     this.hasTriggered = true;
     this.beginWalkCycle();
     this.setPhase("alert");
-    setTimeout(() => this.setPhase("walk"), 1200);
-    setTimeout(() => this.setPhase("attack"), 2400);
-    setTimeout(() => this.finishSequence(), 3600);
+    this.trackTimeout(() => this.setPhase("walk"), 1200);
+    this.trackTimeout(() => this.setPhase("attack"), 2400);
+    this.trackTimeout(() => this.finishSequence(), 3600);
   }
 
   /**
@@ -134,8 +134,8 @@ class Endboss extends MovableObject {
   runWalkAttackCycle() {
     this.beginWalkCycle();
     this.setPhase("walk");
-    setTimeout(() => this.setPhase("attack"), 1200);
-    setTimeout(() => this.finishSequence(), 2400);
+    this.trackTimeout(() => this.setPhase("attack"), 1200);
+    this.trackTimeout(() => this.finishSequence(), 2400);
   }
 
   /**
@@ -180,7 +180,7 @@ class Endboss extends MovableObject {
    */
   triggerHurt() {
     this.isHurt = true;
-    setTimeout(() => {
+    this.trackTimeout(() => {
       this.isHurt = false;
     }, 400);
   }

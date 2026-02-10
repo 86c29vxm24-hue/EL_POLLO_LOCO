@@ -45,9 +45,39 @@ class World {
    */
   restartGame() {
     gameSounds.stopAllSounds();
+    this.disposeActiveObjects();
     this.resetRuntimeState();
     this.resetUiState();
     gameSounds.playStartScreenLoop();
+  }
+
+  /**
+   * @returns {void}
+   */
+  disposeActiveObjects() {
+    this.collectDisposableObjects().forEach((obj) => this.safeDispose(obj));
+  }
+
+  /**
+   * @returns {Array}
+   */
+  collectDisposableObjects() {
+    return [
+      this.character,
+      ...this.level.enemies,
+      ...this.level.clouds,
+      ...this.throwableObject,
+      ...this.collectableObjects,
+    ];
+  }
+
+  /**
+   * @param {any} obj
+   * @returns {void}
+   */
+  safeDispose(obj) {
+    if (!obj || typeof obj.dispose !== "function") return;
+    obj.dispose();
   }
 
   /**

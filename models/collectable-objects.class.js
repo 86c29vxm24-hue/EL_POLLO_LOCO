@@ -30,7 +30,7 @@ IMAGES_BOTTLES = [
    * @returns {void}
    */
   animate() {
-    setInterval(() => {
+    this.trackInterval(() => {
       if (this.isCoin) {
         this.playAnimation(this.IMAGES_COINS);
       }

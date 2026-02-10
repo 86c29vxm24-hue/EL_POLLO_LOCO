@@ -65,7 +65,7 @@ class ThrowableObject extends MovableObject {
    * @returns {void}
    */
   startThrowAnimation() {
-    this.animationInterval = setInterval(() => {
+    this.animationInterval = this.trackInterval(() => {
       if (!this.hasSplashed) this.playAnimation(this.IMAGE_BOTTLETHROW);
     }, 100);
   }
@@ -74,7 +74,7 @@ class ThrowableObject extends MovableObject {
    * @returns {void}
    */
   startThrowMovement() {
-    this.throwInterval = setInterval(() => {
+    this.throwInterval = this.trackInterval(() => {
       if (!this.hasSplashed) this.x += 8 * this.direction;
       if (!this.isAboveGround()) {
         this.impactX = this.x;
@@ -103,7 +103,7 @@ class ThrowableObject extends MovableObject {
     this.hasSplashed = true;
     gameSounds.playBottleSplash();
     let i = 0;
-    let splashInterval = setInterval(() => {
+    let splashInterval = this.trackInterval(() => {
       this.img = this.imageCache[this.IMAGE_BOTTLESPLASH[i++]];
       if (i >= this.IMAGE_BOTTLESPLASH.length) {
         clearInterval(splashInterval);
@@ -111,5 +111,14 @@ class ThrowableObject extends MovableObject {
         this.height = 0;
       }
     }, 100);
+  }
+
+  /**
+   * @returns {void}
+   */
+  dispose() {
+    if (this.animationInterval) clearInterval(this.animationInterval);
+    if (this.throwInterval) clearInterval(this.throwInterval);
+    super.dispose();
   }
 }

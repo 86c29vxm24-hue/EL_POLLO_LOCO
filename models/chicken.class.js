@@ -41,7 +41,7 @@ dead = false;
    * @returns {void}
    */
   startMovement() {
-    setInterval(() => {
+    this.trackInterval(() => {
       if (!this.dead) this.moveLeft();
     }, 1000 / 60);
   }
@@ -50,7 +50,7 @@ dead = false;
    * @returns {void}
    */
   startAnimation() {
-    setInterval(() => {
+    this.trackInterval(() => {
       if (this.dead) this.playAnimation(this.IMAGES_CHICKEN_DEAD);
       else this.playAnimation(this.IMAGES_WALKING);
     }, 200);
@@ -62,7 +62,7 @@ dead = false;
   die() {
     if (this.dead) return;
     this.dead = true;
-    setTimeout(() => {
+    this.trackTimeout(() => {
       this.width = 0;
       this.height = 0;
     }, 1500);

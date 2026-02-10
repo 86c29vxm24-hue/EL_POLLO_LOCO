@@ -6,17 +6,65 @@ class MovableObject extends DrawableObject {
   acceleration = 2.5;
   energy = 100;
   lastHit = 0;
+  intervals = [];
+  timeouts = [];
 
 
 
 
   applyGravity() {
-    setInterval(() => {
+    this.trackInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
       }
     }, 1000 / 25);
+  }
+
+  /**
+   * @param {Function} callback
+   * @param {number} ms
+   * @returns {number}
+   */
+  trackInterval(callback, ms) {
+    const intervalId = setInterval(callback, ms);
+    this.intervals.push(intervalId);
+    return intervalId;
+  }
+
+  /**
+   * @param {Function} callback
+   * @param {number} ms
+   * @returns {number}
+   */
+  trackTimeout(callback, ms) {
+    const timeoutId = setTimeout(callback, ms);
+    this.timeouts.push(timeoutId);
+    return timeoutId;
+  }
+
+  /**
+   * @returns {void}
+   */
+  clearTrackedIntervals() {
+    this.intervals.forEach((intervalId) => clearInterval(intervalId));
+    this.intervals = [];
+  }
+
+  /**
+   * @returns {void}
+   */
+  clearTrackedTimeouts() {
+    this.timeouts.forEach((timeoutId) => clearTimeout(timeoutId));
+    this.timeouts = [];
+  }
+
+  /**
+   * @returns {void}
+   */
+  dispose() {
+    this.clearTrackedIntervals();
+    this.clearTrackedTimeouts();
   }
 
   isAboveGround() {

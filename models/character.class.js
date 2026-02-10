@@ -81,7 +81,7 @@ class Character extends MovableObject {
    * @returns {void}
    */
   startMovementLoop() {
-    setInterval(() => {
+    this.trackInterval(() => {
       if (this.isDead() || !this.canControlCharacter()) return;
       this.handleHorizontalMovement();
       this.handleJumpInput();
@@ -116,7 +116,7 @@ class Character extends MovableObject {
    * @returns {void}
    */
   startAnimationLoop() {
-    setInterval(() => {
+    this.trackInterval(() => {
       if (!this.canControlCharacter()) return;
       this.playCurrentAnimation();
     }, 100);
