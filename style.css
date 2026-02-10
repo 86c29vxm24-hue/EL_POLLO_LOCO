@@ -79,18 +79,17 @@ canvas {
 
 #music-toggle-button {
     position: absolute;
-    left: 50%;
-    top: auto;
-    bottom: 12px;
-    transform: translateX(-50%);
-    width: 44px;
-    height: 44px;
-    padding: 0;
+    right: 12px;
+    bottom: 56px;
+    width: auto;
+    min-width: 110px;
+    height: 36px;
+    padding: 6px 12px;
     border: 2px solid #2a1b0f;
     background: #f3c36b;
     color: #2a1b0f;
     font-weight: 700;
-    font-size: 22px;
+    font-size: 14px;
     line-height: 1;
     display: none;
     align-items: center;
@@ -180,10 +179,15 @@ canvas {
     }
     #music-toggle-button {
         left: 50%;
+        min-width: 44px;
+        width: 44px;
+        height: 44px;
+        padding: 0;
         right: auto;
         top: auto;
         bottom: 12px;
         transform: translateX(-50%);
+        font-size: 22px;
         z-index: 30;
     }
     #mobile-controls {

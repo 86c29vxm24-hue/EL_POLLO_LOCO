@@ -33,6 +33,7 @@ function bindMusicToggleButton() {
     if (!btn) return;
     btn.style.display = "block";
     updateMuteButtonText(btn);
+    window.addEventListener("resize", () => updateMuteButtonText(btn));
     btn.addEventListener("click", () => {
         const isMuted = gameSounds.toggleMute();
         if (!isMuted && !world.gameStarted) gameSounds.playStartScreenLoop();
@@ -46,7 +47,8 @@ function bindMusicToggleButton() {
  */
 function updateMuteButtonText(btn) {
     const isMuted = gameSounds.isMuted();
-    btn.textContent = isMuted ? "🔇" : "🔊";
+    const isMobile = window.matchMedia("(max-width: 450px)").matches;
+    btn.textContent = isMobile ? (isMuted ? "🔇" : "🔊") : (isMuted ? "Sound: Off" : "Sound: On");
     btn.setAttribute("aria-label", isMuted ? "Sound off" : "Sound on");
     btn.setAttribute("title", isMuted ? "Sound off" : "Sound on");
 }
