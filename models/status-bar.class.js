@@ -7,7 +7,6 @@ class StatusBar extends DrawableObject {
     "img/7_statusbars/1_statusbar/2_statusbar_health/green/80.png",
     "img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png",
   ];
-
   IMAGES_COINS = [
     "img/7_statusbars/1_statusbar/1_statusbar_coin/orange/0.png",
     "img/7_statusbars/1_statusbar/1_statusbar_coin/orange/20.png",
@@ -16,7 +15,6 @@ class StatusBar extends DrawableObject {
     "img/7_statusbars/1_statusbar/1_statusbar_coin/orange/80.png",
     "img/7_statusbars/1_statusbar/1_statusbar_coin/orange/100.png",
   ];
-
   IMAGES_BOTTLES = [
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/0.png",
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/20.png",
@@ -25,7 +23,6 @@ class StatusBar extends DrawableObject {
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/80.png",
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/100.png",
   ];
-
   IMAGE_ENDBOSS = [
     "img/7_statusbars/2_statusbar_endboss/green/green0.png",
     "img/7_statusbars/2_statusbar_endboss/green/green20.png",
@@ -34,9 +31,11 @@ class StatusBar extends DrawableObject {
     "img/7_statusbars/2_statusbar_endboss/green/green80.png",
     "img/7_statusbars/2_statusbar_endboss/green/green100.png",
   ];
-
   percentage = 100;
 
+  /**
+   * @returns {void}
+   */
   constructor() {
     super();
     this.loadImages(this.IMAGES_HEALTH);
@@ -50,45 +49,69 @@ class StatusBar extends DrawableObject {
     this.height = 50;
   }
 
+  /**
+   * @param {number} percentage
+   * @returns {void}
+   */
   setPercentage(percentage) {
     this.percentage = percentage;
     this.resolveImageIndex();
   }
 
+  /**
+   * @returns {void}
+   */
   resolveImageIndex() {
     this.img = this.imageCache[this.IMAGES_HEALTH[this.resolvePercentImageIndex()]];
   }
 
+  /**
+   * @param {number} percentage
+   * @returns {void}
+   */
   collectCoin(percentage) {
     this.percentage = percentage;
     this.resolveCoinImageIndex();
   }
 
+  /**
+   * @returns {void}
+   */
   resolveCoinImageIndex() {
     this.img = this.imageCache[this.IMAGES_COINS[this.resolvePercentImageIndex()]];
   }
 
-
-
+  /**
+   * @param {number} percentage
+   * @returns {void}
+   */
   collectBottle(percentage) {
     this.percentage = percentage;
     this.resolveBottleImageIndex();
-  } 
+  }
 
-    resolveBottleImageIndex() {
-      this.img = this.imageCache[this.IMAGES_BOTTLES[this.resolvePercentImageIndex()]];
-    }
+  /**
+   * @returns {void}
+   */
+  resolveBottleImageIndex() {
+    this.img = this.imageCache[this.IMAGES_BOTTLES[this.resolvePercentImageIndex()]];
+  }
 
+  /**
+   * @param {number} percentage
+   * @returns {void}
+   */
+  healthEndboss(percentage) {
+    this.percentage = percentage;
+    this.resolveEndbossImageIndex();
+  }
 
-
-    healthEndboss(percentage) {
-      this.percentage = percentage;
-      this.resolveEndbossImageIndex();
-    } 
-
-      resolveEndbossImageIndex() {
-        this.img = this.imageCache[this.IMAGE_ENDBOSS[this.resolvePercentImageIndex()]];
-      }
+  /**
+   * @returns {void}
+   */
+  resolveEndbossImageIndex() {
+    this.img = this.imageCache[this.IMAGE_ENDBOSS[this.resolvePercentImageIndex()]];
+  }
 
   /**
    * @returns {number}
@@ -101,10 +124,4 @@ class StatusBar extends DrawableObject {
     if (this.percentage >= 20) return 1;
     return 0;
   }
-
-
-
-
-
-
 }

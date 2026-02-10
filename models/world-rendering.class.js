@@ -1,4 +1,7 @@
 Object.assign(World.prototype, {
+  /**
+   * @returns {void}
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     if (this.drawStartOrEndScreen()) return this.loopDraw();
@@ -72,9 +75,8 @@ Object.assign(World.prototype, {
    * @returns {void}
    */
   loopDraw() {
-    let self = this;
-    requestAnimationFrame(function () {
-      self.draw();
+    requestAnimationFrame(() => {
+      this.draw();
     });
   },
 

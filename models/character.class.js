@@ -69,6 +69,9 @@ class Character extends MovableObject {
 
   currentImage = 0;
 
+  /**
+   * @returns {void}
+   */
   constructor() {
     super();
     this.loadImage("img/2_character_pepe/1_idle/idle/I-1.png");
@@ -89,6 +92,9 @@ class Character extends MovableObject {
     return this.world.gameStarted && !this.world.gameEnded;
   }
 
+  /**
+   * @returns {void}
+   */
   animate() {
     this.startMovementLoop();
     this.startAnimationLoop();
@@ -110,20 +116,40 @@ class Character extends MovableObject {
    * @returns {void}
    */
   handleHorizontalMovement() {
-    if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-      if (this.otherDirection) {
-        this.otherDirection = false;
-        return;
-      }
-      this.moveRight();
-    }
-    if (this.world.keyboard.LEFT && this.x > 0) {
-      if (!this.otherDirection) {
-        this.otherDirection = true;
-        return;
-      }
-      this.moveLeft();
-    }
+    this.handleMoveRight();
+    this.handleMoveLeft();
+  }
+
+  /**
+   * @returns {void}
+   */
+  handleMoveRight() {
+    if (!this.world.keyboard.RIGHT || this.x >= this.world.level.level_end_x) return;
+    if (this.otherDirection) return this.turnRight();
+    this.moveRight();
+  }
+
+  /**
+   * @returns {void}
+   */
+  handleMoveLeft() {
+    if (!this.world.keyboard.LEFT || this.x <= 0) return;
+    if (!this.otherDirection) return this.turnLeft();
+    this.moveLeft();
+  }
+
+  /**
+   * @returns {void}
+   */
+  turnRight() {
+    this.otherDirection = false;
+  }
+
+  /**
+   * @returns {void}
+   */
+  turnLeft() {
+    this.otherDirection = true;
   }
 
   /**
@@ -151,17 +177,60 @@ class Character extends MovableObject {
   playCurrentAnimation() {
     if (this.isDead()) return this.playDeadAnimationOnce();
     if (this.isHurt()) return this.playState("hurt", this.IMAGES_HURT);
-    if (this.isAboveGround()) {
-      this.idleStartTime = Date.now();
-      return this.playState("jump", this.IMAGES_JUMPING);
-    }
-    if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-      this.idleStartTime = Date.now();
-      return this.playState("walk", this.IMAGES_WALKING);
-    }
-    if (Date.now() - this.idleStartTime >= 5000) {
-      return this.playState("longIdle", this.IMAGES_LONG_IDLE);
-    }
+    if (this.shouldPlayJumpAnimation()) return this.playJumpAnimation();
+    if (this.shouldPlayWalkAnimation()) return this.playWalkAnimation();
+    if (this.shouldPlayLongIdleAnimation()) return this.playLongIdleAnimation();
+    return this.playIdleAnimation();
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  shouldPlayJumpAnimation() {
+    return this.isAboveGround();
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  shouldPlayWalkAnimation() {
+    return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  shouldPlayLongIdleAnimation() {
+    return Date.now() - this.idleStartTime >= 5000;
+  }
+
+  /**
+   * @returns {void}
+   */
+  playJumpAnimation() {
+    this.idleStartTime = Date.now();
+    this.playState("jump", this.IMAGES_JUMPING);
+  }
+
+  /**
+   * @returns {void}
+   */
+  playWalkAnimation() {
+    this.idleStartTime = Date.now();
+    this.playState("walk", this.IMAGES_WALKING);
+  }
+
+  /**
+   * @returns {void}
+   */
+  playLongIdleAnimation() {
+    this.playState("longIdle", this.IMAGES_LONG_IDLE);
+  }
+
+  /**
+   * @returns {void}
+   */
+  playIdleAnimation() {
     this.playState("idle", this.IMAGES_IDLE);
   }
 
@@ -195,6 +264,9 @@ class Character extends MovableObject {
     this.playAnimation(images);
   }
 
+  /**
+   * @returns {void}
+   */
   jump() {
     if (!this.canControlCharacter()) return;
     gameSounds.playJump();

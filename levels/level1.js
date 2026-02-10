@@ -1,48 +1,65 @@
+/**
+ * @returns {Level}
+ */
 function createLevel1() {
+  const endboss = createEndboss();
+  return new Level(createEnemies(endboss), createClouds(), createBackgroundObjects());
+}
+
+/**
+ * @returns {Endboss}
+ */
+function createEndboss() {
   const endboss = new Endboss();
   endboss.x = 2850;
-  return new Level(
-    [
-      new Chicken(),
-      new Chicken(),
-      new ChickenSmall(),
-      new ChickenSmall(),
-      new Chicken(),
-      new ChickenSmall(),
-      endboss,
-    ],
-    [new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud()],
-    [
-      new BackgroundObject("img/5_background/layers/air.png", -719),
-      new BackgroundObject("img/5_background/layers/3_third_layer/2.png", -719),
-      new BackgroundObject("img/5_background/layers/2_second_layer/2.png", -719),
-      new BackgroundObject("img/5_background/layers/1_first_layer/2.png", -719),
-      new BackgroundObject("img/5_background/layers/air.png", 0),
-      new BackgroundObject("img/5_background/layers/3_third_layer/1.png", 0),
-      new BackgroundObject("img/5_background/layers/2_second_layer/1.png", 0),
-      new BackgroundObject("img/5_background/layers/1_first_layer/1.png", 0),
-      new BackgroundObject("img/5_background/layers/air.png ", 719),
-      new BackgroundObject("img/5_background/layers/3_third_layer/2.png", 719),
-      new BackgroundObject("img/5_background/layers/2_second_layer/2.png", 719),
-      new BackgroundObject("img/5_background/layers/1_first_layer/2.png", 719),
-      new BackgroundObject("img/5_background/layers/air.png", 719 * 2),
-      new BackgroundObject("img/5_background/layers/3_third_layer/1.png",719 * 2,),
-      new BackgroundObject("img/5_background/layers/2_second_layer/1.png",719 * 2,),
-      new BackgroundObject("img/5_background/layers/1_first_layer/1.png",719 * 2,),
-      new BackgroundObject("img/5_background/layers/air.png ", 719*3),
-      new BackgroundObject("img/5_background/layers/3_third_layer/2.png", 719*3),
-      new BackgroundObject("img/5_background/layers/2_second_layer/2.png", 719*3),
-      new BackgroundObject("img/5_background/layers/1_first_layer/2.png", 719*3),
-      new BackgroundObject("img/5_background/layers/air.png ", 719*4),
-      new BackgroundObject("img/5_background/layers/3_third_layer/1.png", 719*4),
-      new BackgroundObject("img/5_background/layers/2_second_layer/1.png", 719*4),
-      new BackgroundObject("img/5_background/layers/1_first_layer/1.png", 719*4),
-      new BackgroundObject("img/5_background/layers/air.png ", 719*5),
-      new BackgroundObject("img/5_background/layers/3_third_layer/2.png", 719*5),
-      new BackgroundObject("img/5_background/layers/2_second_layer/2.png", 719*5),
-      new BackgroundObject("img/5_background/layers/1_first_layer/2.png", 719*5),
-    ],
-  );
+  return endboss;
+}
+
+/**
+ * @param {Endboss} endboss
+ * @returns {MovableObject[]}
+ */
+function createEnemies(endboss) {
+  return [
+    new Chicken(),
+    new Chicken(),
+    new ChickenSmall(),
+    new ChickenSmall(),
+    new Chicken(),
+    new ChickenSmall(),
+    endboss,
+  ];
+}
+
+/**
+ * @returns {Cloud[]}
+ */
+function createClouds() {
+  return [new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud()];
+}
+
+/**
+ * @returns {BackgroundObject[]}
+ */
+function createBackgroundObjects() {
+  const xPositions = [-719, 0, 719, 719 * 2, 719 * 3, 719 * 4, 719 * 5];
+  return xPositions.flatMap((x, index) => createBackgroundLayerSet(index, x));
+}
+
+/**
+ * @param {number} index
+ * @param {number} x
+ * @returns {BackgroundObject[]}
+ */
+function createBackgroundLayerSet(index, x) {
+  const isOddGroup = index % 2 === 1;
+  const parallaxFrame = isOddGroup ? "1" : "2";
+  return [
+    new BackgroundObject("img/5_background/layers/air.png", x),
+    new BackgroundObject(`img/5_background/layers/3_third_layer/${parallaxFrame}.png`, x),
+    new BackgroundObject(`img/5_background/layers/2_second_layer/${parallaxFrame}.png`, x),
+    new BackgroundObject(`img/5_background/layers/1_first_layer/${parallaxFrame}.png`, x),
+  ];
 }
 
 const level1 = createLevel1();

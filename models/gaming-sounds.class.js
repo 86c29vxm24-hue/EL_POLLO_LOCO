@@ -15,6 +15,9 @@ class GamingSounds {
   endScreenWinSound = new Audio("audio/scratchonix-victory-chime-366449.mp3");
   muted = false;
 
+  /**
+   * @returns {void}
+   */
   constructor() {
     this.muted = this.loadMuteState();
     this.applyMuteState();

@@ -1,5 +1,4 @@
 class MovableObject extends DrawableObject {
-
   speed = 0.15;
   otherDirection = false;
   speedY = 0;
@@ -9,9 +8,9 @@ class MovableObject extends DrawableObject {
   intervals = [];
   timeouts = [];
 
-
-
-
+  /**
+   * @returns {void}
+   */
   applyGravity() {
     this.trackInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
@@ -72,6 +71,9 @@ class MovableObject extends DrawableObject {
     this.clearTrackedTimeouts();
   }
 
+  /**
+   * @returns {boolean}
+   */
   isAboveGround() {
     return this.y < this.getGroundY();
   }
@@ -83,18 +85,26 @@ class MovableObject extends DrawableObject {
     return typeof this.groundY === "number" ? this.groundY : 160;
   }
 
+  /**
+   * @returns {void}
+   */
   moveRight() {
     if (this.world && (!this.world.gameStarted || this.world.gameEnded)) return;
     this.x += this.speed;
   }
 
+  /**
+   * @returns {void}
+   */
   moveLeft() {
     if (this.world && (!this.world.gameStarted || this.world.gameEnded)) return;
-    {
-      this.x -= this.speed;
-    }
+    this.x -= this.speed;
   }
 
+  /**
+   * @param {string[]} images
+   * @returns {void}
+   */
   playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];
@@ -102,10 +112,17 @@ class MovableObject extends DrawableObject {
     this.currentImage++;
   }
 
+  /**
+   * @returns {void}
+   */
   jump() {
     this.speedY = 30;
   }
 
+  /**
+   * @param {MovableObject} mo
+   * @returns {boolean}
+   */
   isColliding(mo) {
     const selfOffsets = this.getSelfCollisionOffsets(mo);
     const targetOffsets = this.getTargetCollisionOffsets(mo);
@@ -156,20 +173,31 @@ class MovableObject extends DrawableObject {
     );
   }
 
+  /**
+   * @returns {void}
+   */
   hit() {
     this.energy -= 20;
     if (this.energy < 0) {
       this.energy = 0;
-    } else {this.lastHit = new Date().getTime();}
+    } else {
+      this.lastHit = new Date().getTime();
+    }
   }
 
+  /**
+   * @returns {boolean}
+   */
   isHurt() {
     let actualTime = new Date().getTime();
     let timePassed = actualTime - this.lastHit;
     return timePassed < 600;
   }
 
+  /**
+   * @returns {boolean}
+   */
   isDead() {
-    return this.energy == 0;
+    return this.energy === 0;
   }
 }

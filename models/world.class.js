@@ -20,6 +20,10 @@ class World {
   endScheduled = false;
   
 
+  /**
+   * @param {HTMLCanvasElement} canvas
+   * @param {Keyboard} keyboard
+   */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -48,6 +52,9 @@ class World {
     this.initializeStatusBarValues();
   }
 
+  /**
+   * @returns {void}
+   */
   placeStatusBars() {
     const isMobile = window.matchMedia("(max-width: 450px)").matches;
     this.statusBar.x = 50; this.statusBar.y = 5;
@@ -109,6 +116,9 @@ class World {
     });
   }
 
+  /**
+   * @returns {void}
+   */
   /**
    * @returns {void}
    */
@@ -357,17 +367,29 @@ class World {
    * @returns {void}
    */
   checkJumpOnEnemies() {
-    this.level.enemies.forEach((enemy) => {
-      const isFalling = this.character.speedY < 0;
-      const isAbove = this.character.y + this.character.height - 10 <= enemy.y + enemy.height;
-      const isTop = this.character.y < enemy.y;
-      const isChickenEnemy = enemy instanceof Chicken || enemy instanceof ChickenSmall;
-      if (isChickenEnemy && !enemy.dead && isFalling &&
-        isAbove && isTop && this.character.isColliding(enemy)) {
-        gameSounds.playEnemyHit();
-        enemy.die();
-        this.character.speedY = 15;
-      }
-    });
+    this.level.enemies.forEach((enemy) => this.tryStompEnemy(enemy));
+  }
+
+  /**
+   * @param {MovableObject} enemy
+   * @returns {void}
+   */
+  tryStompEnemy(enemy) {
+    if (!this.canStompEnemy(enemy)) return;
+    gameSounds.playEnemyHit();
+    enemy.die();
+    this.character.speedY = 15;
+  }
+
+  /**
+   * @param {MovableObject} enemy
+   * @returns {boolean}
+   */
+  canStompEnemy(enemy) {
+    const isFalling = this.character.speedY < 0;
+    const isAbove = this.character.y + this.character.height - 10 <= enemy.y + enemy.height;
+    const isTop = this.character.y < enemy.y;
+    const isChickenEnemy = enemy instanceof Chicken || enemy instanceof ChickenSmall;
+    return isChickenEnemy && !enemy.dead && isFalling && isAbove && isTop && this.character.isColliding(enemy);
   }
 }
