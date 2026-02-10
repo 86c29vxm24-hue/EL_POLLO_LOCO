@@ -2,7 +2,15 @@ function createLevel1() {
   const endboss = new Endboss();
   endboss.x = 2850;
   return new Level(
-    [new Chicken(), new Chicken(), new Chicken(), new Chicken(), new Chicken(), endboss],
+    [
+      new Chicken(),
+      new Chicken(),
+      new ChickenSmall(),
+      new ChickenSmall(),
+      new Chicken(),
+      new ChickenSmall(),
+      endboss,
+    ],
     [new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud()],
     [
       new BackgroundObject("img/5_background/layers/air.png", -719),

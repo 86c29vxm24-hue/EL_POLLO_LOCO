@@ -298,7 +298,8 @@ class World {
    */
   checkBottleChickenHits(bottle) {
     this.level.enemies.forEach((enemy) => {
-      if (!(enemy instanceof Chicken) || enemy.dead || !bottle.isColliding(enemy)) return;
+      const isChickenEnemy = enemy instanceof Chicken || enemy instanceof ChickenSmall;
+      if (!isChickenEnemy || enemy.dead || !bottle.isColliding(enemy)) return;
       gameSounds.playEnemyHit();
       enemy.die();
       this.splashBottleAtImpact(bottle);
@@ -343,7 +344,8 @@ class World {
       const isFalling = this.character.speedY < 0;
       const isAbove = this.character.y + this.character.height - 10 <= enemy.y + enemy.height;
       const isTop = this.character.y < enemy.y;
-      if (enemy instanceof Chicken && !enemy.dead && isFalling &&
+      const isChickenEnemy = enemy instanceof Chicken || enemy instanceof ChickenSmall;
+      if (isChickenEnemy && !enemy.dead && isFalling &&
         isAbove && isTop && this.character.isColliding(enemy)) {
         gameSounds.playEnemyHit();
         enemy.die();
