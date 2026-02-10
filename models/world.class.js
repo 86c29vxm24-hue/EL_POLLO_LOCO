@@ -327,7 +327,7 @@ class World {
    */
   checkBottleBossHit(bottle, boss) {
     if (!boss || !bottle.isColliding(boss)) return;
-    gameSounds.playEnemyHit();
+    gameSounds.playEndbossHit();
     boss.takeHit();
     this.statusBarEndboss.healthEndboss(boss.energy);
     this.splashBottleAtImpact(bottle);

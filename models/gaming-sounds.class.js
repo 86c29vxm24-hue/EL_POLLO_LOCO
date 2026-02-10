@@ -5,6 +5,7 @@ class GamingSounds {
   characterHurtSound = new Audio("audio/homemade_sfx-slap-hurt-pain-sound-effect-262618.mp3");
   characterDeathSound = new Audio("audio/freesound_community-young-man-being-hurt-95628.mp3");
   enemyHitSound = new Audio("audio/stepir44-hurt-sound-435314.mp3");
+  endbossHitSound = new Audio("audio/digitalstore07-chicken-430403.mp3");
   endbossDeathSound = new Audio("audio/freesound_community-086398_game-die-81356.mp3");
   coinCollectSound = new Audio("audio/wolfy_sanic-collect-ring-15982.mp3");
   bottleCollectSound = new Audio("audio/delon_boomkin-video-game-collect-item-468889.mp3");
@@ -25,7 +26,7 @@ class GamingSounds {
   getAllSounds() {
     return [
       this.jumpSound, this.characterHurtSound, this.characterDeathSound, this.enemyHitSound,
-      this.endbossDeathSound, this.coinCollectSound, this.bottleCollectSound, this.bottleSplashSound,
+      this.endbossHitSound, this.endbossDeathSound, this.coinCollectSound, this.bottleCollectSound, this.bottleSplashSound,
       this.startScreenMusic, this.endScreenLoseSound, this.endScreenWinSound,
     ];
   }
@@ -117,6 +118,13 @@ class GamingSounds {
   playEndbossDeath() {
     this.endbossDeathSound.loop = false;
     this.playSound(this.endbossDeathSound);
+  }
+
+  /**
+   * @returns {void}
+   */
+  playEndbossHit() {
+    this.playSound(this.endbossHitSound);
   }
 
   /**
