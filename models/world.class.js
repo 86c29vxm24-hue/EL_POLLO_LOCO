@@ -76,7 +76,7 @@ class World {
 
     let bottleY = 360;
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 10; i++) {
       let randomX = 200 + Math.random() * 2400;
       let bottle = new CollectableObjects(randomX, bottleY);
       let bottleImage = bottle.IMAGES_BOTTLES[i % bottle.IMAGES_BOTTLES.length];
@@ -118,7 +118,7 @@ class World {
       if (!this.statusBarBottles.bottles) return;
       this.lastThrowTime = new Date().getTime();
       this.statusBarBottles.bottles -= 1;
-      this.statusBarBottles.collectBottle(this.statusBarBottles.bottles * 5);
+      this.statusBarBottles.collectBottle(this.getBottlePercentage());
       let direction = this.character.otherDirection ? -1 : 1;
       let spawnX = this.character.otherDirection
         ? this.character.x + 40
@@ -232,8 +232,17 @@ class World {
   collectBottle() {
     this.statusBarBottles.bottles = (this.statusBarBottles.bottles || 0) + 1;
     gameSounds.playBottleCollect();
-    this.statusBarBottles.collectBottle(this.statusBarBottles.bottles * 5);
+    this.statusBarBottles.collectBottle(this.getBottlePercentage());
     return false;
+  }
+
+  /**
+   * @returns {number}
+   */
+  getBottlePercentage() {
+    let maxBottles = 10;
+    let bottles = this.statusBarBottles.bottles || 0;
+    return Math.min(100, bottles * (100 / maxBottles));
   }
 
   /**
