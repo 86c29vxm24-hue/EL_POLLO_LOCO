@@ -1,6 +1,7 @@
 class GamingSounds {
   jumpSound = new Audio("audio/edr-8-bit-jump-001-171817.mp3");
   characterHurtSound = new Audio("audio/homemade_sfx-slap-hurt-pain-sound-effect-262618.mp3");
+  characterDeathSound = new Audio("audio/freesound_community-young-man-being-hurt-95628.mp3");
   coinCollectSound = new Audio("audio/wolfy_sanic-collect-ring-15982.mp3");
   bottleCollectSound = new Audio("audio/delon_boomkin-video-game-collect-item-468889.mp3");
   bottleSplashSound = new Audio("audio/freesound_community-water-splash-80537.mp3");
@@ -22,6 +23,15 @@ class GamingSounds {
   playCharacterHurt() {
     this.characterHurtSound.currentTime = 0;
     this.characterHurtSound.play();
+  }
+
+  /**
+   * @returns {void}
+   */
+  playCharacterDeath() {
+    this.characterDeathSound.loop = false;
+    this.characterDeathSound.currentTime = 0;
+    this.characterDeathSound.play();
   }
 
   /**
