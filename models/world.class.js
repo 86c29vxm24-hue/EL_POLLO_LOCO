@@ -257,7 +257,8 @@ class World {
   collectCoin() {
     this.statusBarCoins.coins = (this.statusBarCoins.coins || 0) + 1;
     gameSounds.playCoinCollect();
-    this.statusBarCoins.collectCoin(this.statusBarCoins.coins * 5);
+    const coinPercentage = this.getCoinPercentage();
+    this.statusBarCoins.collectCoin(coinPercentage);
     return false;
   }
 
@@ -277,7 +278,18 @@ class World {
   getBottlePercentage() {
     let maxBottles = 10;
     let bottles = this.statusBarBottles.bottles || 0;
-    return Math.min(100, bottles * (100 / maxBottles));
+    if (bottles <= 0) return 0;
+    return Math.max(20, Math.min(100, bottles * (100 / maxBottles)));
+  }
+
+  /**
+   * @returns {number}
+   */
+  getCoinPercentage() {
+    let maxCoins = 20;
+    let coins = this.statusBarCoins.coins || 0;
+    if (coins <= 0) return 0;
+    return Math.max(20, Math.min(100, coins * (100 / maxCoins)));
   }
 
   /**
