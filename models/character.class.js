@@ -108,4 +108,15 @@ class Character extends MovableObject {
     gameSounds.playJump();
     this.speedY = 28;
   }
+
+  /**
+   * @returns {void}
+   */
+  hit() {
+    let previousEnergy = this.energy;
+    super.hit();
+    if (this.energy < previousEnergy) {
+      gameSounds.playCharacterHurt();
+    }
+  }
 }
