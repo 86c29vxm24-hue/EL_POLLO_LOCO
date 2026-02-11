@@ -338,7 +338,7 @@ class World {
    */
   checkBottleChickenHits(bottle) {
     this.level.enemies.forEach((enemy) => {
-      const isChickenEnemy = enemy instanceof Chicken || enemy instanceof ChickenSmall;
+      const isChickenEnemy = enemy instanceof ChickenEnemy;
       if (!isChickenEnemy || enemy.dead || !bottle.isColliding(enemy)) return;
       gameSounds.playEnemyHit();
       enemy.die();
@@ -407,7 +407,7 @@ class World {
    */
   canStompEnemy(enemy, previousBottom, currentBottom) {
     const isFalling = this.character.speedY < 0;
-    const isChickenEnemy = enemy instanceof Chicken || enemy instanceof ChickenSmall;
+    const isChickenEnemy = enemy instanceof ChickenEnemy;
     return isChickenEnemy && !enemy.dead && isFalling && this.hasStompCollision(enemy, previousBottom, currentBottom, 10);
   }
 
