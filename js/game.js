@@ -135,7 +135,7 @@ function bindHold(btn, key) {
  * @returns {void}
  */
 function preventDefaultEvent(event) {
-  event.preventDefault();
+  if (event.cancelable) event.preventDefault();
 }
 
 /**
@@ -156,7 +156,7 @@ function bindTouchControls(btn, key) {
  * @returns {void}
  */
 function setTouchKeyState(event, key, isPressed) {
-  event.preventDefault();
+  if (event.cancelable) event.preventDefault();
   keyboard[key] = isPressed;
 }
 

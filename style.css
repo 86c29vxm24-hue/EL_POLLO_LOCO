@@ -173,6 +173,7 @@ canvas {
 }
 
 #mobile-controls button {
+    touch-action: none;
     padding: 14px 18px;
     border: 2px solid #2a1b0f;
     background: #f3c36b;
