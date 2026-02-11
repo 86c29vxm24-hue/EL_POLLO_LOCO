@@ -144,19 +144,21 @@ function preventDefaultEvent(event) {
  * @returns {void}
  */
 function bindTouchControls(btn, key) {
-  btn.addEventListener("touchstart", (event) => setTouchKeyState(event, key, true));
-  btn.addEventListener("touchend", (event) => setTouchKeyState(event, key, false));
-  btn.addEventListener("touchcancel", (event) => setTouchKeyState(event, key, false));
+  btn.addEventListener("touchstart", (event) => setTouchKeyState(event, btn, key, true));
+  btn.addEventListener("touchend", (event) => setTouchKeyState(event, btn, key, false));
+  btn.addEventListener("touchcancel", (event) => setTouchKeyState(event, btn, key, false));
 }
 
 /**
  * @param {TouchEvent} event
+ * @param {HTMLElement} btn
  * @param {string} key
  * @param {boolean} isPressed
  * @returns {void}
  */
-function setTouchKeyState(event, key, isPressed) {
+function setTouchKeyState(event, btn, key, isPressed) {
   if (event.cancelable) event.preventDefault();
+  setButtonPressed(btn, isPressed);
   keyboard[key] = isPressed;
 }
 
@@ -166,18 +168,29 @@ function setTouchKeyState(event, key, isPressed) {
  * @returns {void}
  */
 function bindMouseControls(btn, key) {
-  btn.addEventListener("mousedown", () => setMouseKeyState(key, true));
-  btn.addEventListener("mouseup", () => setMouseKeyState(key, false));
-  btn.addEventListener("mouseleave", () => setMouseKeyState(key, false));
+  btn.addEventListener("mousedown", () => setMouseKeyState(btn, key, true));
+  btn.addEventListener("mouseup", () => setMouseKeyState(btn, key, false));
+  btn.addEventListener("mouseleave", () => setMouseKeyState(btn, key, false));
 }
 
 /**
+ * @param {HTMLElement} btn
  * @param {string} key
  * @param {boolean} isPressed
  * @returns {void}
  */
-function setMouseKeyState(key, isPressed) {
+function setMouseKeyState(btn, key, isPressed) {
+  setButtonPressed(btn, isPressed);
   keyboard[key] = isPressed;
+}
+
+/**
+ * @param {HTMLElement} btn
+ * @param {boolean} isPressed
+ * @returns {void}
+ */
+function setButtonPressed(btn, isPressed) {
+  btn.classList.toggle("is-pressed", isPressed);
 }
 
 window.addEventListener("keydown", (event) => {
