@@ -226,7 +226,7 @@ class World {
    */
   canThrowBottle() {
     if (!this.gameStarted || this.gameEnded || this.isPaused || this.character.isDead()) return false;
-    if (this.character.otherDirection || !this.keyboard.D) return false;
+    if (!this.keyboard.D) return false;
     if (this.isThrowOnCooldown()) return false;
     return !!this.statusBarBottles.bottles;
   }
