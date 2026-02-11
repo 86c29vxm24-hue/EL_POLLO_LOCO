@@ -94,6 +94,7 @@ class Endboss extends MovableObject {
    * @returns {void}
    */
   updateState() {
+    if (this.world && this.world.isPaused) return;
     if (this.isDead()) return;
     if (this.isTriggered() && !this.isSequenceRunning) this.triggerSequence();
   }
@@ -124,6 +125,7 @@ class Endboss extends MovableObject {
    * @returns {void}
    */
   playCurrentAnimation() {
+    if (this.world && this.world.isPaused) return;
     if (this.isHurt) return this.playAnimation(this.IMAGES_HURT);
     if (this.isDead()) return this.playAnimation(this.IMAGES_DEAD);
     if (this.phase === "alert") this.playAnimation(this.IMAGES_ALERT);
@@ -188,6 +190,7 @@ class Endboss extends MovableObject {
    * @returns {void}
    */
   walkToCharacter() {
+    if (this.world && this.world.isPaused) return;
     if (this.isDead()) return;
     if (this.phase !== "walk") return;
     if (!this.world || !this.world.character) return;

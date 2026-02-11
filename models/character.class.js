@@ -93,7 +93,7 @@ class Character extends MovableObject {
    * @returns {boolean}
    */
   canControlCharacter() {
-    return this.world.gameStarted && !this.world.gameEnded;
+    return this.world.gameStarted && !this.world.gameEnded && !this.world.isPaused;
   }
 
   /**

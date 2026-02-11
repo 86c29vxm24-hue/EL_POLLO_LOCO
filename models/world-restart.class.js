@@ -72,6 +72,7 @@ Object.assign(World.prototype, {
     this.gameStarted = false;
     this.gameEnded = false;
     this.endScheduled = false;
+    this.isPaused = false;
     this.camera_x = 0;
     this.lastThrowTime = 0;
     this.lastCharacterBottom = null;

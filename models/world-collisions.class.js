@@ -5,7 +5,7 @@ Object.assign(World.prototype, {
    * @returns {void}
    */
   checkCollisions() {
-    if (!this.gameStarted) return;
+    if (!this.gameStarted || this.isPaused) return;
     this.checkGameEnd();
     this.checkJumpOnEnemies();
     this.checkEnemyCollisions();

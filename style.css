@@ -261,6 +261,17 @@ body.info-page {
     color: #ffffff;
 }
 
+.info-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.info-actions .info-back {
+    margin-top: 0;
+}
+
 #rotate-device-overlay {
     display: none;
     position: fixed;

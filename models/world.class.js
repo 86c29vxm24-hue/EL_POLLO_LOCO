@@ -21,6 +21,7 @@ class World {
   endScreen = new EndScreen();
   gameEnded = false;
   endScheduled = false;
+  isPaused = false;
   
 
   /**
@@ -49,6 +50,52 @@ class World {
   startGame() {
     gameSounds.playGameplayBackgroundLoop();
     this.gameStarted = true;
+    this.isPaused = false;
+  }
+
+  /**
+    * Sets paused state.
+    *
+   * @param {boolean} paused
+   * @returns {void}
+   */
+  setPaused(paused) {
+    if (this.gameEnded || this.isPaused === paused) return;
+    this.isPaused = paused;
+    if (paused) this.releaseInputs();
+    this.syncBackgroundAudio();
+  }
+
+  /**
+    * Performs release inputs.
+    *
+   * @returns {void}
+   */
+  releaseInputs() {
+    Object.keys(this.keyboard).forEach((key) => {
+      this.keyboard[key] = false;
+    });
+  }
+
+  /**
+    * Performs sync background audio.
+    *
+   * @returns {void}
+   */
+  syncBackgroundAudio() {
+    if (this.isPaused) return this.pauseBackgroundAudio();
+    if (gameSounds.isMuted() || this.gameEnded) return;
+    if (this.gameStarted) gameSounds.playGameplayBackgroundLoop();
+    else gameSounds.playStartScreenLoop();
+  }
+
+  /**
+    * Performs pause background audio.
+    *
+   * @returns {void}
+   */
+  pauseBackgroundAudio() {
+    gameSounds.startScreenMusic.pause();
   }
 
   /**
@@ -144,6 +191,9 @@ class World {
     this.level.enemies.forEach((enemy) => {
       enemy.world = this;
     });
+    this.level.clouds.forEach((cloud) => {
+      cloud.world = this;
+    });
   }
 
   /**
@@ -175,7 +225,7 @@ class World {
    * @returns {boolean}
    */
   canThrowBottle() {
-    if (!this.gameStarted || this.character.isDead()) return false;
+    if (!this.gameStarted || this.gameEnded || this.isPaused || this.character.isDead()) return false;
     if (this.character.otherDirection || !this.keyboard.D) return false;
     if (this.isThrowOnCooldown()) return false;
     return !!this.statusBarBottles.bottles;
@@ -200,7 +250,9 @@ class World {
   createThrowableBottle() {
     let direction = this.character.otherDirection ? -1 : 1;
     let spawnX = this.character.otherDirection ? this.character.x + 40 : this.character.x + this.character.width - 45;
-    return new ThrowableObject(spawnX, this.character.y + 100, 400, direction);
+    const bottle = new ThrowableObject(spawnX, this.character.y + 100, 400, direction);
+    bottle.world = this;
+    return bottle;
   }
 
   /**

@@ -15,6 +15,7 @@ class MovableObject extends DrawableObject {
    */
   applyGravity() {
     this.trackInterval(() => {
+      if (this.world && (!this.world.gameStarted || this.world.gameEnded || this.world.isPaused)) return;
       if (this.isAboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
@@ -107,7 +108,7 @@ class MovableObject extends DrawableObject {
    * @returns {void}
    */
   moveRight() {
-    if (this.world && (!this.world.gameStarted || this.world.gameEnded)) return;
+    if (this.world && (!this.world.gameStarted || this.world.gameEnded || this.world.isPaused)) return;
     this.x += this.speed;
   }
 
@@ -117,7 +118,7 @@ class MovableObject extends DrawableObject {
    * @returns {void}
    */
   moveLeft() {
-    if (this.world && (!this.world.gameStarted || this.world.gameEnded)) return;
+    if (this.world && (!this.world.gameStarted || this.world.gameEnded || this.world.isPaused)) return;
     this.x -= this.speed;
   }
 

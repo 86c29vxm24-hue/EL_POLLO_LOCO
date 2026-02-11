@@ -58,6 +58,7 @@ class ChickenEnemy extends MovableObject {
    */
   startAnimation() {
     this.trackInterval(() => {
+      if (this.world && this.world.isPaused) return;
       if (this.dead) this.playAnimation(this.IMAGES_CHICKEN_DEAD);
       else this.playAnimation(this.IMAGES_WALKING);
     }, 200);

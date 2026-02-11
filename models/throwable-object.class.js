@@ -76,6 +76,7 @@ class ThrowableObject extends MovableObject {
    */
   startThrowAnimation() {
     this.animationInterval = this.trackInterval(() => {
+      if (this.world && this.world.isPaused) return;
       if (!this.hasSplashed) this.playAnimation(this.IMAGE_BOTTLETHROW);
     }, 100);
   }
@@ -87,6 +88,7 @@ class ThrowableObject extends MovableObject {
    */
   startThrowMovement() {
     this.throwInterval = this.trackInterval(() => {
+      if (this.world && this.world.isPaused) return;
       if (!this.hasSplashed) this.x += 8 * this.direction;
       if (!this.isAboveGround()) {
         this.impactX = this.x;
@@ -120,6 +122,7 @@ class ThrowableObject extends MovableObject {
     gameSounds.playBottleSplash();
     let i = 0;
     let splashInterval = this.trackInterval(() => {
+      if (this.world && this.world.isPaused) return;
       this.img = this.imageCache[this.IMAGE_BOTTLESPLASH[i++]];
       if (i >= this.IMAGE_BOTTLESPLASH.length) {
         clearInterval(splashInterval);

@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let rotateOverlayMediaQuery;
 
 /**
   * Performs init.
@@ -16,6 +17,8 @@ function init() {
   bindEndButton();
   bindFullscreenButton();
   bindMobileControls();
+  bindPauseHandlers();
+  bindInfoNavigationPause();
 }
 
 /**
@@ -45,6 +48,7 @@ function bindMusicToggleButton() {
   btn.addEventListener("click", () => {
     const isMuted = gameSounds.toggleMute();
     if (!isMuted && world.gameEnded) return updateMuteButtonText(btn);
+    if (!isMuted && world.isPaused) return updateMuteButtonText(btn);
     if (!isMuted && !world.gameStarted) gameSounds.playStartScreenLoop();
     if (!isMuted && world.gameStarted) gameSounds.playGameplayBackgroundLoop();
     updateMuteButtonText(btn);
@@ -186,6 +190,7 @@ function bindTouchControls(btn, key) {
  */
 function setTouchKeyState(event, btn, key, isPressed) {
   if (event.cancelable) event.preventDefault();
+  if (world?.isPaused && isPressed) return;
   setButtonPressed(btn, isPressed);
   keyboard[key] = isPressed;
 }
@@ -212,6 +217,7 @@ function bindMouseControls(btn, key) {
  * @returns {void}
  */
 function setMouseKeyState(btn, key, isPressed) {
+  if (world?.isPaused && isPressed) return;
   setButtonPressed(btn, isPressed);
   keyboard[key] = isPressed;
 }
@@ -243,7 +249,55 @@ window.addEventListener("keyup", (event) => {
  * @returns {void}
  */
 function setKeyboardState(key, isPressed) {
+  if (world?.isPaused && isPressed) return;
   const keyMap = { ArrowLeft: "LEFT", ArrowRight: "RIGHT", ArrowUp: "UP", ArrowDown: "DOWN", " ": "SPACE", d: "D" };
   const mappedKey = keyMap[key];
   if (mappedKey) keyboard[mappedKey] = isPressed;
+}
+
+/**
+  * Performs bind pause handlers.
+  *
+ * @returns {void}
+ */
+function bindPauseHandlers() {
+  rotateOverlayMediaQuery = window.matchMedia("(max-width: 1366px) and (orientation: portrait) and (pointer: coarse)");
+  document.addEventListener("visibilitychange", syncPauseState);
+  window.addEventListener("focus", syncPauseState);
+  window.addEventListener("blur", syncPauseState);
+  if (typeof rotateOverlayMediaQuery.addEventListener === "function") {
+    rotateOverlayMediaQuery.addEventListener("change", syncPauseState);
+  } else if (typeof rotateOverlayMediaQuery.addListener === "function") {
+    rotateOverlayMediaQuery.addListener(syncPauseState);
+  }
+  syncPauseState();
+}
+
+/**
+  * Performs bind info navigation pause.
+  *
+ * @returns {void}
+ */
+function bindInfoNavigationPause() {
+  const infoLinks = document.querySelectorAll("#page-links a");
+  infoLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      world.setPaused(true);
+      const popup = window.open(link.href, "_blank");
+      if (!popup) window.location.href = link.href;
+    });
+  });
+}
+
+/**
+  * Performs sync pause state.
+  *
+ * @returns {void}
+ */
+function syncPauseState() {
+  if (!world) return;
+  const rotateOverlayVisible = !!rotateOverlayMediaQuery?.matches;
+  const shouldPause = rotateOverlayVisible || document.hidden;
+  world.setPaused(shouldPause);
 }
