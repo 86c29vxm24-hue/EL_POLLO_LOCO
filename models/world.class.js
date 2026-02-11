@@ -92,9 +92,10 @@ class World {
   createCoins() {
     let coinYsAir = [150, 180, 210, 240, 170, 200, 230, 160, 190, 220];
     let coinYsLow = [300, 320, 340, 310, 330, 350, 300, 320, 340, 310];
-    for (let i = 0; i < 20; i++) {
-      let y = i < 10 ? coinYsAir[i] : coinYsLow[i - 10];
-      this.collectableObjects.push(new CollectableObjects(200 + Math.random() * 2400, y));
+    for (let i = 0; i < 40; i++) {
+      const patternIndex = i % 20;
+      let y = patternIndex < 10 ? coinYsAir[patternIndex] : coinYsLow[patternIndex - 10];
+      this.collectableObjects.push(new CollectableObjects(200 + Math.random() * 4800, y));
     }
   }
 
@@ -102,8 +103,8 @@ class World {
    * @returns {void}
    */
   createBottles() {
-    for (let i = 0; i < 10; i++) {
-      let bottle = new CollectableObjects(200 + Math.random() * 2400, 360);
+    for (let i = 0; i < 20; i++) {
+      let bottle = new CollectableObjects(200 + Math.random() * 4800, 360);
       let bottleImage = bottle.IMAGES_BOTTLES[i % bottle.IMAGES_BOTTLES.length];
       bottle.isCoin = false;
       bottle.loadImage(bottleImage);

@@ -11,7 +11,7 @@ function createLevel1() {
  */
 function createEndboss() {
   const endboss = new Endboss();
-  endboss.x = 2850;
+  endboss.x = 5850;
   return endboss;
 }
 
@@ -27,6 +27,12 @@ function createEnemies(endboss) {
     new ChickenSmall(),
     new Chicken(),
     new ChickenSmall(),
+    new Chicken(),
+    new Chicken(),
+    new ChickenSmall(),
+    new ChickenSmall(),
+    new Chicken(),
+    new ChickenSmall(),
     endboss,
   ];
 }
@@ -35,14 +41,33 @@ function createEnemies(endboss) {
  * @returns {Cloud[]}
  */
 function createClouds() {
-  return [new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud()];
+  return [
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+    new Cloud(),
+  ];
 }
 
 /**
  * @returns {BackgroundObject[]}
  */
 function createBackgroundObjects() {
-  const xPositions = [-719, 0, 719, 719 * 2, 719 * 3, 719 * 4, 719 * 5];
+  const xPositions = [-719, 0, 719, 719 * 2, 719 * 3, 719 * 4, 719 * 5, 719 * 6, 719 * 7, 719 * 8, 719 * 9];
   return xPositions.flatMap((x, index) => createBackgroundLayerSet(index, x));
 }
 
