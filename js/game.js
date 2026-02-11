@@ -51,7 +51,7 @@ function bindMusicToggleButton() {
  */
 function updateMuteButtonText(btn) {
   const isMuted = gameSounds.isMuted();
-  const isMobileLayout = window.matchMedia("(max-width: 900px) and (pointer: coarse)").matches;
+  const isMobileLayout = window.matchMedia("(max-width: 1366px) and (pointer: coarse)").matches;
   btn.textContent = isMobileLayout ? "" : (isMuted ? "Sound: Off" : "Sound: On");
   btn.classList.toggle("is-muted", isMuted);
   btn.setAttribute("aria-label", isMuted ? "Sound off" : "Sound on");

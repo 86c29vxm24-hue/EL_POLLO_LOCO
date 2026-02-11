@@ -387,7 +387,7 @@ body.info-page {
     }
 }
 
-@media (max-width: 450px) and (orientation: portrait) {
+@media (max-width: 1366px) and (orientation: portrait) and (pointer: coarse) {
     body:not(.info-page) #rotate-device-overlay {
         display: flex;
     }
@@ -399,7 +399,7 @@ body.info-page {
     }
 }
 
-@media (max-width: 900px) and (orientation: landscape) and (pointer: coarse) {
+@media (max-width: 1366px) and (orientation: landscape) and (pointer: coarse) {
     body:not(.info-page) {
         margin: 0;
         padding-top: 0;
@@ -449,10 +449,10 @@ body.info-page {
     body:not(.info-page) #mobile-controls {
         display: flex;
         position: fixed;
-        left: 52px;
-        right: 52px;
-        bottom: 8px;
-        padding: 0;
+        left: 0;
+        right: 0;
+        bottom: 12px;
+        padding: 0 16px;
         justify-content: space-between;
         align-items: center;
         z-index: 45;
@@ -463,10 +463,8 @@ body.info-page {
         gap: 8px;
     }
     body:not(.info-page) #mobile-controls button {
-        min-width: 36px;
-        min-height: 36px;
-        padding: 6px 8px;
-        font-size: 12px;
+        padding: 14px 18px;
+        font-size: 18px;
     }
     body:not(.info-page) #page-links {
         position: fixed;
