@@ -50,6 +50,8 @@ class Endboss extends MovableObject {
   isSequenceRunning = false;
   energy = 100;
   isHurt = false;
+  speedMultiplier = 2;
+  walkDurationMultiplier = 2;
 
   /**
    * @returns {void}
@@ -62,7 +64,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.x = 1400;
     this.startX = this.x;
-    this.speed = 1.8 + Math.random() * 0.9;
+    this.speed = (1.8 + Math.random() * 0.9) * this.speedMultiplier;
     this.animate();
   }
 
@@ -121,21 +123,26 @@ class Endboss extends MovableObject {
    */
   runAlertCycle() {
     this.hasTriggered = true;
+    const alertDuration = 700;
+    const walkDuration = 1400 * this.walkDurationMultiplier;
+    const attackDuration = 700;
     this.beginWalkCycle();
     this.setPhase("alert");
-    this.trackTimeout(() => this.setPhase("walk"), 700);
-    this.trackTimeout(() => this.setPhase("attack"), 2100);
-    this.trackTimeout(() => this.finishSequence(), 2800);
+    this.trackTimeout(() => this.setPhase("walk"), alertDuration);
+    this.trackTimeout(() => this.setPhase("attack"), alertDuration + walkDuration);
+    this.trackTimeout(() => this.finishSequence(), alertDuration + walkDuration + attackDuration);
   }
 
   /**
    * @returns {void}
    */
   runWalkAttackCycle() {
+    const walkDuration = 1400 * this.walkDurationMultiplier;
+    const attackDuration = 800;
     this.beginWalkCycle();
     this.setPhase("walk");
-    this.trackTimeout(() => this.setPhase("attack"), 1400);
-    this.trackTimeout(() => this.finishSequence(), 2200);
+    this.trackTimeout(() => this.setPhase("attack"), walkDuration);
+    this.trackTimeout(() => this.finishSequence(), walkDuration + attackDuration);
   }
 
   /**
