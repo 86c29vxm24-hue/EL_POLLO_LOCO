@@ -12,6 +12,8 @@ class World {
   statusBarEndboss = new StatusBar();
   throwableObject = [];
   collectableObjects = [];  
+  totalCoins = 0;
+  totalBottles = 0;
   lastThrowTime = 0;
   lastCharacterBottom = null;
   startScreen = new StartScreen();
@@ -90,9 +92,11 @@ class World {
    * @returns {void}
    */
   createCoins() {
+    const totalCoinsToSpawn = 40;
+    this.totalCoins = totalCoinsToSpawn;
     let coinYsAir = [150, 180, 210, 240, 170, 200, 230, 160, 190, 220];
     let coinYsLow = [300, 320, 340, 310, 330, 350, 300, 320, 340, 310];
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < totalCoinsToSpawn; i++) {
       const patternIndex = i % 20;
       let y = patternIndex < 10 ? coinYsAir[patternIndex] : coinYsLow[patternIndex - 10];
       this.collectableObjects.push(new CollectableObjects(200 + Math.random() * 4800, y));
@@ -103,7 +107,9 @@ class World {
    * @returns {void}
    */
   createBottles() {
-    for (let i = 0; i < 20; i++) {
+    const totalBottlesToSpawn = 20;
+    this.totalBottles = totalBottlesToSpawn;
+    for (let i = 0; i < totalBottlesToSpawn; i++) {
       let bottle = new CollectableObjects(200 + Math.random() * 4800, 360);
       let bottleImage = bottle.IMAGES_BOTTLES[i % bottle.IMAGES_BOTTLES.length];
       bottle.isCoin = false;
@@ -298,7 +304,7 @@ class World {
    * @returns {number}
    */
   getBottlePercentage() {
-    let maxBottles = 10;
+    let maxBottles = this.totalBottles || 1;
     let bottles = this.statusBarBottles.bottles || 0;
     if (bottles <= 0) return 0;
     return Math.max(20, Math.min(100, bottles * (100 / maxBottles)));
@@ -308,7 +314,7 @@ class World {
    * @returns {number}
    */
   getCoinPercentage() {
-    let maxCoins = 20;
+    let maxCoins = this.totalCoins || 1;
     let coins = this.statusBarCoins.coins || 0;
     if (coins <= 0) return 0;
     return Math.max(20, Math.min(100, coins * (100 / maxCoins)));
