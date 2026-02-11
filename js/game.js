@@ -3,6 +3,8 @@ let world;
 let keyboard = new Keyboard();
 
 /**
+  * Performs init.
+  *
  * @returns {void}
  */
 function init() {
@@ -17,6 +19,8 @@ function init() {
 }
 
 /**
+  * Performs bind start button.
+  *
  * @returns {void}
  */
 function bindStartButton() {
@@ -28,6 +32,8 @@ function bindStartButton() {
 }
 
 /**
+  * Performs bind music toggle button.
+  *
  * @returns {void}
  */
 function bindMusicToggleButton() {
@@ -46,6 +52,8 @@ function bindMusicToggleButton() {
 }
 
 /**
+  * Performs update mute button text.
+  *
  * @param {HTMLElement} btn
  * @returns {void}
  */
@@ -59,6 +67,8 @@ function updateMuteButtonText(btn) {
 }
 
 /**
+  * Performs bind end button.
+  *
  * @returns {void}
  */
 function bindEndButton() {
@@ -69,6 +79,8 @@ function bindEndButton() {
 }
 
 /**
+  * Performs bind play again button.
+  *
  * @returns {void}
  */
 function bindPlayAgainButton() {
@@ -79,6 +91,8 @@ function bindPlayAgainButton() {
 }
 
 /**
+  * Performs bind fullscreen button.
+  *
  * @returns {void}
  */
 function bindFullscreenButton() {
@@ -89,6 +103,8 @@ function bindFullscreenButton() {
 }
 
 /**
+  * Performs toggle fullscreen.
+  *
  * @param {HTMLElement} area
  * @returns {void}
  */
@@ -98,6 +114,8 @@ function toggleFullscreen(area) {
 }
 
 /**
+  * Performs update fullscreen button text.
+  *
  * @param {HTMLElement} btn
  * @returns {void}
  */
@@ -106,6 +124,8 @@ function updateFullscreenButtonText(btn) {
 }
 
 /**
+  * Performs bind mobile controls.
+  *
  * @returns {void}
  */
 function bindMobileControls() {
@@ -120,6 +140,8 @@ function bindMobileControls() {
 }
 
 /**
+  * Performs bind hold.
+  *
  * @param {HTMLElement} btn
  * @param {string} key
  * @returns {void}
@@ -131,6 +153,8 @@ function bindHold(btn, key) {
 }
 
 /**
+  * Performs prevent default event.
+  *
  * @param {Event} event
  * @returns {void}
  */
@@ -139,6 +163,8 @@ function preventDefaultEvent(event) {
 }
 
 /**
+  * Performs bind touch controls.
+  *
  * @param {HTMLElement} btn
  * @param {string} key
  * @returns {void}
@@ -150,6 +176,8 @@ function bindTouchControls(btn, key) {
 }
 
 /**
+  * Sets touch key state.
+  *
  * @param {TouchEvent} event
  * @param {HTMLElement} btn
  * @param {string} key
@@ -163,6 +191,8 @@ function setTouchKeyState(event, btn, key, isPressed) {
 }
 
 /**
+  * Performs bind mouse controls.
+  *
  * @param {HTMLElement} btn
  * @param {string} key
  * @returns {void}
@@ -174,6 +204,8 @@ function bindMouseControls(btn, key) {
 }
 
 /**
+  * Sets mouse key state.
+  *
  * @param {HTMLElement} btn
  * @param {string} key
  * @param {boolean} isPressed
@@ -185,6 +217,8 @@ function setMouseKeyState(btn, key, isPressed) {
 }
 
 /**
+  * Sets button pressed.
+  *
  * @param {HTMLElement} btn
  * @param {boolean} isPressed
  * @returns {void}
@@ -202,6 +236,8 @@ window.addEventListener("keyup", (event) => {
 });
 
 /**
+  * Sets keyboard state.
+  *
  * @param {string} key
  * @param {boolean} isPressed
  * @returns {void}

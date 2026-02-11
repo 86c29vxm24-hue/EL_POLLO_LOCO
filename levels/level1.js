@@ -1,4 +1,6 @@
 /**
+  * Creates level1.
+  *
  * @returns {Level}
  */
 function createLevel1() {
@@ -7,6 +9,8 @@ function createLevel1() {
 }
 
 /**
+  * Creates endboss.
+  *
  * @returns {Endboss}
  */
 function createEndboss() {
@@ -16,6 +20,8 @@ function createEndboss() {
 }
 
 /**
+  * Creates enemies.
+  *
  * @param {Endboss} endboss
  * @returns {MovableObject[]}
  */
@@ -38,6 +44,8 @@ function createEnemies(endboss) {
 }
 
 /**
+  * Creates clouds.
+  *
  * @returns {Cloud[]}
  */
 function createClouds() {
@@ -64,6 +72,8 @@ function createClouds() {
 }
 
 /**
+  * Creates background objects.
+  *
  * @returns {BackgroundObject[]}
  */
 function createBackgroundObjects() {
@@ -72,6 +82,8 @@ function createBackgroundObjects() {
 }
 
 /**
+  * Creates background layer set.
+  *
  * @param {number} index
  * @param {number} x
  * @returns {BackgroundObject[]}

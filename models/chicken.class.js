@@ -31,6 +31,8 @@ class ChickenEnemy extends MovableObject {
   }
 
   /**
+    * Performs animate.
+    *
    * @returns {void}
    */
   animate() {
@@ -39,6 +41,8 @@ class ChickenEnemy extends MovableObject {
   }
 
   /**
+    * Performs start movement.
+    *
    * @returns {void}
    */
   startMovement() {
@@ -48,6 +52,8 @@ class ChickenEnemy extends MovableObject {
   }
 
   /**
+    * Performs start animation.
+    *
    * @returns {void}
    */
   startAnimation() {
@@ -58,6 +64,8 @@ class ChickenEnemy extends MovableObject {
   }
 
   /**
+    * Performs die.
+    *
    * @returns {void}
    */
   die() {
@@ -72,6 +80,8 @@ class ChickenEnemy extends MovableObject {
 
 class Chicken extends ChickenEnemy {
   /**
+    * Initializes the instance.
+    *
    * @returns {void}
    */
   constructor() {

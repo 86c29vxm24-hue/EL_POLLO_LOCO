@@ -24,6 +24,8 @@ class World {
   
 
   /**
+    * Initializes the instance.
+    *
    * @param {HTMLCanvasElement} canvas
    * @param {Keyboard} keyboard
    */
@@ -40,6 +42,8 @@ class World {
   }
 
   /**
+    * Performs start game.
+    *
    * @returns {void}
    */
   startGame() {
@@ -48,6 +52,8 @@ class World {
   }
 
   /**
+    * Performs setup status bars.
+    *
    * @returns {void}
    */
   setupStatusBars() {
@@ -56,6 +62,8 @@ class World {
   }
 
   /**
+    * Performs place status bars.
+    *
    * @returns {void}
    */
   placeStatusBars() {
@@ -69,6 +77,8 @@ class World {
   }
 
   /**
+    * Performs initialize status bar values.
+    *
    * @returns {void}
    */
   initializeStatusBarValues() {
@@ -81,6 +91,8 @@ class World {
   }
 
   /**
+    * Performs setup collectables.
+    *
    * @returns {void}
    */
   setupCollectables() {
@@ -89,6 +101,8 @@ class World {
   }
 
   /**
+    * Creates coins.
+    *
    * @returns {void}
    */
   createCoins() {
@@ -104,6 +118,8 @@ class World {
   }
 
   /**
+    * Creates bottles.
+    *
    * @returns {void}
    */
   createBottles() {
@@ -119,6 +135,8 @@ class World {
   }
 
   /**
+    * Sets world.
+    *
    * @returns {void}
    */
   setWorld() {
@@ -129,9 +147,8 @@ class World {
   }
 
   /**
-   * @returns {void}
-   */
-  /**
+    * Runs operation.
+    *
    * @returns {void}
    */
   run() {
@@ -142,6 +159,8 @@ class World {
   }
 
   /**
+    * Checks throw objects.
+    *
    * @returns {void}
    */
   checkThrowObjects() {
@@ -151,6 +170,8 @@ class World {
   }
 
   /**
+    * Checks whether can throw bottle.
+    *
    * @returns {boolean}
    */
   canThrowBottle() {
@@ -161,6 +182,8 @@ class World {
   }
 
   /**
+    * Performs consume bottle.
+    *
    * @returns {void}
    */
   consumeBottle() {
@@ -170,6 +193,8 @@ class World {
   }
 
   /**
+    * Creates throwable bottle.
+    *
    * @returns {ThrowableObject}
    */
   createThrowableBottle() {
@@ -179,6 +204,8 @@ class World {
   }
 
   /**
+    * Checks whether is throw on cooldown.
+    *
    * @returns {boolean}
    */
   isThrowOnCooldown() {
@@ -186,6 +213,8 @@ class World {
   }
 
   /**
+    * Checks collisions.
+    *
    * @returns {void}
    */
   checkCollisions() {
@@ -198,6 +227,8 @@ class World {
   }
 
   /**
+    * Checks game end.
+    *
    * @returns {void}
    */
   checkGameEnd() {
@@ -208,6 +239,8 @@ class World {
   }
 
   /**
+    * Performs schedule end.
+    *
    * @param {string} type
    * @returns {void}
    */
@@ -221,6 +254,8 @@ class World {
   }
 
   /**
+    * Performs show end screen.
+    *
    * @param {string} type
    * @returns {void}
    */
@@ -232,6 +267,8 @@ class World {
   }
 
   /**
+    * Performs render end screen by type.
+    *
    * @param {string} type
    * @returns {void}
    */
@@ -247,6 +284,8 @@ class World {
   }
 
   /**
+    * Performs show end buttons.
+    *
    * @returns {void}
    */
   showEndButtons() {
@@ -257,6 +296,8 @@ class World {
   }
 
   /**
+    * Checks enemy collisions.
+    *
    * @returns {void}
    */
   checkEnemyCollisions() {
@@ -269,6 +310,8 @@ class World {
   }
 
   /**
+    * Checks collectable collisions.
+    *
    * @returns {void}
    */
   checkCollectableCollisions() {
@@ -280,6 +323,8 @@ class World {
   }
 
   /**
+    * Performs collect coin.
+    *
    * @returns {boolean}
    */
   collectCoin() {
@@ -291,6 +336,8 @@ class World {
   }
 
   /**
+    * Performs collect bottle.
+    *
    * @returns {boolean}
    */
   collectBottle() {
@@ -301,6 +348,8 @@ class World {
   }
 
   /**
+    * Returns bottle percentage.
+    *
    * @returns {number}
    */
   getBottlePercentage() {
@@ -311,6 +360,8 @@ class World {
   }
 
   /**
+    * Returns coin percentage.
+    *
    * @returns {number}
    */
   getCoinPercentage() {
@@ -321,6 +372,8 @@ class World {
   }
 
   /**
+    * Checks bottle collisions.
+    *
    * @returns {void}
    */
   checkBottleCollisions() {
@@ -333,6 +386,8 @@ class World {
   }
 
   /**
+    * Checks bottle chicken hits.
+    *
    * @param {ThrowableObject} bottle
    * @returns {void}
    */
@@ -347,6 +402,8 @@ class World {
   }
 
   /**
+    * Checks bottle boss hit.
+    *
    * @param {ThrowableObject} bottle
    * @param {Endboss|undefined} boss
    * @returns {void}
@@ -360,6 +417,8 @@ class World {
   }
 
   /**
+    * Performs splash bottle at impact.
+    *
    * @param {ThrowableObject} bottle
    * @returns {void}
    */
@@ -370,6 +429,8 @@ class World {
   }
 
   /**
+    * Returns endboss.
+    *
    * @returns {Endboss|undefined}
    */
   getEndboss() {
@@ -377,6 +438,8 @@ class World {
   }
 
   /**
+    * Checks jump on enemies.
+    *
    * @returns {void}
    */
   checkJumpOnEnemies() {
@@ -387,6 +450,8 @@ class World {
   }
 
   /**
+    * Performs try stomp enemy.
+    *
    * @param {MovableObject} enemy
    * @param {number} previousBottom
    * @param {number} currentBottom
@@ -400,6 +465,8 @@ class World {
   }
 
   /**
+    * Checks whether can stomp enemy.
+    *
    * @param {MovableObject} enemy
    * @param {number} previousBottom
    * @param {number} currentBottom
@@ -412,6 +479,8 @@ class World {
   }
 
   /**
+    * Checks whether has stomp collision.
+    *
    * @param {MovableObject} enemy
    * @param {number} previousBottom
    * @param {number} currentBottom
@@ -423,6 +492,8 @@ class World {
   }
 
   /**
+    * Checks whether has horizontal stomp overlap.
+    *
    * @param {MovableObject} enemy
    * @returns {boolean}
    */
@@ -435,6 +506,8 @@ class World {
   }
 
   /**
+    * Checks whether has vertical stomp overlap.
+    *
    * @param {MovableObject} enemy
    * @param {number} previousBottom
    * @param {number} currentBottom
@@ -450,6 +523,8 @@ class World {
   }
 
   /**
+    * Returns character bottom for stomp.
+    *
    * @returns {number}
    */
   getCharacterBottomForStomp() {

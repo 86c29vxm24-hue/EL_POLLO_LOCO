@@ -1,5 +1,7 @@
 Object.assign(World.prototype, {
   /**
+    * Performs draw.
+    *
    * @returns {void}
    */
   draw() {
@@ -10,6 +12,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Draws start or end screen.
+    *
    * @returns {boolean}
    */
   drawStartOrEndScreen() {
@@ -19,6 +23,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Draws only start screen.
+    *
    * @returns {boolean}
    */
   drawOnlyStartScreen() {
@@ -27,6 +33,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Draws only end screen.
+    *
    * @returns {boolean}
    */
   drawOnlyEndScreen() {
@@ -35,6 +43,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Draws game scene.
+    *
    * @returns {void}
    */
   drawGameScene() {
@@ -51,6 +61,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Draws world objects.
+    *
    * @returns {void}
    */
   drawWorldObjects() {
@@ -62,6 +74,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Draws status bars.
+    *
    * @returns {void}
    */
   drawStatusBars() {
@@ -72,6 +86,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Performs loop draw.
+    *
    * @returns {void}
    */
   loopDraw() {
@@ -81,6 +97,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Performs add objects to map.
+    *
    * @param {Array} objects
    * @returns {void}
    */
@@ -91,6 +109,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Performs add to map.
+    *
    * @param {MovableObject} movableObject
    * @returns {void}
    */
@@ -108,6 +128,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Performs flip image.
+    *
    * @param {MovableObject} mo
    * @returns {void}
    */
@@ -118,6 +140,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Performs flip image back.
+    *
    * @param {MovableObject} mo
    * @returns {void}
    */

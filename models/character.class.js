@@ -70,6 +70,8 @@ class Character extends MovableObject {
   currentImage = 0;
 
   /**
+    * Initializes the instance.
+    *
    * @returns {void}
    */
   constructor() {
@@ -86,6 +88,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Checks whether can control character.
+    *
    * @returns {boolean}
    */
   canControlCharacter() {
@@ -93,6 +97,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Performs animate.
+    *
    * @returns {void}
    */
   animate() {
@@ -101,6 +107,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Performs start movement loop.
+    *
    * @returns {void}
    */
   startMovementLoop() {
@@ -113,6 +121,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Handles horizontal movement.
+    *
    * @returns {void}
    */
   handleHorizontalMovement() {
@@ -121,6 +131,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Handles move right.
+    *
    * @returns {void}
    */
   handleMoveRight() {
@@ -130,6 +142,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Handles move left.
+    *
    * @returns {void}
    */
   handleMoveLeft() {
@@ -139,6 +153,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Performs turn right.
+    *
    * @returns {void}
    */
   turnRight() {
@@ -146,6 +162,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Performs turn left.
+    *
    * @returns {void}
    */
   turnLeft() {
@@ -153,6 +171,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Handles jump input.
+    *
    * @returns {void}
    */
   handleJumpInput() {
@@ -162,6 +182,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Performs start animation loop.
+    *
    * @returns {void}
    */
   startAnimationLoop() {
@@ -172,6 +194,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Plays current animation.
+    *
    * @returns {void}
    */
   playCurrentAnimation() {
@@ -184,6 +208,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Checks whether should play jump animation.
+    *
    * @returns {boolean}
    */
   shouldPlayJumpAnimation() {
@@ -191,6 +217,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Checks whether should play walk animation.
+    *
    * @returns {boolean}
    */
   shouldPlayWalkAnimation() {
@@ -198,6 +226,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Checks whether should play long idle animation.
+    *
    * @returns {boolean}
    */
   shouldPlayLongIdleAnimation() {
@@ -205,6 +235,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Plays jump animation.
+    *
    * @returns {void}
    */
   playJumpAnimation() {
@@ -213,6 +245,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Plays walk animation.
+    *
    * @returns {void}
    */
   playWalkAnimation() {
@@ -221,6 +255,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Plays long idle animation.
+    *
    * @returns {void}
    */
   playLongIdleAnimation() {
@@ -228,6 +264,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Plays idle animation.
+    *
    * @returns {void}
    */
   playIdleAnimation() {
@@ -235,6 +273,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Plays dead animation once.
+    *
    * @returns {void}
    */
   playDeadAnimationOnce() {
@@ -252,6 +292,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Plays state.
+    *
    * @param {string} state
    * @param {string[]} images
    * @returns {void}
@@ -265,6 +307,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Performs jump.
+    *
    * @returns {void}
    */
   jump() {
@@ -274,6 +318,8 @@ class Character extends MovableObject {
   }
 
   /**
+    * Performs hit.
+    *
    * @returns {void}
    */
   hit() {

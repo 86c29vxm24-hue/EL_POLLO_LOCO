@@ -9,6 +9,8 @@ class MovableObject extends DrawableObject {
   timeouts = [];
 
   /**
+    * Performs apply gravity.
+    *
    * @returns {void}
    */
   applyGravity() {
@@ -26,6 +28,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Performs track interval.
+    *
    * @param {Function} callback
    * @param {number} ms
    * @returns {number}
@@ -37,6 +41,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Performs track timeout.
+    *
    * @param {Function} callback
    * @param {number} ms
    * @returns {number}
@@ -48,6 +54,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Performs clear tracked intervals.
+    *
    * @returns {void}
    */
   clearTrackedIntervals() {
@@ -56,6 +64,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Performs clear tracked timeouts.
+    *
    * @returns {void}
    */
   clearTrackedTimeouts() {
@@ -64,6 +74,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Performs dispose.
+    *
    * @returns {void}
    */
   dispose() {
@@ -72,6 +84,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Checks whether is above ground.
+    *
    * @returns {boolean}
    */
   isAboveGround() {
@@ -79,6 +93,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Returns ground y.
+    *
    * @returns {number}
    */
   getGroundY() {
@@ -86,6 +102,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Performs move right.
+    *
    * @returns {void}
    */
   moveRight() {
@@ -94,6 +112,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Performs move left.
+    *
    * @returns {void}
    */
   moveLeft() {
@@ -102,6 +122,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Plays animation.
+    *
    * @param {string[]} images
    * @returns {void}
    */
@@ -113,6 +135,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Performs jump.
+    *
    * @returns {void}
    */
   jump() {
@@ -120,6 +144,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Checks whether is colliding.
+    *
    * @param {MovableObject} mo
    * @returns {boolean}
    */
@@ -130,6 +156,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Returns self collision offsets.
+    *
    * @param {MovableObject} mo
    * @returns {{left:number,right:number,top:number,bottom:number}}
    */
@@ -142,6 +170,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Returns target collision offsets.
+    *
    * @param {MovableObject} mo
    * @returns {{left:number,right:number,top:number,bottom:number}}
    */
@@ -159,6 +189,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Checks whether has box overlap.
+    *
    * @param {MovableObject} mo
    * @param {{left:number,right:number,top:number,bottom:number}} selfOffsets
    * @param {{left:number,right:number,top:number,bottom:number}} targetOffsets
@@ -174,6 +206,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Performs hit.
+    *
    * @returns {void}
    */
   hit() {
@@ -186,6 +220,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Checks whether is hurt.
+    *
    * @returns {boolean}
    */
   isHurt() {
@@ -195,6 +231,8 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+    * Checks whether is dead.
+    *
    * @returns {boolean}
    */
   isDead() {

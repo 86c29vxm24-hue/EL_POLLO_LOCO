@@ -16,6 +16,8 @@ class ThrowableObject extends MovableObject {
   ];
 
   /**
+    * Initializes the instance.
+    *
    * @param {number} x
    * @param {number} y
    * @param {number} groundY
@@ -29,6 +31,8 @@ class ThrowableObject extends MovableObject {
   }
 
   /**
+    * Performs initialize throw props.
+    *
    * @param {number} x
    * @param {number} y
    * @param {number} groundY
@@ -45,6 +49,8 @@ class ThrowableObject extends MovableObject {
   }
 
   /**
+    * Performs throw.
+    *
    * @returns {void}
    */
   throw() {
@@ -55,6 +61,8 @@ class ThrowableObject extends MovableObject {
   }
 
   /**
+    * Checks whether is above ground.
+    *
    * @returns {boolean}
    */
   isAboveGround() {
@@ -62,6 +70,8 @@ class ThrowableObject extends MovableObject {
   }
 
   /**
+    * Performs start throw animation.
+    *
    * @returns {void}
    */
   startThrowAnimation() {
@@ -71,6 +81,8 @@ class ThrowableObject extends MovableObject {
   }
 
   /**
+    * Performs start throw movement.
+    *
    * @returns {void}
    */
   startThrowMovement() {
@@ -85,6 +97,8 @@ class ThrowableObject extends MovableObject {
   }
 
   /**
+    * Performs on impact.
+    *
    * @returns {void}
    */
   onImpact() {
@@ -97,6 +111,8 @@ class ThrowableObject extends MovableObject {
   }
 
   /**
+    * Performs splash.
+    *
    * @returns {void}
    */
   splash() {
@@ -114,6 +130,8 @@ class ThrowableObject extends MovableObject {
   }
 
   /**
+    * Performs dispose.
+    *
    * @returns {void}
    */
   dispose() {

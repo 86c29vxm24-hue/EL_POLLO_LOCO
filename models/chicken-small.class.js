@@ -1,5 +1,7 @@
 class ChickenSmall extends ChickenEnemy {
   /**
+    * Initializes the instance.
+    *
    * @returns {void}
    */
   constructor() {

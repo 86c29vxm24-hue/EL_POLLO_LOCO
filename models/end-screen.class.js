@@ -7,6 +7,8 @@ class EndScreen extends DrawableObject {
   ];
 
   /**
+    * Initializes the instance.
+    *
    * @returns {void}
    */
   constructor() {
@@ -20,6 +22,8 @@ class EndScreen extends DrawableObject {
   }
 
   /**
+    * Performs show win.
+    *
    * @returns {void}
    */
   showWin() {
@@ -27,6 +31,8 @@ class EndScreen extends DrawableObject {
   }
 
   /**
+    * Performs show lose.
+    *
    * @returns {void}
    */
   showLose() {

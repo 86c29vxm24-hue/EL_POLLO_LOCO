@@ -7,6 +7,8 @@ class DrawableObject {
   width = 100;
   height = 150;
   /**
+    * Performs load image.
+    *
    * @param {string} path
    * @returns {void}
    */
@@ -16,6 +18,8 @@ class DrawableObject {
   }
 
   /**
+    * Performs draw.
+    *
    * @param {CanvasRenderingContext2D} ctx
    * @returns {void}
    */
@@ -24,6 +28,8 @@ class DrawableObject {
   }
 
   /**
+    * Performs load images.
+    *
    * @param {string[]} arr
    * @returns {void}
    */
@@ -36,6 +42,8 @@ class DrawableObject {
   }
 
   /**
+    * Draws frame.
+    *
    * @param {CanvasRenderingContext2D} ctx
    * @returns {void}
    */

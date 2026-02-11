@@ -4,6 +4,8 @@ class StartScreen extends DrawableObject {
   ];
 
   /**
+    * Initializes the instance.
+    *
    * @returns {void}
    */
   constructor() {

@@ -3,6 +3,8 @@ class BackgroundObject extends MovableObject {
   height = 480;
 
   /**
+    * Initializes the instance.
+    *
    * @param {string} imagePath
    * @param {number} x
    */

@@ -55,6 +55,8 @@ class Endboss extends MovableObject {
   moveDirection = -1;
 
   /**
+    * Initializes the instance.
+    *
    * @returns {void}
    */
   constructor() {
@@ -70,6 +72,8 @@ class Endboss extends MovableObject {
   }
 
   /**
+    * Performs animate.
+    *
    * @returns {void}
    */
   animate() {
@@ -85,6 +89,8 @@ class Endboss extends MovableObject {
   }
 
   /**
+    * Performs update state.
+    *
    * @returns {void}
    */
   updateState() {
@@ -93,6 +99,8 @@ class Endboss extends MovableObject {
   }
 
   /**
+    * Performs trigger sequence.
+    *
    * @returns {void}
    */
   triggerSequence() {
@@ -101,6 +109,8 @@ class Endboss extends MovableObject {
   }
 
   /**
+    * Sets phase.
+    *
    * @param {string} phase
    * @returns {void}
    */
@@ -109,6 +119,8 @@ class Endboss extends MovableObject {
   }
 
   /**
+    * Plays current animation.
+    *
    * @returns {void}
    */
   playCurrentAnimation() {
@@ -120,6 +132,8 @@ class Endboss extends MovableObject {
   }
 
   /**
+    * Runs operation alert cycle.
+    *
    * @returns {void}
    */
   runAlertCycle() {
@@ -135,6 +149,8 @@ class Endboss extends MovableObject {
   }
 
   /**
+    * Runs operation walk attack cycle.
+    *
    * @returns {void}
    */
   runWalkAttackCycle() {
@@ -147,6 +163,8 @@ class Endboss extends MovableObject {
   }
 
   /**
+    * Performs begin walk cycle.
+    *
    * @returns {void}
    */
   beginWalkCycle() {
@@ -155,6 +173,8 @@ class Endboss extends MovableObject {
   }
 
   /**
+    * Performs finish sequence.
+    *
    * @returns {void}
    */
   finishSequence() {
@@ -163,6 +183,8 @@ class Endboss extends MovableObject {
   }
 
   /**
+    * Performs walk to character.
+    *
    * @returns {void}
    */
   walkToCharacter() {
@@ -180,6 +202,8 @@ class Endboss extends MovableObject {
   }
 
   /**
+    * Checks whether should turn after overrun.
+    *
    * @param {number} distanceX
    * @returns {boolean}
    */
@@ -191,6 +215,8 @@ class Endboss extends MovableObject {
   }
 
   /**
+    * Performs turn around.
+    *
    * @returns {void}
    */
   turnAround() {
@@ -199,6 +225,8 @@ class Endboss extends MovableObject {
   }
 
   /**
+    * Performs take hit.
+    *
    * @returns {void}
    */
   takeHit() {
@@ -210,6 +238,8 @@ class Endboss extends MovableObject {
   }
 
   /**
+    * Performs trigger hurt.
+    *
    * @returns {void}
    */
   triggerHurt() {
@@ -220,6 +250,8 @@ class Endboss extends MovableObject {
   }
 
   /**
+    * Checks whether is triggered.
+    *
    * @returns {boolean}
    */
   isTriggered() {

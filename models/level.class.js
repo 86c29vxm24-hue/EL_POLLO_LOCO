@@ -5,6 +5,8 @@ class Level {
   level_end_x = 6000;
 
   /**
+    * Initializes the instance.
+    *
    * @param {MovableObject[]} enemies
    * @param {Cloud[]} clouds
    * @param {BackgroundObject[]} backgroundObjects

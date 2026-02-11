@@ -4,6 +4,8 @@ class Cloud extends MovableObject {
   height = 150;
 
   /**
+    * Initializes the instance.
+    *
    * @returns {void}
    */
   constructor() {
@@ -14,6 +16,8 @@ class Cloud extends MovableObject {
   }
 
   /**
+    * Performs animate.
+    *
    * @returns {void}
    */
   animate() {

@@ -18,6 +18,8 @@ class GamingSounds {
   muted = false;
 
   /**
+    * Initializes the instance.
+    *
    * @returns {void}
    */
   constructor() {
@@ -27,6 +29,8 @@ class GamingSounds {
   }
 
   /**
+    * Performs apply custom volumes.
+    *
    * @returns {void}
    */
   applyCustomVolumes() {
@@ -35,6 +39,8 @@ class GamingSounds {
   }
 
   /**
+    * Returns all sounds.
+    *
    * @returns {Audio[]}
    */
   getAllSounds() {
@@ -46,6 +52,8 @@ class GamingSounds {
   }
 
   /**
+    * Performs load mute state.
+    *
    * @returns {boolean}
    */
   loadMuteState() {
@@ -54,6 +62,8 @@ class GamingSounds {
   }
 
   /**
+    * Performs save mute state.
+    *
    * @returns {void}
    */
   saveMuteState() {
@@ -61,6 +71,8 @@ class GamingSounds {
   }
 
   /**
+    * Performs apply mute state.
+    *
    * @returns {void}
    */
   applyMuteState() {
@@ -70,6 +82,8 @@ class GamingSounds {
   }
 
   /**
+    * Checks whether is muted.
+    *
    * @returns {boolean}
    */
   isMuted() {
@@ -77,6 +91,8 @@ class GamingSounds {
   }
 
   /**
+    * Performs toggle mute.
+    *
    * @returns {boolean}
    */
   toggleMute() {
@@ -87,6 +103,8 @@ class GamingSounds {
   }
 
   /**
+    * Plays sound.
+    *
    * @param {Audio} sound
    * @param {boolean} restart
    * @returns {void}
@@ -98,6 +116,8 @@ class GamingSounds {
   }
 
   /**
+    * Plays jump.
+    *
    * @returns {void}
    */
   playJump() {
@@ -105,6 +125,8 @@ class GamingSounds {
   }
 
   /**
+    * Plays character hurt.
+    *
    * @returns {void}
    */
   playCharacterHurt() {
@@ -112,6 +134,8 @@ class GamingSounds {
   }
 
   /**
+    * Plays character death.
+    *
    * @returns {void}
    */
   playCharacterDeath() {
@@ -120,6 +144,8 @@ class GamingSounds {
   }
 
   /**
+    * Plays enemy hit.
+    *
    * @returns {void}
    */
   playEnemyHit() {
@@ -127,6 +153,8 @@ class GamingSounds {
   }
 
   /**
+    * Plays endboss death.
+    *
    * @returns {void}
    */
   playEndbossDeath() {
@@ -135,6 +163,8 @@ class GamingSounds {
   }
 
   /**
+    * Plays endboss hit.
+    *
    * @returns {void}
    */
   playEndbossHit() {
@@ -142,6 +172,8 @@ class GamingSounds {
   }
 
   /**
+    * Plays coin collect.
+    *
    * @returns {void}
    */
   playCoinCollect() {
@@ -149,6 +181,8 @@ class GamingSounds {
   }
 
   /**
+    * Plays bottle splash.
+    *
    * @returns {void}
    */
   playBottleSplash() {
@@ -156,6 +190,8 @@ class GamingSounds {
   }
 
   /**
+    * Plays bottle collect.
+    *
    * @returns {void}
    */
   playBottleCollect() {
@@ -163,6 +199,8 @@ class GamingSounds {
   }
 
   /**
+    * Plays start screen loop.
+    *
    * @returns {void}
    */
   playStartScreenLoop() {
@@ -172,6 +210,8 @@ class GamingSounds {
   }
 
   /**
+    * Plays gameplay background loop.
+    *
    * @returns {void}
    */
   playGameplayBackgroundLoop() {
@@ -181,6 +221,8 @@ class GamingSounds {
   }
 
   /**
+    * Performs stop start screen loop.
+    *
    * @returns {void}
    */
   stopStartScreenLoop() {
@@ -189,6 +231,8 @@ class GamingSounds {
   }
 
   /**
+    * Performs stop all sounds.
+    *
    * @returns {void}
    */
   stopAllSounds() {
@@ -199,6 +243,8 @@ class GamingSounds {
   }
 
   /**
+    * Performs toggle start screen loop.
+    *
    * @returns {boolean}
    */
   toggleStartScreenLoop() {
@@ -211,6 +257,8 @@ class GamingSounds {
   }
 
   /**
+    * Checks whether is start screen loop playing.
+    *
    * @returns {boolean}
    */
   isStartScreenLoopPlaying() {
@@ -218,6 +266,8 @@ class GamingSounds {
   }
 
   /**
+    * Plays lose end screen sound.
+    *
    * @returns {void}
    */
   playLoseEndScreenSound() {
@@ -226,6 +276,8 @@ class GamingSounds {
   }
 
   /**
+    * Plays win end screen sound.
+    *
    * @returns {void}
    */
   playWinEndScreenSound() {

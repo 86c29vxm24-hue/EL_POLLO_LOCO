@@ -34,6 +34,8 @@ class StatusBar extends DrawableObject {
   percentage = 100;
 
   /**
+    * Initializes the instance.
+    *
    * @returns {void}
    */
   constructor() {
@@ -50,6 +52,8 @@ class StatusBar extends DrawableObject {
   }
 
   /**
+    * Sets percentage.
+    *
    * @param {number} percentage
    * @returns {void}
    */
@@ -59,6 +63,8 @@ class StatusBar extends DrawableObject {
   }
 
   /**
+    * Performs resolve image index.
+    *
    * @returns {void}
    */
   resolveImageIndex() {
@@ -66,6 +72,8 @@ class StatusBar extends DrawableObject {
   }
 
   /**
+    * Performs collect coin.
+    *
    * @param {number} percentage
    * @returns {void}
    */
@@ -75,6 +83,8 @@ class StatusBar extends DrawableObject {
   }
 
   /**
+    * Performs resolve coin image index.
+    *
    * @returns {void}
    */
   resolveCoinImageIndex() {
@@ -82,6 +92,8 @@ class StatusBar extends DrawableObject {
   }
 
   /**
+    * Performs collect bottle.
+    *
    * @param {number} percentage
    * @returns {void}
    */
@@ -91,6 +103,8 @@ class StatusBar extends DrawableObject {
   }
 
   /**
+    * Performs resolve bottle image index.
+    *
    * @returns {void}
    */
   resolveBottleImageIndex() {
@@ -98,6 +112,8 @@ class StatusBar extends DrawableObject {
   }
 
   /**
+    * Performs health endboss.
+    *
    * @param {number} percentage
    * @returns {void}
    */
@@ -107,6 +123,8 @@ class StatusBar extends DrawableObject {
   }
 
   /**
+    * Performs resolve endboss image index.
+    *
    * @returns {void}
    */
   resolveEndbossImageIndex() {
@@ -114,6 +132,8 @@ class StatusBar extends DrawableObject {
   }
 
   /**
+    * Performs resolve percent image index.
+    *
    * @returns {number}
    */
   resolvePercentImageIndex() {

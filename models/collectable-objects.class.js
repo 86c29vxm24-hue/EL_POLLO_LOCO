@@ -12,6 +12,8 @@ IMAGES_BOTTLES = [
 
 
   /**
+    * Initializes the instance.
+    *
    * @param {number} x
    * @param {number} y
    */
@@ -27,6 +29,8 @@ IMAGES_BOTTLES = [
   }
 
   /**
+    * Performs animate.
+    *
    * @returns {void}
    */
   animate() {

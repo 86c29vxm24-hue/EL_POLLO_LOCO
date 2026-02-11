@@ -1,5 +1,7 @@
 Object.assign(World.prototype, {
   /**
+    * Performs restart game.
+    *
    * @param {boolean} startImmediately
    * @returns {void}
    */
@@ -13,6 +15,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Performs dispose active objects.
+    *
    * @returns {void}
    */
   disposeActiveObjects() {
@@ -20,6 +24,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Performs collect disposable objects.
+    *
    * @returns {Array}
    */
   collectDisposableObjects() {
@@ -33,6 +39,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Performs safe dispose.
+    *
    * @param {any} obj
    * @returns {void}
    */
@@ -42,6 +50,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Performs reset runtime state.
+    *
    * @returns {void}
    */
   resetRuntimeState() {
@@ -54,6 +64,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Performs reset gameplay flags.
+    *
    * @returns {void}
    */
   resetGameplayFlags() {
@@ -66,6 +78,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Performs reset world objects.
+    *
    * @returns {void}
    */
   resetWorldObjects() {
@@ -81,6 +95,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Performs reset keyboard state.
+    *
    * @returns {void}
    */
   resetKeyboardState() {
@@ -90,6 +106,8 @@ Object.assign(World.prototype, {
   },
 
   /**
+    * Performs reset ui state.
+    *
    * @param {boolean} startImmediately
    * @returns {void}
    */
