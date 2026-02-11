@@ -5,6 +5,7 @@
 }
 
 body {
+    font-family: "Kablammo", system-ui, sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,6 +16,13 @@ body {
     margin: 0;
     background: #d97a3f;
     background: linear-gradient(180deg, #e08a3b 0%, #c45a2a 100%);
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
 }
 
 h1 {
