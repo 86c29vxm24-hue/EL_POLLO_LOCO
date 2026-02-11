@@ -392,9 +392,41 @@ class World {
    */
   canStompEnemy(enemy) {
     const isFalling = this.character.speedY < 0;
-    const isAbove = this.character.y + this.character.height - 10 <= enemy.y + enemy.height;
     const isTop = this.character.y < enemy.y;
     const isChickenEnemy = enemy instanceof Chicken || enemy instanceof ChickenSmall;
-    return isChickenEnemy && !enemy.dead && isFalling && isAbove && isTop && this.character.isColliding(enemy);
+    return isChickenEnemy && !enemy.dead && isFalling && isTop && this.hasStompCollision(enemy, 10);
+  }
+
+  /**
+   * @param {MovableObject} enemy
+   * @param {number} earlyPx
+   * @returns {boolean}
+   */
+  hasStompCollision(enemy, earlyPx = 0) {
+    return this.hasHorizontalStompOverlap(enemy) && this.hasVerticalStompOverlap(enemy, earlyPx);
+  }
+
+  /**
+   * @param {MovableObject} enemy
+   * @returns {boolean}
+   */
+  hasHorizontalStompOverlap(enemy) {
+    const characterLeft = this.character.x + 20;
+    const characterRight = this.character.x + this.character.width - 30;
+    const enemyLeft = enemy.x + 10;
+    const enemyRight = enemy.x + enemy.width - 10;
+    return characterRight > enemyLeft && characterLeft < enemyRight;
+  }
+
+  /**
+   * @param {MovableObject} enemy
+   * @param {number} earlyPx
+   * @returns {boolean}
+   */
+  hasVerticalStompOverlap(enemy, earlyPx = 0) {
+    const characterBottom = this.character.y + this.character.height - 20;
+    const stompTop = enemy.y - earlyPx;
+    const stompBottom = enemy.y + enemy.height - 20;
+    return characterBottom >= stompTop && characterBottom <= stompBottom;
   }
 }
