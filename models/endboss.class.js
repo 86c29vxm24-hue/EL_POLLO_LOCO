@@ -196,6 +196,6 @@ class Endboss extends MovableObject {
    */
   isTriggered() {
     if (!this.world) return false;
-    return this.world.character.x > this.x - 700;
+    return this.world.character.x > this.x - 500;
   }
 }
