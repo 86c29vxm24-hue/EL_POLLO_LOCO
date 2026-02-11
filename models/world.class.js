@@ -69,7 +69,10 @@ class World {
    * @returns {void}
    */
   initializeStatusBarValues() {
+    this.statusBar.setPercentage(this.character.energy);
+    this.statusBarCoins.coins = 0;
     this.statusBarCoins.collectCoin(0);
+    this.statusBarBottles.bottles = 0;
     this.statusBarBottles.collectBottle(0);
     this.statusBarEndboss.healthEndboss(100);
   }

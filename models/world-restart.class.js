@@ -72,6 +72,10 @@ Object.assign(World.prototype, {
     this.collectableObjects = [];
     this.character = new Character();
     this.level = createLevel1();
+    this.statusBar = new StatusBar();
+    this.statusBarCoins = new StatusBar();
+    this.statusBarBottles = new StatusBar();
+    this.statusBarEndboss = new StatusBar();
     this.endScreen = new EndScreen();
   },
 
