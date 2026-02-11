@@ -52,6 +52,7 @@ class Endboss extends MovableObject {
   isHurt = false;
   speedMultiplier = 2;
   walkDurationMultiplier = 2;
+  moveDirection = -1;
 
   /**
    * @returns {void}
@@ -167,7 +168,34 @@ class Endboss extends MovableObject {
   walkToCharacter() {
     if (this.isDead()) return;
     if (this.phase !== "walk") return;
-    this.x -= this.speed;
+    if (!this.world || !this.world.character) return;
+
+    const characterCenterX = this.world.character.x + this.world.character.width / 2;
+    const bossCenterX = this.x + this.width / 2;
+    const distanceX = characterCenterX - bossCenterX;
+
+    if (this.shouldTurnAfterOverrun(distanceX)) this.turnAround();
+
+    this.x += this.speed * this.moveDirection;
+  }
+
+  /**
+   * @param {number} distanceX
+   * @returns {boolean}
+   */
+  shouldTurnAfterOverrun(distanceX) {
+    const overrunDistance = 200;
+    const passedCharacterWhileMovingLeft = this.moveDirection < 0 && distanceX > overrunDistance;
+    const passedCharacterWhileMovingRight = this.moveDirection > 0 && distanceX < -overrunDistance;
+    return passedCharacterWhileMovingLeft || passedCharacterWhileMovingRight;
+  }
+
+  /**
+   * @returns {void}
+   */
+  turnAround() {
+    this.moveDirection *= -1;
+    this.otherDirection = this.moveDirection > 0;
   }
 
   /**
