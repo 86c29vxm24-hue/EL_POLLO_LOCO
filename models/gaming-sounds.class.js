@@ -1,6 +1,8 @@
 class GamingSounds {
   startScreenVolume = 1;
   gameplayBackgroundVolume = 0.5;
+  jumpVolume = 0.5;
+  coinCollectVolume = 0.55;
   jumpSound = new Audio("audio/edr-8-bit-jump-001-171817.mp3");
   characterHurtSound = new Audio("audio/homemade_sfx-slap-hurt-pain-sound-effect-262618.mp3");
   characterDeathSound = new Audio("audio/freesound_community-young-man-being-hurt-95628.mp3");
@@ -20,7 +22,16 @@ class GamingSounds {
    */
   constructor() {
     this.muted = this.loadMuteState();
+    this.applyCustomVolumes();
     this.applyMuteState();
+  }
+
+  /**
+   * @returns {void}
+   */
+  applyCustomVolumes() {
+    this.jumpSound.volume = this.jumpVolume;
+    this.coinCollectSound.volume = this.coinCollectVolume;
   }
 
   /**
