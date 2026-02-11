@@ -185,9 +185,11 @@ canvas {
     user-select: none;
 }
 
-#mobile-controls button:active {
+#mobile-controls button:active,
+#mobile-controls button.is-pressed {
+    background: #ffffff;
     border-color: #ffffff;
-    color: #ffffff;
+    color: #2a1b0f;
 }
 
 #page-links {
