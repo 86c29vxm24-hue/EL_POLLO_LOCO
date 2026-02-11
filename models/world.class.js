@@ -215,6 +215,7 @@ class World {
    */
   showEndScreen(type) {
     this.gameEnded = true;
+    gameSounds.stopAllSounds();
     this.renderEndScreenByType(type);
     this.showEndButtons();
   }

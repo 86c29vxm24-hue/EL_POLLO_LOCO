@@ -38,6 +38,7 @@ function bindMusicToggleButton() {
   window.addEventListener("resize", () => updateMuteButtonText(btn));
   btn.addEventListener("click", () => {
     const isMuted = gameSounds.toggleMute();
+    if (!isMuted && world.gameEnded) return updateMuteButtonText(btn);
     if (!isMuted && !world.gameStarted) gameSounds.playStartScreenLoop();
     if (!isMuted && world.gameStarted) gameSounds.playGameplayBackgroundLoop();
     updateMuteButtonText(btn);
