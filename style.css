@@ -143,6 +143,11 @@ canvas {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 
+#music-toggle-button.is-muted {
+    filter: grayscale(1) brightness(0.75);
+    opacity: 0.85;
+}
+
 #start-button:hover,
 #play-again-button:hover,
 #end-button:hover,
@@ -318,7 +323,12 @@ body.info-page {
         top: auto;
         bottom: 12px;
         transform: translateX(-50%);
-        font-size: 22px;
+        font-size: 0;
+        color: transparent;
+        background-image: url("img/josy_dom_alexis-icon-1628258_1920.png");
+        background-size: 26px 26px;
+        background-position: center;
+        background-repeat: no-repeat;
         z-index: 30;
     }
     #mobile-controls {
@@ -405,11 +415,53 @@ body.info-page {
     body:not(.info-page) #fullscreen-button {
         display: none;
     }
+    body:not(.info-page) #music-toggle-button {
+        left: auto;
+        right: 8px;
+        top: 8px;
+        bottom: auto;
+        transform: none;
+        width: 30px;
+        min-width: 30px;
+        height: 30px;
+        padding: 0;
+        border: 2px solid #2a1b0f;
+        background-color: #f3c36b;
+        background-image: url("img/josy_dom_alexis-icon-1628258_1920.png");
+        background-size: 16px 16px;
+        background-position: center;
+        background-repeat: no-repeat;
+        font-size: 0;
+        color: transparent;
+        z-index: 46;
+    }
+    body:not(.info-page) #mobile-controls {
+        display: flex;
+        position: fixed;
+        left: 52px;
+        right: 52px;
+        bottom: 8px;
+        padding: 0;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 45;
+    }
+    body:not(.info-page) #controls-left,
+    body:not(.info-page) #controls-right {
+        display: flex;
+        gap: 8px;
+    }
+    body:not(.info-page) #mobile-controls button {
+        min-width: 36px;
+        min-height: 36px;
+        padding: 6px 8px;
+        font-size: 12px;
+    }
     body:not(.info-page) #page-links {
         position: fixed;
-        right: 8px;
-        bottom: 8px;
-        top: auto;
+        right: 44px;
+        top: 8px;
+        bottom: auto;
         margin: 0;
         padding: 0;
         display: flex;
