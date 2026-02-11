@@ -13,6 +13,7 @@ class World {
   throwableObject = [];
   collectableObjects = [];  
   lastThrowTime = 0;
+  lastCharacterBottom = null;
   startScreen = new StartScreen();
   gameStarted = false;
   endScreen = new EndScreen();
@@ -372,15 +373,20 @@ class World {
    * @returns {void}
    */
   checkJumpOnEnemies() {
-    this.level.enemies.forEach((enemy) => this.tryStompEnemy(enemy));
+    const currentBottom = this.getCharacterBottomForStomp();
+    const previousBottom = this.lastCharacterBottom ?? currentBottom;
+    this.level.enemies.forEach((enemy) => this.tryStompEnemy(enemy, previousBottom, currentBottom));
+    this.lastCharacterBottom = currentBottom;
   }
 
   /**
    * @param {MovableObject} enemy
+   * @param {number} previousBottom
+   * @param {number} currentBottom
    * @returns {void}
    */
-  tryStompEnemy(enemy) {
-    if (!this.canStompEnemy(enemy)) return;
+  tryStompEnemy(enemy, previousBottom, currentBottom) {
+    if (!this.canStompEnemy(enemy, previousBottom, currentBottom)) return;
     gameSounds.playEnemyHit();
     enemy.die();
     this.character.speedY = 15;
@@ -388,22 +394,25 @@ class World {
 
   /**
    * @param {MovableObject} enemy
+   * @param {number} previousBottom
+   * @param {number} currentBottom
    * @returns {boolean}
    */
-  canStompEnemy(enemy) {
+  canStompEnemy(enemy, previousBottom, currentBottom) {
     const isFalling = this.character.speedY < 0;
-    const isTop = this.character.y < enemy.y;
     const isChickenEnemy = enemy instanceof Chicken || enemy instanceof ChickenSmall;
-    return isChickenEnemy && !enemy.dead && isFalling && isTop && this.hasStompCollision(enemy, 10);
+    return isChickenEnemy && !enemy.dead && isFalling && this.hasStompCollision(enemy, previousBottom, currentBottom, 10);
   }
 
   /**
    * @param {MovableObject} enemy
+   * @param {number} previousBottom
+   * @param {number} currentBottom
    * @param {number} earlyPx
    * @returns {boolean}
    */
-  hasStompCollision(enemy, earlyPx = 0) {
-    return this.hasHorizontalStompOverlap(enemy) && this.hasVerticalStompOverlap(enemy, earlyPx);
+  hasStompCollision(enemy, previousBottom, currentBottom, earlyPx = 0) {
+    return this.hasHorizontalStompOverlap(enemy) && this.hasVerticalStompOverlap(enemy, previousBottom, currentBottom, earlyPx);
   }
 
   /**
@@ -420,13 +429,23 @@ class World {
 
   /**
    * @param {MovableObject} enemy
+   * @param {number} previousBottom
+   * @param {number} currentBottom
    * @param {number} earlyPx
    * @returns {boolean}
    */
-  hasVerticalStompOverlap(enemy, earlyPx = 0) {
-    const characterBottom = this.character.y + this.character.height - 20;
+  hasVerticalStompOverlap(enemy, previousBottom, currentBottom, earlyPx = 0) {
     const stompTop = enemy.y - earlyPx;
     const stompBottom = enemy.y + enemy.height - 20;
-    return characterBottom >= stompTop && characterBottom <= stompBottom;
+    const crossedStompTop = previousBottom <= stompTop && currentBottom >= stompTop;
+    const isInStompZone = currentBottom >= stompTop && currentBottom <= stompBottom;
+    return crossedStompTop || isInStompZone;
+  }
+
+  /**
+   * @returns {number}
+   */
+  getCharacterBottomForStomp() {
+    return this.character.y + this.character.height - 20;
   }
 }

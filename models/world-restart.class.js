@@ -62,6 +62,7 @@ Object.assign(World.prototype, {
     this.endScheduled = false;
     this.camera_x = 0;
     this.lastThrowTime = 0;
+    this.lastCharacterBottom = null;
   },
 
   /**
